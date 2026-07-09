@@ -447,27 +447,24 @@ export default function CalendarMonth() {
             </div>
 
             {/* Detailed Events Title & Section below Grid */}
-            <section className="w-full">
-              <div className="border-b border-surface-container pb-4 mb-8 flex justify-between items-end">
-                <h2 className="font-headline-sm text-headline-sm text-primary font-bold">
-                  {selectedDate 
-                    ? `Aktiviteter ${selectedDate.getDate()}. ${MONTH_NAMES[selectedDate.getMonth()]}`
-                    : `Aktiviteter i ${MONTH_NAMES[currentMonth]}`
-                  }
-                </h2>
-                {selectedDate && (
+            {/* Detailed Events Title & Section below Grid (only visible when a date is selected) */}
+            {selectedDate && (
+              <section className="w-full mt-12 animate-fadeIn">
+                <div className="border-b border-surface-container pb-4 mb-8 flex justify-between items-end">
+                  <h2 className="font-headline-sm text-headline-sm text-primary font-bold">
+                    Aktiviteter {selectedDate.getDate()}. {MONTH_NAMES[selectedDate.getMonth()]}
+                  </h2>
                   <button 
                     onClick={() => setSelectedDate(null)}
-                    className="text-xs font-bold uppercase tracking-wider text-secondary hover:underline underline-offset-4"
+                    className="text-xs font-bold uppercase tracking-wider text-secondary hover:underline underline-offset-4 flex items-center gap-1"
                   >
-                    Vis alle i måneden
+                    <span className="material-symbols-outlined text-[14px]">close</span>
+                    Skjul detaljer
                   </button>
-                )}
-              </div>
+                </div>
 
-              <AnimatePresence mode="popLayout">
-                {selectedDate ? (
-                  selectedDayEvents.length > 0 ? (
+                <AnimatePresence mode="popLayout">
+                  {selectedDayEvents.length > 0 ? (
                     <div className="space-y-4">
                       {selectedDayEvents.map((evt, idx) => (
                         <EventCardDetail 
@@ -487,32 +484,10 @@ export default function CalendarMonth() {
                       <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30 mb-3 select-none">event_busy</span>
                       <p className="font-body-md text-sm font-semibold">Ingen registrerte aktiviteter denne dagen.</p>
                     </motion.div>
-                  )
-                ) : (
-                  currentMonthEvents.length > 0 ? (
-                    <div className="space-y-4">
-                      {currentMonthEvents.map((evt, idx) => (
-                        <EventCardDetail 
-                          key={evt.id || idx} 
-                          event={evt} 
-                          onClick={() => setActivePopupEvent(evt)}
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="bg-surface-cream/30 border border-dashed border-surface-container rounded-3xl p-12 text-center text-on-surface-variant/60"
-                    >
-                      <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30 mb-3 select-none">event_busy</span>
-                      <p className="font-body-md text-sm font-semibold">Ingen registrerte aktiviteter for denne måneden.</p>
-                    </motion.div>
-                  )
-                )}
-              </AnimatePresence>
-            </section>
+                  )}
+                </AnimatePresence>
+              </section>
+            )}
           </>
         ) : (
           /* List / Overview (Agenda) View Mode */
