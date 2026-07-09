@@ -249,18 +249,9 @@ export default function Calendar() {
                   </h3>
 
                   {/* Description */}
-                  <p className="font-body-md text-on-surface-variant leading-relaxed line-clamp-3 mb-6 flex-1">
+                  <p className="font-body-md text-on-surface-variant leading-relaxed line-clamp-3 mb-0 flex-1">
                     {evt.description}
                   </p>
-
-                  {/* Button */}
-                  <button 
-                    onClick={() => handleAddToCalendar(evt.title)}
-                    className="w-full py-3 bg-surface-container hover:bg-primary hover:text-white text-primary text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-1.5 shrink-0"
-                  >
-                    <span className="material-symbols-outlined text-[16px]">add</span>
-                    <span>Legg til i kalender</span>
-                  </button>
                 </div>
               </motion.div>
             ))}

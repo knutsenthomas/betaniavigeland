@@ -266,17 +266,10 @@ export default function CalendarMonth() {
                 </p>
                 
                 {/* Actions */}
-                <div className="pt-2 flex gap-3">
-                  <button
-                    onClick={() => handleAddToCalendar(activePopupEvent.title)}
-                    className="flex-1 py-3.5 bg-primary hover:bg-[#153a51] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-1.5 shadow-sm"
-                  >
-                    <span className="material-symbols-outlined text-[16px]">calendar_add_on</span>
-                    Legg til i kalender
-                  </button>
+                <div className="pt-2">
                   <button
                     onClick={() => setActivePopupEvent(null)}
-                    className="px-6 py-3.5 bg-surface-container hover:bg-surface-container-high text-primary text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98]"
+                    className="w-full py-3.5 bg-surface-container hover:bg-surface-container-high text-primary text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] flex items-center justify-center"
                   >
                     Lukk
                   </button>
