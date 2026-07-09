@@ -105,18 +105,7 @@ export default function Podcast() {
   const { siteSettings } = useContent();
 
   const getFeedUrl = () => {
-    const podbeanUrl = siteSettings?.platform_links?.podbean || '';
-    let username = 'betania-vigeland';
-    if (podbeanUrl) {
-      const match = podbeanUrl.match(/(?:https?:\/\/)?([^.]+)\.podbean\.com/);
-      if (match && match[1]) {
-        username = match[1];
-      } else {
-        // Fallback for custom domains or username strings
-        username = podbeanUrl.replace(/https?:\/\//, '').split('/')[0].trim();
-      }
-    }
-    return `https://feed.podbean.com/${username}/feed.xml`;
+    return siteSettings?.platform_links?.podcast_rss || 'https://feed.podbean.com/betania-vigeland/feed.xml';
   };
 
   const [episodes, setEpisodes] = useState([]);

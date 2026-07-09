@@ -13,17 +13,7 @@ export default function SearchModal({ isOpen, onClose }) {
   const inputRef = useRef(null);
 
   const getFeedUrl = () => {
-    const podbeanUrl = siteSettings?.platform_links?.podbean || '';
-    let username = 'betania-vigeland';
-    if (podbeanUrl) {
-      const match = podbeanUrl.match(/(?:https?:\/\/)?([^.]+)\.podbean\.com/);
-      if (match && match[1]) {
-        username = match[1];
-      } else {
-        username = podbeanUrl.replace(/https?:\/\//, '').split('/')[0].trim();
-      }
-    }
-    return `https://feed.podbean.com/${username}/feed.xml`;
+    return siteSettings?.platform_links?.podcast_rss || 'https://feed.podbean.com/betania-vigeland/feed.xml';
   };
 
   // Auto-focus input on open

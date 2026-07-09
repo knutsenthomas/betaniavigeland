@@ -657,15 +657,29 @@ export default function Admin() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Podbean RSS/Hjemmeside</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Podbean Hjemmeside</label>
                         <input
                           type="text"
-                          value={localSettings.platform_links.podbean}
+                          value={localSettings.platform_links.podbean || ''}
                           onChange={(e) => setLocalSettings({
                             ...localSettings,
                             platform_links: { ...localSettings.platform_links, podbean: e.target.value }
                           })}
                           className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Podcast RSS-feed (XML) URL</label>
+                        <input
+                          type="text"
+                          placeholder="Standard: https://feed.podbean.com/betania-vigeland/feed.xml"
+                          value={localSettings.platform_links.podcast_rss || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            platform_links: { ...localSettings.platform_links, podcast_rss: e.target.value }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs font-mono"
                         />
                       </div>
                     </div>

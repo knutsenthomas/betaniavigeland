@@ -101,9 +101,9 @@ export const ContentProvider = ({ children }) => {
       facebook: "https://www.facebook.com/BetaniaVigeland",
       instagram: "",
       youtube: "",
-      spotify: "",
       apple_podcasts: "https://podcasts.apple.com/no/podcast/betania-vigeland/id1113038676",
-      podbean: "https://betania-vigeland.podbean.com"
+      podbean: "https://betania-vigeland.podbean.com",
+      podcast_rss: "https://feed.podbean.com/betania-vigeland/feed.xml"
     },
     calendar_sync: {
       enabled: false,
