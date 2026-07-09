@@ -87,7 +87,7 @@ export default function Footer() {
               href="https://tk-design.no" 
               target="_blank" 
               rel="noreferrer" 
-              className="text-secondary hover:text-secondary-container transition-colors font-bold underline underline-offset-4 decoration-[1.5px] whitespace-nowrap"
+              className="text-tertiary hover:text-tertiary-container transition-colors font-bold underline underline-offset-4 decoration-[1.5px] whitespace-nowrap"
             >
               tk-design.no
             </a>
