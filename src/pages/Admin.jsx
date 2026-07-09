@@ -158,7 +158,11 @@ export default function Admin() {
         <div>
           {/* Logo & Header */}
           <div className="p-6 border-b border-white/10 flex items-center gap-3">
-            <span className="material-symbols-outlined text-secondary text-[28px] animate-pulse">church</span>
+            <img 
+              src="/logo-icon.png?v=2" 
+              alt="Betania Vigeland Logo" 
+              className="w-8 h-8 object-contain shrink-0" 
+            />
             <div>
               <h1 className="font-bold text-base tracking-wide leading-tight">Betania Vigeland</h1>
               <span className="text-[10px] uppercase tracking-widest text-white/50 font-semibold">Kontrollpanel</span>
