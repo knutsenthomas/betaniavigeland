@@ -495,65 +495,67 @@ export default function CalendarMonth() {
             )}
           </>
         ) : (
-          /* List / Overview (Agenda) View Mode */
-          <div className="bg-white border border-surface-container rounded-3xl p-6 md:p-8 shadow-sm mb-12 w-full animate-fadeIn">
+          /* List / Overview (Agenda) View Mode - Premium Grid Cards */
+          <div className="w-full mb-12 animate-fadeIn">
             {currentMonthEvents.length > 0 ? (
-              <div className="divide-y divide-surface-container/60">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentMonthEvents.map((evt, idx) => {
-                  const theme = CATEGORY_COLORS[evt.category] || CATEGORY_COLORS['Annet'];
                   const dateObj = new Date(evt.startDate);
-                  const dayName = dateObj.toLocaleDateString('no-NO', { weekday: 'long' });
-                  const niceDayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
                   
                   return (
-                    <div 
-                      key={evt.id || idx} 
+                    <div
+                      key={evt.id || idx}
                       onClick={() => setActivePopupEvent(evt)}
-                      className="py-6 first:pt-0 last:pb-0 flex flex-row gap-4 md:gap-6 items-start group cursor-pointer"
+                      className="group bg-white border border-surface-container rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full cursor-pointer"
                     >
-                      {/* Left Date Column */}
-                      <div className="w-14 md:w-24 shrink-0 flex flex-col text-left">
-                        <span className="text-2xl md:text-3xl font-headline font-bold text-primary group-hover:text-secondary transition-colors leading-none">
-                          {dateObj.getDate()}
-                        </span>
-                        <span className="text-[10px] md:text-[11px] uppercase font-bold tracking-wider text-on-surface-variant/70 mt-1.5">
-                          {MONTH_NAMES[dateObj.getMonth()].slice(0, 3)}
-                        </span>
-                        <span className="text-[9px] md:text-[10px] text-on-surface-variant/40 mt-0.5">
-                          {niceDayName}
-                        </span>
-                      </div>
-                      
-                      {/* Right Content Column */}
-                      <div className="flex-1 flex flex-col sm:flex-row gap-4 justify-between sm:items-start">
-                        <div className="space-y-2 flex-1">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${theme.bg} ${theme.text || 'text-slate-800'} border ${theme.border || 'border-slate-200'}`}>
-                              {evt.category}
-                            </span>
-                            <div className="flex items-center gap-1 text-[11px] font-bold text-secondary uppercase tracking-wider">
-                              <span className="material-symbols-outlined text-[14px] translate-y-[-0.5px]">schedule</span>
-                              <span>{evt.time}</span>
-                            </div>
-                          </div>
-                          <h3 className="text-base md:text-lg font-bold text-primary group-hover:text-secondary transition-colors leading-snug">{evt.title}</h3>
-                          <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed max-w-2xl">{evt.description}</p>
-                        </div>
-                        
-                        {/* Event Image Preview */}
-                        {evt.image && (
+                      {/* Event Image */}
+                      <div className="h-48 overflow-hidden relative shrink-0 bg-surface-cream border-b border-surface-container">
+                        {evt.image ? (
                           <div 
-                            className="w-full sm:w-28 h-32 sm:h-20 bg-cover bg-center rounded-2xl shrink-0 overflow-hidden shadow-sm border border-surface-container mt-3 sm:mt-0"
+                            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                             style={{ backgroundImage: `url('${evt.image}')` }}
                           />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-surface-cream text-outline">
+                            <span className="material-symbols-outlined text-[48px] select-none">event</span>
+                          </div>
                         )}
+                        {/* Floating Date Badge */}
+                        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-xl text-center shadow-md min-w-[55px] flex flex-col justify-center items-center">
+                          <span className="block font-headline font-bold text-primary text-xl leading-none">{dateObj.getDate()}</span>
+                          <span className="block text-[9px] font-bold uppercase tracking-widest text-on-surface-variant/80 mt-1">{MONTH_NAMES[dateObj.getMonth()]}</span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-6 flex flex-col flex-1">
+                        {/* Category */}
+                        <span className="text-secondary font-label-md text-label-md uppercase tracking-wider text-[11px] font-bold block mb-1">
+                          {evt.category}
+                        </span>
+                        
+                        {/* Title */}
+                        <h3 className="font-headline text-lg font-bold text-primary mb-3 line-clamp-2 group-hover:text-secondary transition-colors leading-snug">
+                          {evt.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="font-body text-xs md:text-sm text-on-surface-variant leading-relaxed line-clamp-3 mb-4 flex-1">
+                          {evt.description}
+                        </p>
+
+                        {/* Date & Time Footer */}
+                        <div className="mt-auto pt-4 border-t border-surface-container flex items-center gap-2 text-on-surface-variant font-label-md text-label-md text-[12px] shrink-0">
+                          <span className="material-symbols-outlined text-[16px] text-outline">schedule</span>
+                          <span>{evt.time}</span>
+                        </div>
                       </div>
                     </div>
                   );
                 })}
               </div>
             ) : (
-              <div className="py-16 text-center text-on-surface-variant/60">
+              <div className="bg-white border border-surface-container rounded-3xl p-16 text-center text-on-surface-variant/60 w-full">
                 <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30 mb-3 select-none">event_busy</span>
                 <p className="font-body-md text-sm font-semibold">Ingen registrerte aktiviteter for denne måneden.</p>
               </div>
