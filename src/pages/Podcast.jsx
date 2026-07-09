@@ -3,6 +3,52 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import historicalEpisodes from '@/data/historical_episodes.json';
 
+const speakerBios = {
+  'Hilde Karin Knutsen': {
+    role: 'Hovedpastor',
+    bio: 'Hilde Karin er hovedpastor i Betania Vigeland. Hun brenner for disippelliv, nære relasjoner og formidler troen på en varm, hjertevarm og praktisk måte i hverdagen.',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=300&h=300&q=80'
+  },
+  'Tormod Bakkevold': {
+    role: 'Pastor / Forkynner',
+    bio: 'Tormod er pastor og en av menighetens sentrale forkynnere. Han har dyp innsikt i Guds ord og brenner for å gjøre bibelske sannheter forståelige og livsnære for alle generasjoner.',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80'
+  },
+  'Geir Myra': {
+    role: 'Forkynner / Lederråd',
+    bio: 'Geir har vært en trofast del av menigheten i mange år og underviser jevnlig. Hans taler kjennetegnes av bibeltroskap, praktiske eksempler og en brennende omsorg for enkeltmennesket.',
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fit=crop&w=300&h=300&q=80'
+  },
+  'Magnus Næss Eriksen': {
+    role: 'Ungdomsarbeider / Awake',
+    bio: 'Magnus er engasjert i Awake ungdomsklubb og brenner for at unge skal oppleve et trygt fellesskap og få et personlig forhold til Jesus. Formidler troen med humor og relevans.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'
+  },
+  'Bjørn Henrik': {
+    role: 'Forkynner',
+    bio: 'Bjørn Henrik formidler tro og disippelskap på en lettfattelig, disippelsentrert og jordnær måte som utfordrer oss til å leve ut troen i hverdagen.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=300&h=300&q=80'
+  },
+  'Gjestetaler': {
+    role: 'Besøkende taler',
+    bio: 'Betania Vigeland får jevnlig besøk av dyktige gjestetalere fra fjern og nær som deler sine hjertevarme budskap og inspirerer menigheten med nye perspektiver.',
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?fit=crop&w=300&h=300&q=80'
+  }
+};
+
+const getSpeakerBio = (name) => {
+  if (!name) return speakerBios['Gjestetaler'];
+  
+  const cleanName = name.trim();
+  if (speakerBios[cleanName]) return speakerBios[cleanName];
+  
+  return {
+    role: 'Gjestetaler / Forkynner',
+    bio: `${cleanName} besøker Betania Vigeland og deler inspirerende forkynnelse og Guds ord med menighetsfamilien.`,
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?fit=crop&w=300&h=300&q=80'
+  };
+};
+
 export default function Podcast() {
   const location = useLocation();
   const [episodes, setEpisodes] = useState([]);
@@ -24,6 +70,7 @@ export default function Podcast() {
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
+  const [showSpeakerBio, setShowSpeakerBio] = useState(false);
 
   const audioRef = useRef(null);
 
@@ -371,7 +418,7 @@ export default function Podcast() {
       </section>
 
       {/* Search and Filters */}
-      <section className="max-w-container-max mx-auto px-gutter mb-12">
+      <section id="podcast-list-header" className="max-w-container-max mx-auto px-gutter mb-12">
         <div className="space-y-6 pb-6 border-b border-surface-container">
           {/* Row 1: Header and Search */}
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
@@ -557,7 +604,20 @@ export default function Podcast() {
               </div>
               <div className="min-w-0 flex-1">
                 <h4 className="font-bold text-primary text-sm truncate">{currentEpisode.sermonTitle}</h4>
-                <p className="text-xs text-on-surface-variant truncate">{currentEpisode.speaker}</p>
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <p className="text-xs text-on-surface-variant truncate">{currentEpisode.speaker}</p>
+                  <button 
+                    onClick={() => setShowSpeakerBio(!showSpeakerBio)}
+                    className={`inline-flex items-center text-[9px] px-1.5 py-0.5 rounded font-bold uppercase transition-colors shrink-0 ${
+                      showSpeakerBio 
+                        ? 'bg-secondary text-white shadow-sm' 
+                        : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
+                    }`}
+                    title="Vis info om taleren"
+                  >
+                    Info
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -665,6 +725,7 @@ export default function Podcast() {
                   if (audioRef.current) audioRef.current.pause();
                   setIsPlaying(false);
                   setCurrentEpisode(null);
+                  setShowSpeakerBio(false);
                 }}
                 className="text-outline hover:text-primary p-1"
                 title="Lukk spiller"
@@ -672,6 +733,68 @@ export default function Podcast() {
                 <span className="material-symbols-outlined text-[20px] select-none">close</span>
               </button>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Speaker Bio Card */}
+      <AnimatePresence>
+        {showSpeakerBio && currentEpisode && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed bottom-24 left-4 right-4 md:left-8 md:right-auto md:w-80 bg-white rounded-3xl shadow-2xl border border-surface-container p-5 z-50 overflow-hidden"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <span className="text-[10px] font-bold text-secondary uppercase tracking-widest">
+                Talerprofil
+              </span>
+              <button 
+                onClick={() => setShowSpeakerBio(false)}
+                className="text-on-surface-variant hover:text-primary p-0.5 rounded-full hover:bg-surface-cream transition-colors"
+              >
+                <span className="material-symbols-outlined text-[18px]">close</span>
+              </button>
+            </div>
+
+            {(() => {
+              const bioData = getSpeakerBio(currentEpisode.speaker);
+              return (
+                <div className="space-y-4">
+                  <div className="flex gap-4 items-center">
+                    <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-surface-container shadow-sm bg-surface-cream">
+                      <img 
+                        src={bioData.image} 
+                        alt={currentEpisode.speaker} 
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h5 className="font-bold text-primary text-sm truncate">{currentEpisode.speaker}</h5>
+                      <p className="text-xs text-secondary font-semibold truncate">{bioData.role}</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-[12px] text-on-surface-variant leading-relaxed">
+                    {bioData.bio}
+                  </p>
+
+                  <button
+                    onClick={() => {
+                      setSelectedSpeaker(cleanSpeakerName(currentEpisode.speaker));
+                      setShowSpeakerBio(false);
+                      document.getElementById('podcast-list-header')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-full bg-primary hover:bg-primary-container text-white text-xs py-2.5 rounded-full font-label-md transition-all active:scale-95 text-center flex items-center justify-center gap-1.5 font-bold shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[14px]">search</span>
+                    Taler av {currentEpisode.speaker.split(' ')[0]}
+                  </button>
+                </div>
+              );
+            })()}
           </motion.div>
         )}
       </AnimatePresence>
