@@ -69,16 +69,19 @@ export default function Admin() {
 
   // Save settings helper
   const [saveStatus, setSaveStatus] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const handleSave = async (updated) => {
     const settingsToSave = updated || localSettings;
     setSaveStatus('lagrer');
+    setErrorMessage('');
     try {
       await updateSiteSettings(settingsToSave);
       setSaveStatus('suksess');
       setTimeout(() => setSaveStatus(''), 3000);
     } catch (e) {
       setSaveStatus('feil');
-      setTimeout(() => setSaveStatus(''), 3000);
+      setErrorMessage(e.message || 'Ukjent feil');
+      setTimeout(() => setSaveStatus(''), 6000);
     }
   };
 
@@ -562,7 +565,7 @@ export default function Admin() {
                     </button>
                     {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer til database...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Endringer lagret!</span>}
-                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring: {errorMessage}</span>}
                   </div>
                 </div>
               )}
@@ -611,7 +614,7 @@ export default function Admin() {
                     </button>
                     {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
-                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring: {errorMessage}</span>}
                   </div>
                 </div>
               )}
@@ -812,7 +815,7 @@ export default function Admin() {
                     </button>
                     {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
-                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring: {errorMessage}</span>}
                   </div>
                 </div>
               )}
@@ -1200,7 +1203,7 @@ export default function Admin() {
                     </button>
                     {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
-                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring: {errorMessage}</span>}
                   </div>
                 </div>
               )}
@@ -1466,7 +1469,7 @@ export default function Admin() {
                     </button>
                     {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
-                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring: {errorMessage}</span>}
                   </div>
                 </div>
               )}
