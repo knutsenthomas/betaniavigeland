@@ -14,6 +14,31 @@ const speakerBios = {
     bio: 'Tormod er pastor og en av menighetens sentrale forkynnere. Han har dyp innsikt i Guds ord og brenner for å gjøre bibelske sannheter forståelige og livsnære for alle generasjoner.',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80'
   },
+  'Kristin Løland Berge': {
+    role: 'Forfatter og forkynner',
+    bio: 'Kristin Løland Berge er forfatter og forkynner med bakgrunn som sykepleier. Hun har tidligere ledet bønnetjenesten i Filadelfia Kristiansand og utgitt flere bøker om bønn, åndelig liv og autoritet i Jesus.',
+    image: null
+  },
+  'Svein-Kåre Dahl': {
+    role: 'Evangelist / Sett & Hørt',
+    bio: 'Svein-Kåre Dahl er stifter av misjonsorganisasjonen «Sett & Hørt» og bosatt på Vigeland. Han reiser på heltid som evangelist over hele landet etter å ha stått sentralt i Vigeland-vekkelsen i 2023.',
+    image: null
+  },
+  'Eva Olsvold Sundar': {
+    role: 'Forfatter og bibelunderviser',
+    bio: 'Eva Olsvold Sundar er forfatter og bibelunderviser. Hun driver misjonstjenesten «Uten tvil» sammen med sin ektemann og reiser rundt for å forkynne med fokus på Guds ords troverdighet og bibelsk historie.',
+    image: null
+  },
+  'Joakim Skavern': {
+    role: 'Forkynner og medieprodusent',
+    bio: 'Joakim Skavern er forkynner og medieprodusent (blant annet for TV Inter). Han har vokst opp i en pastorslekt og formidler troen på en levende, kreativ og engasjerende måte for alle generasjoner.',
+    image: null
+  },
+  'Andreas Høiland': {
+    role: 'Ungdomsleder / Eldsterådet',
+    bio: 'Andreas Høiland er medlem av eldsterådet og leder for menighetens ungdomsarbeid Awake på Vigeland. Han brenner for disippelgjøring og å skape et trygt miljø for tenåringer.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'
+  },
   'Geir Myra': {
     role: 'Forkynner / Lederråd',
     bio: 'Geir har vært en trofast del av menigheten i mange år og underviser jevnlig. Hans taler kjennetegnes av disippelfokus, praktiske eksempler og en brennende omsorg for enkeltmennesket.',
@@ -24,9 +49,34 @@ const speakerBios = {
     bio: 'Magnus er engasjert i Awake ungdomsklubb og brenner for at unge skal oppleve et trygt fellesskap og få et disippelforhold til Jesus. Formidler troen med humor og relevans.',
     image: null
   },
+  'Bjørn Henrik Slotten': {
+    role: 'Forkynner',
+    bio: 'Bjørn Henrik Slotten deler engasjerte og inspirerende taler om tro, disippelliv og Guds nærvær på Betanias samlinger.',
+    image: null
+  },
   'Bjørn Henrik': {
     role: 'Forkynner',
-    bio: 'Bjørn Henrik formidler tro og disippelskap på en lettfattelig, disippelsentrert og jordnær måte som utfordrer oss til å leve ut troen i hverdagen.',
+    bio: 'Bjørn Henrik deler engasjerte og inspirerende taler om tro, disippelliv og Guds nærvær på Betanias samlinger.',
+    image: null
+  },
+  'Øyvind Valvik': {
+    role: 'Pastor / Forkynner',
+    bio: 'Øyvind Valvik er en erfaren pastor og forkynner i pinsebevegelsen som jevnlig besøker og taler i menigheter på Sørlandet.',
+    image: null
+  },
+  'Karl Eiken': {
+    role: 'Forkynner',
+    bio: 'Karl Eiken er en erfaren lokal forkynner som regelmessig deltar med taler og bibelundervisning på Betanias møter.',
+    image: null
+  },
+  'Nathan Osnes': {
+    role: 'Forkynner',
+    bio: 'Nathan Osnes er en engasjert forkynner som taler med dybde, varme og relevans om kristenlivet på Betanias samlinger.',
+    image: null
+  },
+  'Eivind Galdal': {
+    role: 'Forkynner',
+    bio: 'Eivind Galdal er en lokal forkynner som deler Guds ord, inspirerende fortellinger og vitnesbyrd på møtene i Betania.',
     image: null
   },
   'Gjestetaler': {
