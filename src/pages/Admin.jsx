@@ -609,7 +609,9 @@ export default function Admin() {
                       <span className="material-symbols-outlined text-[16px]">save</span>
                       <span>Lagre endringer</span>
                     </button>
+                    {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
                   </div>
                 </div>
               )}
@@ -808,7 +810,9 @@ export default function Admin() {
                       <span className="material-symbols-outlined text-[16px]">save</span>
                       <span>Lagre endringer</span>
                     </button>
+                    {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
                   </div>
                 </div>
               )}
@@ -1194,7 +1198,9 @@ export default function Admin() {
                       <span className="material-symbols-outlined text-[16px]">save</span>
                       <span>Lagre endringer</span>
                     </button>
+                    {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
                   </div>
                 </div>
               )}
@@ -1458,7 +1464,9 @@ export default function Admin() {
                       <span className="material-symbols-outlined text-[16px]">save</span>
                       <span>Lagre endringer</span>
                     </button>
+                    {saveStatus === 'lagrer' && <span className="text-xs text-on-surface-variant animate-pulse">Lagrer...</span>}
                     {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
+                    {saveStatus === 'feil' && <span className="text-xs text-secondary font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">error</span> Feil ved lagring</span>}
                   </div>
                 </div>
               )}
