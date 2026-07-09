@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import CmsText from '@/components/CmsText';
+import { useContent } from '@/contexts/ContentContext';
 import historicalEpisodes from '@/data/historical_episodes.json';
 
 const speakerBios = {
