@@ -904,13 +904,17 @@ export default function Admin() {
                             <div className="pt-3 border-t border-surface-container-high/50">
                               <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Bilde</label>
                               <div className="flex items-center gap-3">
-                                {person.image && (
-                                  <img 
-                                    src={person.image} 
-                                    alt="Leder" 
-                                    className="w-12 h-12 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0 shadow-sm" 
-                                  />
-                                )}
+                                <div className="w-12 h-12 rounded-xl border border-surface-container bg-surface-cream shrink-0 shadow-sm flex items-center justify-center text-on-surface-variant/30 overflow-hidden">
+                                  {person.image ? (
+                                    <img 
+                                      src={person.image} 
+                                      alt="Leder" 
+                                      className="w-full h-full object-cover" 
+                                    />
+                                  ) : (
+                                    <span className="material-symbols-outlined text-[24px]">person</span>
+                                  )}
+                                </div>
                                 <div className="flex items-center gap-2">
                                   <input
                                     type="file"
@@ -1047,13 +1051,17 @@ export default function Admin() {
                             <div className="pt-3 border-t border-surface-container-high/50">
                               <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Bilde</label>
                               <div className="flex items-center gap-3">
-                                {person.image && (
-                                  <img 
-                                    src={person.image} 
-                                    alt="Ansatt" 
-                                    className="w-12 h-12 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0 shadow-sm" 
-                                  />
-                                )}
+                                <div className="w-12 h-12 rounded-xl border border-surface-container bg-surface-cream shrink-0 shadow-sm flex items-center justify-center text-on-surface-variant/30 overflow-hidden">
+                                  {person.image ? (
+                                    <img 
+                                      src={person.image} 
+                                      alt="Ansatt" 
+                                      className="w-full h-full object-cover" 
+                                    />
+                                  ) : (
+                                    <span className="material-symbols-outlined text-[24px]">person</span>
+                                  )}
+                                </div>
                                 <div className="flex items-center gap-2">
                                   <input
                                     type="file"

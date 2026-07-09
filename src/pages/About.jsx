@@ -224,11 +224,17 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ledelse.map((lead, idx) => (
               <div key={idx} className="group bg-surface-cream border border-surface-container rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                <div className="h-64 overflow-hidden relative">
-                  <div 
-                    className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                    style={{ backgroundImage: `url('${lead.image}')` }}
-                  />
+                <div className="h-64 overflow-hidden relative bg-surface-container-high/40 flex items-center justify-center text-outline">
+                  {lead.image ? (
+                    <div 
+                      className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                      style={{ backgroundImage: `url('${lead.image}')` }}
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-on-surface-variant/30">
+                      <span className="material-symbols-outlined text-[64px]">person</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-6 text-center">
                   <CmsText slug={`about_leader_name_${idx}`} fallback={lead.name} as="h3" className="font-headline-md text-headline-md text-primary mb-1 font-bold" />
@@ -259,11 +265,17 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {ansatte.map((lead, idx) => (
               <div key={idx} className="group bg-surface-cream border border-surface-container rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                <div className="h-64 overflow-hidden relative">
-                  <div 
-                    className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                    style={{ backgroundImage: `url('${lead.image}')` }}
-                  />
+                <div className="h-64 overflow-hidden relative bg-surface-container-high/40 flex items-center justify-center text-outline">
+                  {lead.image ? (
+                    <div 
+                      className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                      style={{ backgroundImage: `url('${lead.image}')` }}
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-on-surface-variant/30">
+                      <span className="material-symbols-outlined text-[64px]">person</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-6 text-center">
                   <CmsText slug={`about_staff_name_${idx}`} fallback={lead.name} as="h3" className="font-headline-md text-headline-md text-primary mb-1 font-bold" />
