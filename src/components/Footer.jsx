@@ -90,22 +90,19 @@ export default function Footer() {
         </div>
         <div className="py-10 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <p className="font-body-md text-[14px] text-on-surface-variant/80">
-            © {new Date().getFullYear()} Betania Vigeland • Designet av{' '}
-            <a 
-              href="https://tk-design.no" 
-              target="_blank" 
-              rel="noreferrer" 
-              className="text-tertiary hover:text-tertiary-container transition-colors font-bold underline underline-offset-4 decoration-[1.5px] whitespace-nowrap"
-            >
-              tk-design.no
-            </a>
+            © {new Date().getFullYear()} Betania Vigeland
           </p>
-          <div className="flex items-center gap-2 text-on-surface-variant/60 hover:text-primary transition-colors duration-300">
-            <span className="material-symbols-outlined text-[18px] select-none translate-y-[-0.5px]">church</span>
+          <a 
+            href="https://tk-design.no" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="flex items-center gap-2 text-on-surface-variant/60 hover:text-primary transition-colors duration-300 group"
+          >
+            <span className="material-symbols-outlined text-[18px] select-none translate-y-[-0.5px] group-hover:scale-110 transition-transform">design_services</span>
             <span className="text-[12px] uppercase tracking-widest font-label-md font-bold">
-              Pinsebevegelsen i Norge
+              Designet av tk-design.no
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </footer>
