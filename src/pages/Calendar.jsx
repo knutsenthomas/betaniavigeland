@@ -65,10 +65,10 @@ export default function Calendar() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-surface-container-low p-8 rounded-3xl border border-surface-container flex flex-col lg:flex-row gap-8 justify-between items-start"
+          className="bg-surface-container-low p-6 md:p-8 rounded-3xl border border-surface-container flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between items-start"
         >
           {/* Main Info */}
-          <div className="space-y-4 max-w-2xl">
+          <div className="space-y-5 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed text-secondary text-xs font-bold uppercase tracking-wider">
               <span className="material-symbols-outlined text-[16px] animate-pulse">info</span> Sommerferie-info
             </div>
@@ -82,8 +82,8 @@ export default function Calendar() {
           </div>
 
           {/* Links / Stevner Grid */}
-          <div className="w-full lg:max-w-md space-y-3">
-            <h3 className="font-bold text-primary text-sm uppercase tracking-wider">Anbefalte sommerstevner:</h3>
+          <div className="w-full lg:max-w-md space-y-4 border-t lg:border-t-0 border-surface-container-highest pt-8 lg:pt-0">
+            <h3 className="font-bold text-primary text-xs uppercase tracking-widest">Anbefalte sommerstevner:</h3>
             
             {/* Solstrand Link */}
             <a 
