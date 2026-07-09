@@ -1,0 +1,21 @@
+# Tasks
+
+- [x] Initialize Vite React project
+- [x] Install dependencies (react-router-dom, framer-motion, @supabase/supabase-js, react-ga4)
+- [x] Configure absolute imports with `@/`
+- [x] Set up Tailwind CSS configuration with custom theme colors
+- [x] Implement React Contexts with safety nets:
+  - [x] `SiteContext`
+  - [x] `AuthContext`
+  - [x] `ContentContext`
+- [x] Create Root.jsx and Layout components
+- [x] Create shared layout components:
+  - [x] Navbar (with glassmorphism and scroll state)
+  - [x] Footer
+- [x] Implement pages:
+  - [x] Home Page
+  - [x] Calendar Page (with filter system)
+  - [x] Kids & Youth Page
+  - [x] About Page
+  - [x] Rental Page
+- [x] Verify build and local dev execution

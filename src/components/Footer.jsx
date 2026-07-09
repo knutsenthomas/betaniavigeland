@@ -1,0 +1,103 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+export default function Footer() {
+  return (
+    <footer className="bg-surface-container-lowest dark:bg-surface-dim pt-20 border-t border-surface-container">
+      <div className="px-gutter max-w-container-max mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-gutter mb-20">
+          <div className="space-y-6 max-w-sm">
+            <div className="flex items-center gap-3 font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+              <img 
+                src="/logo-icon.png?v=2" 
+                alt="Betania Vigeland Logo" 
+                className="w-10 h-10 object-contain"
+              />
+              Betania Vigeland
+            </div>
+            <p className="font-body-md text-on-surface-variant leading-relaxed">
+              En lokal menighet tilknyttet Pinsebevegelsen i Norge. Vi er et fellesskap som ønsker å peke på Jesus og utgjøre en forskjell i lokalmiljøet.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+            {/* Column 1: Menigheten */}
+            <div className="space-y-4">
+              <h5 className="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Menigheten</h5>
+              <div className="flex flex-col gap-3">
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/about">
+                  Om oss
+                </Link>
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/virkegrener">
+                  Våre virkegrener
+                </Link>
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/calendar">
+                  Kalender
+                </Link>
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/misjon">
+                  Misjon
+                </Link>
+              </div>
+            </div>
+
+            {/* Column 2: Ressurser */}
+            <div className="space-y-4">
+              <h5 className="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Ressurser</h5>
+              <div className="flex flex-col gap-3">
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/podcast">
+                  Podcast
+                </Link>
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/rental">
+                  Utleie
+                </Link>
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/medlem">
+                  Medlemskap
+                </Link>
+                <Link className="font-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200" to="/gave">
+                  Gi en gave
+                </Link>
+              </div>
+            </div>
+
+            {/* Column 3: Besøk og kontakt */}
+            <div className="space-y-4 col-span-2 sm:col-span-1">
+              <h5 className="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Besøk og kontakt</h5>
+              <div className="space-y-3 font-body-md text-on-surface-variant leading-relaxed">
+                <p>
+                  Elveveien 6<br/>
+                  4520 Lindesnes
+                </p>
+                <p>
+                  <span className="font-bold text-primary block text-xs uppercase tracking-wider">Epost</span>
+                  <a href="mailto:post@betania-vigeland.no" className="hover:text-secondary transition-colors">
+                    post@betania-vigeland.no
+                  </a>
+                </p>
+                <p>
+                  <span className="font-bold text-primary block text-xs uppercase tracking-wider">Bidrag</span>
+                  Vipps: 106111
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="py-8 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+          <p className="font-label-md text-label-md text-on-surface-variant">
+            © {new Date().getFullYear()} Betania Vigeland. Designet av{' '}
+            <a 
+              href="https://tk-design.no" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="hover:text-secondary transition-colors font-bold"
+            >
+              tk-design.no
+            </a>
+          </p>
+          <div className="flex items-center gap-2 text-on-surface-variant opacity-60">
+            <span className="material-symbols-outlined text-[16px]">church</span>
+            <span className="text-[12px] uppercase tracking-widest font-label-md">Pinsebevegelsen i Norge</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

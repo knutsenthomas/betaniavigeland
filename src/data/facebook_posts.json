@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "date": "I går",
+    "text": "Hjertelig velkommen til søndagsmøte førstkommende søndag kl 11.00! 🌟 Det blir sang, forkynnelse og godt fellesskap. Søndagsskole for barna parallelt med møtet. Vi gleder oss til å samles igjen!",
+    "image": "https://images.unsplash.com/photo-1438032005730-c779502df39b?fit=crop&w=600&h=400&q=80",
+    "likes": 24,
+    "comments": 3,
+    "url": "https://www.facebook.com/betaniavigeland"
+  },
+  {
+    "id": 2,
+    "date": "3 dager siden",
+    "text": "For en herlig gjeng på Awake på fredag! 🔥 God stemning, kiosk, biljard, og en kjempefin samling. Takk til alle ungdommer som fyller huset med liv og røre hver fredag kl 20.00!",
+    "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?fit=crop&w=600&h=400&q=80",
+    "likes": 38,
+    "comments": 5,
+    "url": "https://www.facebook.com/betaniavigeland"
+  },
+  {
+    "id": 3,
+    "date": "1 uke siden",
+    "text": "Tweens er i full gang! Annenhver tirsdag kl 18.30-20.00 samles vi til kule aktiviteter, lek og andakt for alle i 5.-7. klasse. Ta med en venn og bli med på moroa! Blir gøy! 🙌",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=600&h=400&q=80",
+    "likes": 19,
+    "comments": 2,
+    "url": "https://www.facebook.com/betaniavigeland"
+  }
+]
