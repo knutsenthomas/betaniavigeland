@@ -256,10 +256,10 @@ export default function Membership() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-3xl border border-surface-container shadow-sm space-y-6"
+              className="bg-white p-6 sm:p-8 rounded-3xl border border-surface-container shadow-sm space-y-6"
             >
-              <h3 className="font-headline-md text-headline-md text-primary flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary text-[26px]">rule</span>
+              <h3 className="font-headline-md text-headline-md text-primary flex items-start gap-3">
+                <span className="material-symbols-outlined text-secondary text-[26px] shrink-0 mt-0.5">rule</span>
                 <CmsText slug="membership_require_title" fallback="Som medlem hos oss må du:" />
               </h3>
               <ul className="space-y-4">
@@ -286,10 +286,10 @@ export default function Membership() {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-white p-8 rounded-3xl border border-surface-container shadow-sm space-y-4"
+                className="bg-white p-6 sm:p-8 rounded-3xl border border-surface-container shadow-sm space-y-4"
               >
-                <h3 className="font-headline-md text-headline-md text-primary flex items-center gap-3">
-                  <span className="material-symbols-outlined text-secondary text-[26px]">handshake</span>
+                <h3 className="font-headline-md text-headline-md text-primary flex items-start gap-3">
+                  <span className="material-symbols-outlined text-secondary text-[26px] shrink-0 mt-0.5">handshake</span>
                   <CmsText slug="membership_expect_title" fallback="Hva vi forventer av deg:" />
                 </h3>
                 <ul className="space-y-3">
@@ -311,10 +311,10 @@ export default function Membership() {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-white p-8 rounded-3xl border border-surface-container shadow-sm space-y-4"
+                className="bg-white p-6 sm:p-8 rounded-3xl border border-surface-container shadow-sm space-y-4"
               >
-                <h3 className="font-headline-md text-headline-md text-primary flex items-center gap-3">
-                  <span className="material-symbols-outlined text-secondary text-[26px]">star</span>
+                <h3 className="font-headline-md text-headline-md text-primary flex items-start gap-3">
+                  <span className="material-symbols-outlined text-secondary text-[26px] shrink-0 mt-0.5">star</span>
                   <CmsText slug="membership_receive_title" fallback="Hva du kan forvente av menigheten:" />
                 </h3>
                 <ul className="space-y-3">
