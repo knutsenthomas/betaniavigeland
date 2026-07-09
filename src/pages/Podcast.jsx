@@ -16,23 +16,23 @@ const speakerBios = {
   },
   'Geir Myra': {
     role: 'Forkynner / Lederråd',
-    bio: 'Geir har vært en trofast del av menigheten i mange år og underviser jevnlig. Hans taler kjennetegnes av bibeltroskap, praktiske eksempler og en brennende omsorg for enkeltmennesket.',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fit=crop&w=300&h=300&q=80'
+    bio: 'Geir har vært en trofast del av menigheten i mange år og underviser jevnlig. Hans taler kjennetegnes av disippelfokus, praktiske eksempler og en brennende omsorg for enkeltmennesket.',
+    image: null
   },
   'Magnus Næss Eriksen': {
     role: 'Ungdomsarbeider / Awake',
-    bio: 'Magnus er engasjert i Awake ungdomsklubb og brenner for at unge skal oppleve et trygt fellesskap og få et personlig forhold til Jesus. Formidler troen med humor og relevans.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'
+    bio: 'Magnus er engasjert i Awake ungdomsklubb og brenner for at unge skal oppleve et trygt fellesskap og få et disippelforhold til Jesus. Formidler troen med humor og relevans.',
+    image: null
   },
   'Bjørn Henrik': {
     role: 'Forkynner',
     bio: 'Bjørn Henrik formidler tro og disippelskap på en lettfattelig, disippelsentrert og jordnær måte som utfordrer oss til å leve ut troen i hverdagen.',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=300&h=300&q=80'
+    image: null
   },
   'Gjestetaler': {
     role: 'Besøkende taler',
-    bio: 'Betania Vigeland får jevnlig besøk av dyktige gjestetalere fra fjern og nær som deler sine hjertevarme budskap og inspirerer menigheten med nye perspektiver.',
-    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?fit=crop&w=300&h=300&q=80'
+    bio: 'Betania Vigeland får jevnlig besøk av dyktige gjestetalere fra fjern og nær som deler sine budskap og inspirerer menigheten med nye perspektiver.',
+    image: null
   }
 };
 
@@ -45,7 +45,7 @@ const getSpeakerBio = (name) => {
   return {
     role: 'Gjestetaler / Forkynner',
     bio: `${cleanName} besøker Betania Vigeland og deler inspirerende forkynnelse og Guds ord med menighetsfamilien.`,
-    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?fit=crop&w=300&h=300&q=80'
+    image: null
   };
 };
 
@@ -764,12 +764,25 @@ export default function Podcast() {
               return (
                 <div className="space-y-4">
                   <div className="flex gap-4 items-center">
-                    <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-surface-container shadow-sm bg-surface-cream">
-                      <img 
-                        src={bioData.image} 
-                        alt={currentEpisode.speaker} 
-                        className="w-full h-full object-cover" 
-                      />
+                    <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-surface-container shadow-sm bg-surface-cream flex items-center justify-center text-on-surface-variant/60">
+                      {bioData.image ? (
+                        <img 
+                          src={bioData.image} 
+                          alt=""
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            const fallback = e.target.parentElement.querySelector('.avatar-fallback');
+                            if (fallback) fallback.style.display = 'block';
+                          }}
+                          className="w-full h-full object-cover" 
+                        />
+                      ) : null}
+                      <span 
+                        className="material-symbols-outlined text-[28px] select-none avatar-fallback" 
+                        style={{ display: bioData.image ? 'none' : 'block' }}
+                      >
+                        person
+                      </span>
                     </div>
                     <div className="min-w-0">
                       <h5 className="font-bold text-primary text-sm truncate">{currentEpisode.speaker}</h5>
