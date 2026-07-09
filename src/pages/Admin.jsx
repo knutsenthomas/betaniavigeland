@@ -230,7 +230,7 @@ export default function Admin() {
         </header>
 
         {/* Scrollable Content Container */}
-        <div className="p-8 md:p-10 flex-1 max-w-4xl">
+        <div className="p-8 md:p-10 flex-1 w-full max-w-none">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
