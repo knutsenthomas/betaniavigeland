@@ -1,7 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useContent } from '@/contexts/ContentContext';
 
 export default function Mission() {
+  const { siteSettings } = useContent();
+  const vipps = siteSettings?.platform_links?.vipps || '106111';
+  const driftskonto = siteSettings?.platform_links?.konto || '3138.07.03737';
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
@@ -159,12 +163,12 @@ export default function Mission() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <div className="bg-white p-5 rounded-2xl border border-surface-container shadow-sm min-w-[200px]">
               <span className="block text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">Menighetskonto</span>
-              <span className="font-bold text-primary text-base">3138.07.03737</span>
+              <span className="font-bold text-primary text-base">{driftskonto}</span>
             </div>
             <div className="bg-white p-5 rounded-2xl border border-surface-container shadow-sm flex items-center justify-between min-w-[200px] gap-4">
               <div className="text-left">
                 <span className="block text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">Vippsnummer</span>
-                <span className="font-bold text-primary text-base">106111</span>
+                <span className="font-bold text-primary text-base">{vipps}</span>
               </div>
               <img src="/vipps-logo.svg" alt="Vipps" className="h-6 object-contain select-none" />
             </div>

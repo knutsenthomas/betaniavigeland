@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
+import CmsText from '@/components/CmsText';
 import facebookPosts from '@/data/facebook_posts.json';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { events } = useContent();
+  const { events, siteSettings } = useContent();
+  const vipps = siteSettings?.platform_links?.vipps || '106111';
   const [copied, setCopied] = useState(false);
 
   // Filter the events that are featured
   const featuredEvents = events.filter(event => event.featured).slice(0, 3);
 
   const handleCopyVipps = () => {
-    navigator.clipboard.writeText('106111');
+    navigator.clipboard.writeText(vipps);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -126,12 +128,18 @@ export default function Home() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="max-w-2xl"
           >
-            <h1 className="font-headline-xl text-headline-xl text-primary mb-6 leading-tight">
-              Et fellesskap for hele livet
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
-              Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk.
-            </p>
+            <CmsText 
+              slug="hero_title" 
+              fallback="Et fellesskap for hele livet" 
+              as="h1" 
+              className="font-headline-xl text-headline-xl text-primary mb-6 leading-tight" 
+            />
+            <CmsText 
+              slug="hero_desc" 
+              fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
+              as="p" 
+              className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg" 
+            />
             <div className="flex flex-wrap gap-4">
               <button 
                 onClick={() => navigate('/about')}
@@ -435,7 +443,7 @@ export default function Home() {
                     alt="Vipps" 
                     className="h-8 object-contain"
                   />
-                  <span className="font-bold text-wood-bark">106111</span>
+                  <span className="font-bold text-wood-bark">{vipps}</span>
                 </div>
                 <button 
                   onClick={handleCopyVipps} 

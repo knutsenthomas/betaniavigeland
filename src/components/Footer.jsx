@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useContent } from '@/contexts/ContentContext';
 
 export default function Footer() {
+  const { siteSettings } = useContent();
+  const vipps = siteSettings?.platform_links?.vipps || '106111';
+
   return (
     <footer className="bg-surface-container-lowest dark:bg-surface-dim pt-20 border-t border-surface-container">
       <div className="px-gutter max-w-container-max mx-auto">
@@ -74,7 +78,7 @@ export default function Footer() {
                 </p>
                 <p>
                   <span className="font-bold text-primary block text-xs uppercase tracking-wider">Bidrag</span>
-                  Vipps: 106111
+                  Vipps: {vipps}
                 </p>
               </div>
             </div>

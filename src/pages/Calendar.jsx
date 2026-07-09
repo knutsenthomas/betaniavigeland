@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
+import CmsText from '@/components/CmsText';
 
 export default function Calendar() {
-  const { events } = useContent();
+  const { events, siteSettings } = useContent();
   const [selectedFilter, setSelectedFilter] = useState('Alle');
   const [calendarAlert, setCalendarAlert] = useState(null);
 
@@ -60,75 +61,63 @@ export default function Calendar() {
       </section>
 
       {/* Summer Break / Eksterne arrangementer Notice Section */}
-      <section className="max-w-container-max mx-auto px-gutter mb-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-surface-container-low p-6 md:p-8 rounded-3xl border border-surface-container flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between items-start"
-        >
-          {/* Main Info */}
-          <div className="space-y-5 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed text-secondary text-xs font-bold uppercase tracking-wider">
-              <span className="material-symbols-outlined text-[16px] animate-pulse">info</span> Sommerferie-info
+      {siteSettings.show_summer_banner && (
+        <section className="max-w-container-max mx-auto px-gutter mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="bg-surface-container-low p-6 md:p-8 rounded-3xl border border-surface-container flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between items-start"
+          >
+            {/* Main Info */}
+            <div className="space-y-5 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed text-secondary text-xs font-bold uppercase tracking-wider">
+                <span className="material-symbols-outlined text-[16px] animate-pulse">info</span>
+                <CmsText slug="summer_banner_badge" fallback="Sommerferie-info" />
+              </div>
+              <CmsText 
+                slug="summer_banner_title" 
+                fallback="Sommerferie i menigheten" 
+                as="h2" 
+                className="font-headline-md text-headline-md text-primary font-bold" 
+              />
+              <CmsText 
+                slug="summer_banner_text1" 
+                fallback="Vi har ingen ordinære arrangementer i Betania Vigeland gjennom fellesferien. Første søndagsmøte etter sommerferien er søndag 16. august kl. 18:00. Vi ønsker alle en kjempefin sommer! ☀️" 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed" 
+              />
+              <CmsText 
+                slug="summer_banner_text2" 
+                fallback="Gjennom hele sommeren oppfordrer vi til å støtte opp under møtene og fellesskapet på Solstrand Camping." 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed" 
+              />
             </div>
-            <h2 className="font-headline-md text-headline-md text-primary">Sommerferie i menigheten</h2>
-            <p className="font-body-md text-on-surface-variant leading-relaxed">
-              Vi har ingen ordinære arrangementer i Betania Vigeland gjennom fellesferien. Første søndagsmøte etter sommerferien er <strong>søndag 16. august kl. 18:00</strong>. Vi ønsker alle en kjempefin sommer! ☀️
-            </p>
-            <p className="font-body-md text-on-surface-variant leading-relaxed">
-              Gjennom hele sommeren oppfordrer vi til å støtte opp under møtene og fellesskapet på <strong>Solstrand Camping</strong>.
-            </p>
-          </div>
 
-          {/* Links / Stevner Grid */}
-          <div className="w-full lg:max-w-md space-y-4 border-t lg:border-t-0 border-surface-container-highest pt-8 lg:pt-0">
-            <h3 className="font-bold text-primary text-xs uppercase tracking-widest">Anbefalte sommerstevner:</h3>
-            
-            {/* Solstrand Link */}
-            <a 
-              href="https://www.solstrand-camping.no/arrangement-MksEf" 
-              target="_blank" 
-              rel="noreferrer"
-              className="group bg-white p-4 rounded-xl border border-surface-container flex items-center justify-between hover:shadow-md transition-all duration-300"
-            >
-              <div>
-                <span className="block font-bold text-primary text-sm group-hover:text-secondary transition-colors">Solstrand Camping</span>
-                <span className="text-xs text-on-surface-variant">Se program for møtene sommeren 2026</span>
-              </div>
-              <span className="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
-            </a>
-
-            {/* Sommerstevnet Link */}
-            <a 
-              href="https://www.sommerstevnet.no" 
-              target="_blank" 
-              rel="noreferrer"
-              className="group bg-white p-4 rounded-xl border border-surface-container flex items-center justify-between hover:shadow-md transition-all duration-300"
-            >
-              <div>
-                <span className="block font-bold text-primary text-sm group-hover:text-secondary transition-colors">Sommerstevne (New Life)</span>
-                <span className="text-xs text-on-surface-variant">På Solstrand Camping 8. - 12. juli 2026</span>
-              </div>
-              <span className="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
-            </a>
-
-            {/* Facebook Link */}
-            <a 
-              href="https://www.facebook.com/BetaniaVigeland" 
-              target="_blank" 
-              rel="noreferrer"
-              className="group bg-white p-4 rounded-xl border border-surface-container flex items-center justify-between hover:shadow-md transition-all duration-300"
-            >
-              <div>
-                <span className="block font-bold text-primary text-sm group-hover:text-secondary transition-colors">Følg med på Facebook</span>
-                <span className="text-xs text-on-surface-variant">Løpende oppdateringer gjennom sommeren</span>
-              </div>
-              <span className="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
-            </a>
-          </div>
-        </motion.div>
-      </section>
+            {/* Links / Grid */}
+            <div className="w-full lg:max-w-md space-y-4 border-t lg:border-t-0 border-surface-container-highest pt-8 lg:pt-0">
+              <h3 className="font-bold text-primary text-xs uppercase tracking-widest">Anbefalte sommerstevner:</h3>
+              
+              {(siteSettings.summer_banner?.links || []).map((link, idx) => (
+                <a 
+                  key={idx}
+                  href={link.url} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="group bg-white p-4 rounded-xl border border-surface-container flex items-center justify-between hover:shadow-md transition-all duration-300"
+                >
+                  <div>
+                    <span className="block font-bold text-primary text-sm group-hover:text-secondary transition-colors">{link.label}</span>
+                    <span className="text-xs text-on-surface-variant">{link.sublabel}</span>
+                  </div>
+                  <span className="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+      )}
 
       {/* Filters Section */}
       <section className="max-w-container-max mx-auto px-gutter mb-12">

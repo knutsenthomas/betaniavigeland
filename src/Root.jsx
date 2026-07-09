@@ -15,6 +15,8 @@ import Mission from '@/pages/Mission';
 import Virkegrener from '@/pages/Virkegrener';
 import Podcast from '@/pages/Podcast';
 import Gave from '@/pages/Gave';
+import Login from '@/pages/Login';
+import Admin from '@/pages/Admin';
 
 export default function Root() {
   return (
@@ -42,6 +44,8 @@ export default function Root() {
                 <Route path="gave" element={<Gave />} />
                 <Route path="gi" element={<Gave />} />
               </Route>
+              <Route path="login" element={<Login />} />
+              <Route path="admin" element={<Admin />} />
             </Routes>
           </BrowserRouter>
         </ContentProvider>

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useContent } from '@/contexts/ContentContext';
 
 export default function Membership() {
+  const { siteSettings } = useContent();
+  const vipps = siteSettings?.platform_links?.vipps || '106111';
+  const driftskonto = siteSettings?.platform_links?.konto || '3138.07.03737';
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -327,12 +331,12 @@ export default function Membership() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-white p-5 rounded-2xl border border-surface-container shadow-sm">
                   <span className="block text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">Menighetskonto</span>
-                  <span className="font-bold text-primary text-base">3138.07.03737</span>
+                  <span className="font-bold text-primary text-base">{driftskonto}</span>
                 </div>
                 <div className="bg-white p-5 rounded-2xl border border-surface-container shadow-sm flex items-center justify-between">
                   <div>
                     <span className="block text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">Vippsnummer</span>
-                    <span className="font-bold text-primary text-base">106111</span>
+                    <span className="font-bold text-primary text-base">{vipps}</span>
                   </div>
                   <img src="/vipps-logo.svg" alt="Vipps" className="h-6 object-contain select-none" />
                 </div>

@@ -73,14 +73,14 @@ export default function Gave() {
               {/* Number display */}
               <div className="bg-surface-cream/50 rounded-2xl p-4 border border-surface-container/60 text-center">
                 <span className="text-xs text-on-surface-variant block font-semibold mb-1">VIPPS-NUMMER</span>
-                <span className="font-headline-md text-2xl font-black text-primary tracking-wide">106111</span>
+                <span className="font-headline-md text-2xl font-black text-primary tracking-wide">{vipps}</span>
               </div>
             </div>
 
             <div className="pt-8">
               <button
-                onClick={() => handleCopy('106111', 'Vippsnummer')}
-                className="w-full bg-[#ff5b24] text-white py-3 rounded-full font-label-md text-sm flex items-center justify-center gap-2 hover:bg-[#e04f1f] transition-colors active:scale-98 shadow-sm"
+                onClick={() => handleCopy(vipps, 'Vippsnummer')}
+                className="w-full bg-[#ff5b24] text-white py-3 rounded-full font-label-md text-sm flex items-center justify-center gap-2 hover:bg-[#e04f1f] transition-colors active:scale-[0.98] shadow-sm cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[18px] select-none">content_copy</span>
                 Kopier vippsnummer
@@ -109,14 +109,14 @@ export default function Gave() {
               {/* Number display */}
               <div className="bg-surface-cream/50 rounded-2xl p-4 border border-surface-container/60 text-center">
                 <span className="text-xs text-on-surface-variant block font-semibold mb-1">KONTONUMMER</span>
-                <span className="font-headline-md text-xl font-bold text-primary tracking-wide">3138.07.03737</span>
+                <span className="font-headline-md text-xl font-bold text-primary tracking-wide">{driftskonto}</span>
               </div>
             </div>
 
             <div className="pt-8">
               <button
-                onClick={() => handleCopy('3138.07.03737', 'Driftskontonummer')}
-                className="w-full bg-primary text-white py-3 rounded-full font-label-md text-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-98 shadow-sm"
+                onClick={() => handleCopy(driftskonto, 'Driftskontonummer')}
+                className="w-full bg-primary text-white py-3 rounded-full font-label-md text-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-[0.98] shadow-sm cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[18px] select-none">content_copy</span>
                 Kopier kontonummer

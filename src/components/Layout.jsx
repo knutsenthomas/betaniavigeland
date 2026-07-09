@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import SearchModal from '@/components/SearchModal';
+import CmsVisualToggle from '@/components/CmsVisualToggle';
 
 export default function Layout() {
   const location = useLocation();
@@ -19,6 +20,7 @@ export default function Layout() {
         </ErrorBoundary>
       </main>
       <Footer />
+      <CmsVisualToggle />
 
       <AnimatePresence>
         {isSearchOpen && (
