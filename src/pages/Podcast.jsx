@@ -107,6 +107,14 @@ export default function Podcast() {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpeaker, setSelectedSpeaker] = useState('Alle');
+  const [viewMode, setViewMode] = useState(() => {
+    return localStorage.getItem('betania-podcast-view') || 'grid';
+  });
+  
+  useEffect(() => {
+    localStorage.setItem('betania-podcast-view', viewMode);
+  }, [viewMode]);
+
   const [podcastInfo, setPodcastInfo] = useState({
     title: 'Betania Vigeland',
     description: 'Taler i fra Betania',
@@ -472,19 +480,49 @@ export default function Podcast() {
       <section id="podcast-list-header" className="max-w-container-max mx-auto px-gutter mb-12">
         <div className="space-y-6 pb-6 border-b border-surface-container">
           {/* Row 1: Header and Search */}
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
             <h2 className="font-headline-md text-headline-md text-primary font-bold">Taler og undervisning</h2>
             
-            {/* Search box */}
-            <div className="relative w-full sm:max-w-sm">
-              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline select-none">search</span>
-              <input
-                type="text"
-                placeholder="Søk i taler..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white rounded-full border border-surface-container text-on-surface placeholder-outline font-body-md text-sm focus:outline-none focus:border-secondary transition-all"
-              />
+            {/* Search box and View toggle */}
+            <div className="flex flex-row items-center gap-3 w-full md:w-auto">
+              <div className="relative flex-1 md:w-80 md:flex-initial">
+                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline select-none">search</span>
+                <input
+                  type="text"
+                  placeholder="Søk i taler..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 bg-white rounded-full border border-surface-container text-on-surface placeholder-outline font-body-md text-sm focus:outline-none focus:border-secondary transition-all"
+                />
+              </div>
+
+              {/* Grid / List View Toggle */}
+              <div className="flex items-center gap-1 bg-surface-container-low border border-surface-container rounded-full p-1 shadow-sm shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-full transition-all duration-200 active:scale-95 ${
+                    viewMode === 'grid'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-on-surface-variant hover:bg-surface-container'
+                  }`}
+                  title="Rutenett-visning"
+                >
+                  <span className="material-symbols-outlined text-[20px] block select-none">grid_view</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-full transition-all duration-200 active:scale-95 ${
+                    viewMode === 'list'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-on-surface-variant hover:bg-surface-container'
+                  }`}
+                  title="Liste-visning"
+                >
+                  <span className="material-symbols-outlined text-[20px] block select-none">format_list_bulleted</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -570,7 +608,7 @@ export default function Podcast() {
             <p className="font-semibold text-primary">Ingen taler matchet søket ditt</p>
             <p className="text-on-surface-variant font-body-sm text-[13px]">Prøv andre søkeord eller bytt taler-filter.</p>
           </div>
-        ) : (
+        ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEpisodes.map((ep, idx) => {
               const isSelected = currentEpisode?.id === ep.id;
@@ -615,6 +653,96 @@ export default function Podcast() {
                   <div className="p-6 bg-surface-cream/30 border-t border-surface-container flex items-center justify-between">
                     <div className="flex items-center gap-1.5 text-on-surface-variant text-xs font-semibold">
                       <span className="material-symbols-outlined text-[16px] select-none">schedule</span>
+                      <span>{ep.duration.replace(/^00:/, '')}</span>
+                    </div>
+
+                    <button
+                      onClick={() => handlePlayEpisode(ep)}
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-label-md text-xs shadow-sm transition-all duration-200 active:scale-95 ${
+                        isSelected && isPlaying 
+                          ? 'bg-secondary text-white font-bold' 
+                          : 'bg-primary text-white hover:bg-primary-container'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-[16px] select-none">
+                        {isSelected && isPlaying ? 'pause' : 'play_arrow'}
+                      </span>
+                      {isSelected && isPlaying ? 'Spiller av' : 'Hør tale'}
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {filteredEpisodes.map((ep, idx) => {
+              const isSelected = currentEpisode?.id === ep.id;
+              
+              return (
+                <motion.div
+                  id={`episode-${ep.id}`}
+                  key={ep.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.4, delay: idx * 0.03 }}
+                  className={`bg-white rounded-2xl p-5 border transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm hover:shadow-md ${
+                    isSelected ? 'border-secondary/40 shadow-md shadow-secondary/5' : 'border-surface-container'
+                  }`}
+                >
+                  {/* Left: Play button & Info */}
+                  <div className="flex items-start md:items-center gap-4 flex-1 min-w-0">
+                    <button
+                      onClick={() => handlePlayEpisode(ep)}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
+                        isSelected && isPlaying 
+                          ? 'bg-secondary text-white shadow-sm'
+                          : 'bg-primary/5 hover:bg-primary/10 text-primary'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-[20px] select-none">
+                        {isSelected && isPlaying ? 'pause' : 'play_arrow'}
+                      </span>
+                    </button>
+
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-on-surface-variant">
+                        <span className="font-bold text-secondary uppercase bg-secondary-fixed/50 px-2.5 py-0.5 rounded-full text-[10px]">
+                          {ep.speaker}
+                        </span>
+                        <span className="text-outline-variant">•</span>
+                        <span>
+                          {new Date(ep.pubDate).toLocaleDateString('no-NO', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </span>
+                        {ep.duration && (
+                          <>
+                            <span className="text-outline-variant">•</span>
+                            <span className="flex items-center gap-1 font-semibold">
+                              <span className="material-symbols-outlined text-[14px]">schedule</span>
+                              {ep.duration.replace(/^00:/, '')}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                      <h3 
+                        onClick={() => handlePlayEpisode(ep)}
+                        className="font-headline-md text-title-md text-primary font-bold hover:text-secondary transition-colors cursor-pointer truncate"
+                      >
+                        {ep.sermonTitle}
+                      </h3>
+                      {ep.description && (
+                        <p className="text-on-surface-variant font-body-sm text-[13px] line-clamp-1 leading-relaxed hidden sm:block">
+                          {ep.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right: Action Button */}
+                  <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-surface-container/60">
+                    <div className="flex items-center gap-1 text-on-surface-variant text-xs font-semibold md:hidden">
+                      <span className="material-symbols-outlined text-[15px] select-none">schedule</span>
                       <span>{ep.duration.replace(/^00:/, '')}</span>
                     </div>
 
