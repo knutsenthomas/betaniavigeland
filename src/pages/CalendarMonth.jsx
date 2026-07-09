@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
 import { Link } from 'react-router-dom';
@@ -40,22 +40,30 @@ export default function CalendarMonth() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [activePopupEvent, setActivePopupEvent] = useState(null);
+  const [calendarAlert, setCalendarAlert] = useState(null);
 
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
 
+  // Handle escape key to close popup modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActivePopupEvent(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // 1. Generate calendar grid data
   const gridCells = useMemo(() => {
-    // First day of current month
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-    // Get day index (0 = Monday, 6 = Sunday)
     let startDayOfWeek = firstDayOfMonth.getDay() - 1;
     if (startDayOfWeek === -1) startDayOfWeek = 6; // Sunday is 6
 
-    // Total days in current month
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-    // Total days in previous month
     const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
 
     const cells = [];
@@ -83,7 +91,7 @@ export default function CalendarMonth() {
       });
     }
 
-    // Next month padding cells to fill the grid (normally 42 cells total for 6 rows)
+    // Next month padding cells to fill the grid
     const totalCells = cells.length;
     const remainingCells = 42 - totalCells;
     for (let i = 1; i <= remainingCells; i++) {
@@ -154,8 +162,131 @@ export default function CalendarMonth() {
     }).sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
   }, [events, currentMonth, currentYear]);
 
+  const handleAddToCalendar = (eventTitle) => {
+    setCalendarAlert(`"${eventTitle}" ble lagt til i kalenderen din!`);
+    setTimeout(() => setCalendarAlert(null), 3000);
+  };
+
   return (
-    <main className="pt-32 pb-section-gap-lg bg-background min-h-screen">
+    <main className="pt-32 pb-section-gap-lg bg-background min-h-screen relative">
+      {/* Toast Alert for calendar action */}
+      <AnimatePresence>
+        {calendarAlert && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-4 rounded-xl shadow-2xl z-[110] flex items-center gap-3 border border-primary-container"
+          >
+            <span className="material-symbols-outlined text-secondary-container">check_circle</span>
+            <span className="font-label-md text-label-md">{calendarAlert}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Popup Modal for Event Details */}
+      <AnimatePresence>
+        {activePopupEvent && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop with fade-in and blur */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActivePopupEvent(null)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+
+            {/* Modal Card with scale-up entry */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', duration: 0.4 }}
+              className="bg-white border border-surface-container rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full flex flex-col relative z-10 max-h-[90vh]"
+            >
+              {/* Event Image Banner */}
+              {activePopupEvent.image && (
+                <div 
+                  className="h-52 w-full relative bg-cover bg-center shrink-0 border-b border-surface-container"
+                  style={{ backgroundImage: `url('${activePopupEvent.image}')` }}
+                >
+                  {/* Floating Close Button */}
+                  <button
+                    onClick={() => setActivePopupEvent(null)}
+                    className="absolute top-4 right-4 w-10 h-10 bg-white/80 hover:bg-white text-primary rounded-full flex items-center justify-center backdrop-blur-sm hover:scale-105 active:scale-95 transition-all shadow-md focus:outline-none"
+                    aria-label="Lukk"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">close</span>
+                  </button>
+                </div>
+              )}
+
+              {/* Event details */}
+              <div className="p-6 md:p-8 space-y-5 overflow-y-auto flex-1">
+                {/* Close button if no image is present */}
+                {!activePopupEvent.image && (
+                  <button
+                    onClick={() => setActivePopupEvent(null)}
+                    className="absolute top-4 right-4 w-10 h-10 bg-surface-container hover:bg-surface-container-high text-primary rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all focus:outline-none"
+                    aria-label="Lukk"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">close</span>
+                  </button>
+                )}
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                    (CATEGORY_COLORS[activePopupEvent.category] || CATEGORY_COLORS['Annet']).bg
+                  } ${
+                    (CATEGORY_COLORS[activePopupEvent.category] || CATEGORY_COLORS['Annet']).text || 'text-slate-800'
+                  } border ${
+                    (CATEGORY_COLORS[activePopupEvent.category] || CATEGORY_COLORS['Annet']).border || 'border-slate-200'
+                  }`}>
+                    {activePopupEvent.category}
+                  </span>
+                  
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-secondary uppercase tracking-wider">
+                    <span className="material-symbols-outlined text-[16px] translate-y-[-0.5px]">calendar_today</span>
+                    <span>{activePopupEvent.date}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-secondary uppercase tracking-wider border-l border-surface-container-highest pl-3">
+                    <span className="material-symbols-outlined text-[16px] translate-y-[-0.5px]">schedule</span>
+                    <span>{activePopupEvent.time}</span>
+                  </div>
+                </div>
+
+                <h2 className="text-xl md:text-2xl font-headline font-bold text-primary leading-snug">
+                  {activePopupEvent.title}
+                </h2>
+
+                <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed whitespace-pre-line">
+                  {activePopupEvent.description || 'Ingen ytterligere beskrivelse tilgjengelig.'}
+                </p>
+                
+                {/* Actions */}
+                <div className="pt-2 flex gap-3">
+                  <button
+                    onClick={() => handleAddToCalendar(activePopupEvent.title)}
+                    className="flex-1 py-3.5 bg-primary hover:bg-[#153a51] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-1.5 shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">calendar_add_on</span>
+                    Legg til i kalender
+                  </button>
+                  <button
+                    onClick={() => setActivePopupEvent(null)}
+                    className="px-6 py-3.5 bg-surface-container hover:bg-surface-container-high text-primary text-xs font-bold uppercase tracking-wider rounded-xl transition-all active:scale-[0.98]"
+                  >
+                    Lukk
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-container-max mx-auto px-gutter">
         
         {/* Header Branding */}
@@ -224,7 +355,7 @@ export default function CalendarMonth() {
 
         {viewMode === 'grid' ? (
           <>
-            {/* Calendar Card Container */}
+            {/* Calendar Card Grid Container */}
             <div className="bg-white border border-surface-container rounded-3xl p-4 md:p-6 shadow-sm mb-12 animate-fadeIn">
               
               {/* Grid Layout Headers */}
@@ -298,7 +429,11 @@ export default function CalendarMonth() {
                           return (
                             <div
                               key={evt.id}
-                              className={`text-[10px] font-label-md font-bold px-2 py-1 rounded-lg border truncate w-full flex items-center gap-1.5 ${theme.bg} ${theme.text || 'text-slate-800'} ${theme.border || 'border-slate-200'}`}
+                              onClick={(e) => {
+                                e.stopPropagation(); // Avoid selecting cell date
+                                setActivePopupEvent(evt);
+                              }}
+                              className={`text-[10px] font-label-md font-bold px-2 py-1 rounded-lg border truncate w-full flex items-center gap-1.5 cursor-pointer hover:scale-[1.02] transition-transform ${theme.bg} ${theme.text || 'text-slate-800'} ${theme.border || 'border-slate-200'}`}
                               title={`${evt.time} - ${evt.title}`}
                             >
                               <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${theme.dot}`} />
@@ -342,7 +477,11 @@ export default function CalendarMonth() {
                   selectedDayEvents.length > 0 ? (
                     <div className="space-y-4">
                       {selectedDayEvents.map((evt, idx) => (
-                        <EventCardDetail key={evt.id || idx} event={evt} />
+                        <EventCardDetail 
+                          key={evt.id || idx} 
+                          event={evt} 
+                          onClick={() => setActivePopupEvent(evt)}
+                        />
                       ))}
                     </div>
                   ) : (
@@ -360,7 +499,11 @@ export default function CalendarMonth() {
                   currentMonthEvents.length > 0 ? (
                     <div className="space-y-4">
                       {currentMonthEvents.map((evt, idx) => (
-                        <EventCardDetail key={evt.id || idx} event={evt} />
+                        <EventCardDetail 
+                          key={evt.id || idx} 
+                          event={evt} 
+                          onClick={() => setActivePopupEvent(evt)}
+                        />
                       ))}
                     </div>
                   ) : (
@@ -390,7 +533,11 @@ export default function CalendarMonth() {
                   const niceDayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
                   
                   return (
-                    <div key={evt.id || idx} className="py-6 first:pt-0 last:pb-0 flex flex-col md:flex-row gap-6 md:items-start group">
+                    <div 
+                      key={evt.id || idx} 
+                      onClick={() => setActivePopupEvent(evt)}
+                      className="py-6 first:pt-0 last:pb-0 flex flex-col md:flex-row gap-6 md:items-start group cursor-pointer"
+                    >
                       {/* Left Date Column */}
                       <div className="w-24 shrink-0 flex flex-col">
                         <span className="text-3xl font-headline font-bold text-primary group-hover:text-secondary transition-colors leading-none">
@@ -446,7 +593,7 @@ export default function CalendarMonth() {
 }
 
 /* Detail Card helper component */
-function EventCardDetail({ event }) {
+function EventCardDetail({ event, onClick }) {
   const theme = CATEGORY_COLORS[event.category] || CATEGORY_COLORS['Annet'];
 
   return (
@@ -456,10 +603,13 @@ function EventCardDetail({ event }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.25 }}
-      className="bg-surface-cream border border-surface-container rounded-3xl p-5 md:p-6 shadow-sm flex flex-col sm:flex-row gap-5 hover:shadow-md transition-shadow"
+      onClick={onClick}
+      className="bg-surface-cream border border-surface-container rounded-3xl p-5 md:p-6 shadow-sm flex flex-col sm:flex-row gap-5 hover:shadow-md transition-all duration-300 cursor-pointer hover:border-primary/20 active:scale-[0.99]"
     >
       {/* Category Accent and Image snippet */}
-      <div className="w-full sm:w-28 h-20 bg-cover bg-center rounded-2xl shrink-0 overflow-hidden" style={{ backgroundImage: `url('${event.image}')` }} />
+      {event.image && (
+        <div className="w-full sm:w-28 h-20 bg-cover bg-center rounded-2xl shrink-0 overflow-hidden border border-surface-container" style={{ backgroundImage: `url('${event.image}')` }} />
+      )}
       
       <div className="flex-1 flex flex-col justify-between">
         <div>
@@ -473,7 +623,7 @@ function EventCardDetail({ event }) {
             </div>
           </div>
           
-          <h3 className="font-headline-sm text-base md:text-lg font-bold text-primary mb-1.5">{event.title}</h3>
+          <h3 className="font-headline-sm text-base md:text-lg font-bold text-primary mb-1.5 group-hover:text-secondary">{event.title}</h3>
           <p className="text-[13px] text-on-surface-variant leading-relaxed line-clamp-2">{event.description}</p>
         </div>
       </div>
