@@ -25,7 +25,7 @@ export default function Navbar({ onSearchOpen }) {
   const mainLinks = [
     { to: '/', label: 'Hjem' },
     { to: '/hva-skjer', label: 'Hva skjer' },
-    { to: '/virkegrener', label: 'Virkegrener' },
+    { to: '/virkegrener', label: 'Våre virkegrener' },
     { to: '/podcast', label: 'Podcast' },
   ];
 
