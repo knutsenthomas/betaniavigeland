@@ -132,6 +132,43 @@ export default function Admin() {
     }
   };
 
+  const compressAndSetImage = (file, callback) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 300;
+        const MAX_HEIGHT = 300;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert to compressed jpeg
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        callback(compressedDataUrl);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   if (!user || !localSettings) {
     return (
       <div className="min-h-screen bg-[#fbf9f6] flex items-center justify-center">
@@ -938,13 +975,11 @@ export default function Admin() {
                                     onChange={(e) => {
                                       const file = e.target.files[0];
                                       if (!file) return;
-                                      const reader = new FileReader();
-                                      reader.onload = (event) => {
+                                      compressAndSetImage(file, (compressedUrl) => {
                                         const leadership = [...localSettings.leadership];
-                                        leadership[idx].image = event.target.result;
+                                        leadership[idx].image = compressedUrl;
                                         setLocalSettings({ ...localSettings, leadership });
-                                      };
-                                      reader.readAsDataURL(file);
+                                      });
                                     }}
                                   />
                                   <label
@@ -952,8 +987,21 @@ export default function Admin() {
                                     className="cursor-pointer px-3.5 py-2.5 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5 shrink-0 shadow-sm"
                                   >
                                     <span className="material-symbols-outlined text-[16px]">upload</span>
-                                    Last opp bilde
+                                    Last opp
                                   </label>
+                                  {person.image && (
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        const leadership = [...localSettings.leadership];
+                                        leadership[idx].image = '';
+                                        setLocalSettings({ ...localSettings, leadership });
+                                      }}
+                                      className="px-3.5 py-2.5 bg-outline-variant hover:bg-outline text-on-surface text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all shadow-sm flex items-center gap-1.5 shrink-0"
+                                    >
+                                      Fjern
+                                    </button>
+                                  )}
                                 </div>
                                 <input
                                   type="text"
@@ -1085,13 +1133,11 @@ export default function Admin() {
                                     onChange={(e) => {
                                       const file = e.target.files[0];
                                       if (!file) return;
-                                      const reader = new FileReader();
-                                      reader.onload = (event) => {
+                                      compressAndSetImage(file, (compressedUrl) => {
                                         const staff = [...localSettings.staff];
-                                        staff[idx].image = event.target.result;
+                                        staff[idx].image = compressedUrl;
                                         setLocalSettings({ ...localSettings, staff });
-                                      };
-                                      reader.readAsDataURL(file);
+                                      });
                                     }}
                                   />
                                   <label
@@ -1099,8 +1145,21 @@ export default function Admin() {
                                     className="cursor-pointer px-3.5 py-2.5 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5 shrink-0 shadow-sm"
                                   >
                                     <span className="material-symbols-outlined text-[16px]">upload</span>
-                                    Last opp bilde
+                                    Last opp
                                   </label>
+                                  {person.image && (
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        const staff = [...localSettings.staff];
+                                        staff[idx].image = '';
+                                        setLocalSettings({ ...localSettings, staff });
+                                      }}
+                                      className="px-3.5 py-2.5 bg-outline-variant hover:bg-outline text-on-surface text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all shadow-sm flex items-center gap-1.5 shrink-0"
+                                    >
+                                      Fjern
+                                    </button>
+                                  )}
                                 </div>
                                 <input
                                   type="text"

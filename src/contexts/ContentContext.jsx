@@ -276,7 +276,6 @@ export const ContentProvider = ({ children }) => {
     }
   };
 
-  // 4. Mutate site settings
   const updateSiteSettings = async (newSettings) => {
     setSiteSettings(newSettings);
 
@@ -292,10 +291,12 @@ export const ContentProvider = ({ children }) => {
         body: JSON.stringify({ data: newSettings })
       });
       if (!res.ok) {
-        throw new Error('Klarte ikke lagre innstillinger');
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Klarte ikke lagre innstillinger');
       }
     } catch (err) {
       console.error("Klarte ikke lagre innstillinger:", err);
+      throw err; // Re-throw so callers (like Admin page) know it failed
     }
   };
 
