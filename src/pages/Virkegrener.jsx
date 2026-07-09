@@ -247,7 +247,7 @@ export default function Virkegrener() {
           <div className="shrink-0 flex flex-col sm:flex-row gap-4 w-full sm:w-auto z-10">
             <a
               href="mailto:post@betania-vigeland.no"
-              className="bg-[#eb6a33] hover:bg-[#eb6a33]/90 text-white px-8 py-3 rounded-full font-label-md text-sm text-center transition-all active:scale-95 shadow-sm hover:shadow"
+              className="bg-secondary hover:bg-secondary-container text-white px-8 py-3 rounded-full font-label-md text-sm text-center transition-all active:scale-95 shadow-sm hover:shadow"
             >
               Ta kontakt med oss
             </a>
