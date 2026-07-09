@@ -236,7 +236,7 @@ export default function Virkegrener() {
 
       {/* Interactive Bottom CTA Section */}
       <section className="max-w-container-max mx-auto px-gutter mt-20">
-        <div className="bg-gradient-to-br from-[#1B4965] to-[#1B4965]/90 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden border border-[#1B4965]/20 flex flex-col md:flex-row gap-8 items-center justify-between">
+        <div className="bg-gradient-to-br from-primary to-primary/90 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden border border-primary/20 flex flex-col md:flex-row gap-8 items-center justify-between">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent pointer-events-none" />
           <div className="space-y-4 max-w-xl text-center md:text-left z-10">
             <h3 className="font-headline-lg text-headline-lg font-bold text-white">Lurer du på noe eller vil du bli med?</h3>
