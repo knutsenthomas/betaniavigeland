@@ -228,14 +228,21 @@ export default function Gave() {
                 className="font-body-md text-on-surface-variant leading-relaxed text-sm" 
               />
               <div className="bg-white/60 border border-surface-container rounded-2xl p-5 space-y-3">
-                <p className="text-xs text-on-surface-variant font-semibold">REGLER FOR SKATTEFRADRAG</p>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
-                  Du får fradrag på skatten for gaver mellom 500 kr og 25 000 kr per år. For at gaven skal rapporteres til Skatteetaten og utløse fradrag, må vi ha registrert fødselsnummeret ditt (11 siffer) i våre systemer.
-                </p>
+                <CmsText slug="gave_tax_rules_title" fallback="REGLER FOR SKATTEFRADRAG" as="p" className="text-xs text-on-surface-variant font-semibold" />
+                <CmsText 
+                  slug="gave_tax_rules_desc" 
+                  fallback="Du får fradrag på skatten for gaver mellom 500 kr og 25 000 kr per år. For at gaven skal rapporteres til Skatteetaten og utløse fradrag, må vi ha registrert fødselsnummeret ditt (11 siffer) i våre systemer." 
+                  as="p" 
+                  className="text-xs text-on-surface-variant leading-relaxed" 
+                />
               </div>
-              <p className="text-xs text-on-surface-variant leading-relaxed">
-                Ta kontakt med menighetens kasserer på epost <a href="mailto:post@betania-vigeland.no" className="text-secondary font-bold hover:underline">post@betania-vigeland.no</a> dersom du ønsker å registrere fødselsnummeret ditt for skattefradrag eller har spørsmål vedrørende gaver.
-              </p>
+              <div className="text-xs text-on-surface-variant leading-relaxed">
+                <CmsText slug="gave_tax_contact_prefix" fallback="Ta kontakt med menighetens kasserer på epost " as="span" />
+                <a href="mailto:post@betania-vigeland.no" className="text-secondary font-bold hover:underline">
+                  post@betania-vigeland.no
+                </a>
+                <CmsText slug="gave_tax_contact_suffix" fallback=" dersom du ønsker å registrere fødselsnummeret ditt for skattefradrag eller har spørsmål vedrørende gaver." as="span" />
+              </div>
             </div>
           </div>
 

@@ -153,25 +153,23 @@ export default function Rental() {
             <div className="bg-surface-container-low border border-surface-container rounded-2xl p-6 shadow-sm space-y-4">
               <h4 className="font-bold text-primary text-md flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary">contact_phone</span>
-                Utleieansvarlig
+                <CmsText slug="rental_contact_title" fallback="Utleieansvarlig" />
               </h4>
-              <p className="text-on-surface-variant font-body-md">For spørsmål om leie og tilgjengelighet, ta kontakt med:</p>
+              <CmsText slug="rental_contact_intro" fallback="For spørsmål om leie og tilgjengelighet, ta kontakt med:" as="p" className="text-on-surface-variant font-body-md" />
               <div className="space-y-1 font-body-md">
-                <p className="font-bold text-primary text-lg">
-                  {siteSettings?.rental_contact?.name || 'Jan Tore Tellefsen'}
-                </p>
+                <CmsText slug="rental_contact_name" fallback={siteSettings?.rental_contact?.name || "Jan Tore Tellefsen"} as="p" className="font-bold text-primary text-lg" />
                 <p className="text-on-surface-variant flex items-center gap-2">
                   <span className="material-symbols-outlined text-[18px]">phone</span>
                   Mobil:{' '}
                   <a href={`tel:${siteSettings?.rental_contact?.phone || '97055786'}`} className="text-secondary hover:underline">
-                    {siteSettings?.rental_contact?.phone || '97055786'}
+                    <CmsText slug="rental_contact_phone" fallback={siteSettings?.rental_contact?.phone || "97055786"} as="span" />
                   </a>
                 </p>
                 <p className="text-on-surface-variant flex items-center gap-2">
                   <span className="material-symbols-outlined text-[18px]">mail</span>
                   E-post:{' '}
                   <a href={`mailto:${siteSettings?.rental_contact?.email || 'jant_tellefsen@live.no'}`} className="text-secondary hover:underline">
-                    {siteSettings?.rental_contact?.email || 'jant_tellefsen@live.no'}
+                    <CmsText slug="rental_contact_email" fallback={siteSettings?.rental_contact?.email || "jant_tellefsen@live.no"} as="span" />
                   </a>
                 </p>
               </div>
@@ -181,10 +179,8 @@ export default function Rental() {
           {/* Inquiry Form */}
           <div className="lg:col-span-7">
             <div className="bg-surface-cream border border-surface-container rounded-3xl p-8 lg:p-12 shadow-sm">
-              <h3 className="font-headline-lg text-headline-lg text-primary mb-2">Send leieforespørsel</h3>
-              <p className="font-body-md text-on-surface-variant mb-8">
-                Fyll ut skjemaet under, så kontakter vi deg for å bekrefte tilgjengelighet og avtale detaljer.
-              </p>
+              <CmsText slug="rental_form_title" fallback="Send leieforespørsel" as="h3" className="font-headline-lg text-headline-lg text-primary mb-2 font-bold" />
+              <CmsText slug="rental_form_desc" fallback="Fyll ut skjemaet under, så kontakter vi deg for å bekrefte tilgjengelighet og avtale detaljer." as="p" className="font-body-md text-on-surface-variant mb-8" />
               
               <AnimatePresence mode="wait">
                 {inquirySent ? (
@@ -216,7 +212,9 @@ export default function Rental() {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">Ditt navn *</label>
+                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">
+                          <CmsText slug="rental_label_name" fallback="Ditt navn *" />
+                        </label>
                         <input 
                           type="text" 
                           required
@@ -226,7 +224,9 @@ export default function Rental() {
                         />
                       </div>
                       <div>
-                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">E-postadresse *</label>
+                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">
+                          <CmsText slug="rental_label_email" fallback="E-postadresse *" />
+                        </label>
                         <input 
                           type="email" 
                           required
@@ -238,7 +238,9 @@ export default function Rental() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">Telefonnummer *</label>
+                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">
+                          <CmsText slug="rental_label_phone" fallback="Telefonnummer *" />
+                        </label>
                         <input 
                           type="tel" 
                           required
@@ -248,7 +250,9 @@ export default function Rental() {
                         />
                       </div>
                       <div>
-                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">Ønsket dato *</label>
+                        <label className="block font-label-md text-label-md text-on-surface-variant mb-1">
+                          <CmsText slug="rental_label_date" fallback="Ønsket dato *" />
+                        </label>
                         <input 
                           type="date" 
                           required
@@ -259,7 +263,9 @@ export default function Rental() {
                       </div>
                     </div>
                     <div>
-                      <label className="block font-label-md text-label-md text-on-surface-variant mb-1">Velg lokale *</label>
+                      <label className="block font-label-md text-label-md text-on-surface-variant mb-1">
+                        <CmsText slug="rental_label_room" fallback="Velg lokale *" />
+                      </label>
                       <select 
                         value={formData.room}
                         onChange={(e) => setFormData({...formData, room: e.target.value})}
@@ -271,7 +277,9 @@ export default function Rental() {
                       </select>
                     </div>
                     <div>
-                      <label className="block font-label-md text-label-md text-on-surface-variant mb-1">Tilleggsinformasjon</label>
+                      <label className="block font-label-md text-label-md text-on-surface-variant mb-1">
+                        <CmsText slug="rental_label_notes" fallback="Tilleggsinformasjon" />
+                      </label>
                       <textarea 
                         rows="4" 
                         value={formData.notes}

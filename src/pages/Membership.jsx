@@ -260,7 +260,7 @@ export default function Membership() {
             >
               <h3 className="font-headline-md text-headline-md text-primary flex items-center gap-3">
                 <span className="material-symbols-outlined text-secondary text-[26px]">rule</span>
-                Som medlem hos oss må du:
+                <CmsText slug="membership_require_title" fallback="Som medlem hos oss må du:" />
               </h3>
               <ul className="space-y-4">
                 {[
@@ -273,7 +273,7 @@ export default function Membership() {
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-on-surface-variant font-body-md leading-relaxed text-[15px]">
                     <span className="material-symbols-outlined text-meadow-green text-[20px] mt-0.5 select-none">check_circle</span>
-                    <span>{item}</span>
+                    <CmsText slug={`membership_require_item_${idx}`} fallback={item} as="span" />
                   </li>
                 ))}
               </ul>
@@ -290,7 +290,7 @@ export default function Membership() {
               >
                 <h3 className="font-headline-md text-headline-md text-primary flex items-center gap-3">
                   <span className="material-symbols-outlined text-secondary text-[26px]">handshake</span>
-                  Hva vi forventer av deg:
+                  <CmsText slug="membership_expect_title" fallback="Hva vi forventer av deg:" />
                 </h3>
                 <ul className="space-y-3">
                   {[
@@ -300,7 +300,7 @@ export default function Membership() {
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-on-surface-variant text-[15px] leading-relaxed">
                       <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5">arrow_right_alt</span>
-                      <span>{item}</span>
+                      <CmsText slug={`membership_expect_item_${idx}`} fallback={item} as="span" />
                     </li>
                   ))}
                 </ul>
@@ -315,7 +315,7 @@ export default function Membership() {
               >
                 <h3 className="font-headline-md text-headline-md text-primary flex items-center gap-3">
                   <span className="material-symbols-outlined text-secondary text-[26px]">star</span>
-                  Hva du kan forvente av menigheten:
+                  <CmsText slug="membership_receive_title" fallback="Hva du kan forvente av menigheten:" />
                 </h3>
                 <ul className="space-y-3">
                   {[
@@ -326,7 +326,7 @@ export default function Membership() {
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-on-surface-variant text-[15px] leading-relaxed">
                       <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5">star_rate</span>
-                      <span>{item}</span>
+                      <CmsText slug={`membership_receive_item_${idx}`} fallback={item} as="span" />
                     </li>
                   ))}
                 </ul>
@@ -363,9 +363,12 @@ export default function Membership() {
                 as="p" 
                 className="font-body-md text-on-surface-variant leading-relaxed" 
               />
-              <p className="font-body-md text-on-surface-variant italic">
-                Tips: Alle gaver til menigheten gir rett til skattefradrag. Kontakt oss i skjemaet om du ønsker å sette opp fast givertjeneste registrert med personnummer for skattefradrag.
-              </p>
+              <CmsText 
+                slug="membership_contribute_tips" 
+                fallback="Tips: Alle gaver til menigheten gir rett til skattefradrag. Kontakt oss i skjemaet om du ønsker å sette opp fast givertjeneste registrert med personnummer for skattefradrag." 
+                as="p" 
+                className="font-body-md text-on-surface-variant italic" 
+              />
             </motion.div>
 
             {/* Account card and Vipps */}
@@ -375,7 +378,7 @@ export default function Membership() {
               viewport={{ once: true }}
               className="bg-surface-container-low p-8 rounded-3xl border border-surface-container space-y-6"
             >
-              <h3 className="font-headline-md text-headline-md text-primary">Fast Giveravtale</h3>
+              <CmsText slug="membership_giveravtale_title" fallback="Fast Giveravtale" as="h3" className="font-headline-md text-headline-md text-primary font-bold" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-white p-5 rounded-2xl border border-surface-container shadow-sm">
                   <span className="block text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">Menighetskonto</span>
@@ -416,8 +419,8 @@ export default function Membership() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <h3 className="font-headline-md text-headline-md text-primary mb-2">Kontakt oss om medlemskap</h3>
-                  <p className="font-body-md text-on-surface-variant text-sm">Har du spørsmål om medlemskap, dåp eller ønsker du å engasjere deg som frivillig? Send oss en melding her!</p>
+                  <CmsText slug="membership_form_title" fallback="Kontakt oss om medlemskap" as="h3" className="font-headline-md text-headline-md text-primary mb-2 font-bold" />
+                  <CmsText slug="membership_form_desc" fallback="Har du spørsmål om medlemskap, dåp eller ønsker du å engasjere deg som frivillig? Send oss en melding her!" as="p" className="font-body-md text-on-surface-variant text-sm" />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -471,7 +474,7 @@ export default function Membership() {
                           onChange={() => handleCheckboxChange(area.id)}
                           className="mt-0.5 accent-secondary"
                         />
-                        <span className="text-on-surface-variant leading-snug">{area.label}</span>
+                        <CmsText slug={`membership_serving_label_${area.id}`} fallback={area.label} as="span" className="text-on-surface-variant leading-snug" />
                       </label>
                     ))}
                   </div>
