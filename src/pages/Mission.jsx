@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
+import CmsText from '@/components/CmsText';
 
 export default function Mission() {
   const { siteSettings } = useContent();
@@ -56,13 +57,21 @@ export default function Mission() {
             variants={fadeInUpVariants}
             className="max-w-3xl space-y-6"
           >
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Spredning av evangeliet</span>
-            <h1 className="font-headline-xl text-headline-xl text-primary leading-tight">
-              Vårt misjonsengasjement
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-              Det er et stort misjonsengasjement i Betania Vigeland. Vi ønsker å være med på å bringe det gode budskapet om Jesus både nasjonalt og internasjonalt. Menigheten støtter to misjonsprosjekter fast med et månedlig beløp.
-            </p>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="mission_hero_badge" fallback="Spredning av evangeliet" />
+            </div>
+            <CmsText 
+              slug="mission_hero_title" 
+              fallback="Vårt misjonsengasjement" 
+              as="h1" 
+              className="font-headline-xl text-headline-xl text-primary leading-tight font-bold" 
+            />
+            <CmsText 
+              slug="mission_hero_desc" 
+              fallback="Det er et stort misjonsengasjement i Betania Vigeland. Vi ønsker å være med på å bringe det gode budskapet om Jesus både nasjonalt og internasjonalt. Menigheten støtter to misjonsprosjekter fast med et månedlig beløp." 
+              as="p" 
+              className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" 
+            />
           </motion.div>
         </div>
       </section>
@@ -155,11 +164,21 @@ export default function Mission() {
       {/* Give support banner */}
       <section className="bg-surface-container-low py-20 border-t border-surface-container">
         <div className="max-w-4xl mx-auto px-gutter text-center space-y-6">
-          <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Gi en gave</span>
-          <h2 className="font-headline-lg text-headline-lg text-primary">Vil du være med å støtte arbeidet?</h2>
-          <p className="font-body-md text-on-surface-variant leading-relaxed max-w-2xl mx-auto">
-            Gjennom menighetens misjonskasse kan du være med å velsigne og bidra til at Sett og Hørt og Høiland Misjon når enda lenger ut med evangeliet. Merk gjerne gaven med "Misjon".
-          </p>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+            <CmsText slug="mission_support_badge" fallback="Gi en gave" />
+          </div>
+          <CmsText 
+            slug="mission_support_title" 
+            fallback="Vil du være med å støtte arbeidet?" 
+            as="h2" 
+            className="font-headline-lg text-headline-lg text-primary font-bold" 
+          />
+          <CmsText 
+            slug="mission_support_desc" 
+            fallback="Gjennom menighetens misjonskasse kan du være med å velsigne og bidra til at Sett og Hørt og Høiland Misjon når enda lenger ut med evangeliet. Merk gaven med &quot;Misjon&quot;." 
+            as="p" 
+            className="font-body-md text-on-surface-variant leading-relaxed max-w-2xl mx-auto" 
+          />
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <div className="bg-white p-5 rounded-2xl border border-surface-container shadow-sm min-w-[200px]">
               <span className="block text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">Menighetskonto</span>

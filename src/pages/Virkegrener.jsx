@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import CmsText from '@/components/CmsText';
 
 export default function Virkegrener() {
   const [filter, setFilter] = useState('alle');
@@ -114,13 +115,21 @@ export default function Virkegrener() {
       {/* Title Header */}
       <section className="max-w-container-max mx-auto px-gutter mb-12">
         <div className="max-w-3xl space-y-4">
-          <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Hva vi gjør</span>
-          <h1 className="font-headline-xl text-headline-xl text-primary leading-tight">
-            Våre virkegrener
-          </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-            Vi har et variert tilbud av samlinger og aktiviteter for folk i alle aldre. Alle våre samlinger og grupper er åpne for alle som ønsker å delta!
-          </p>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+            <CmsText slug="virkegrener_header_badge" fallback="Hva vi gjør" />
+          </div>
+          <CmsText 
+            slug="virkegrener_header_title" 
+            fallback="Våre virkegrener" 
+            as="h1" 
+            className="font-headline-xl text-headline-xl text-primary leading-tight font-bold" 
+          />
+          <CmsText 
+            slug="virkegrener_header_desc" 
+            fallback="Vi har et variert tilbud av samlinger og aktiviteter for folk i alle aldre. Alle våre samlinger og grupper er åpne for alle som ønsker å delta!" 
+            as="p" 
+            className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" 
+          />
         </div>
       </section>
 
@@ -228,21 +237,32 @@ export default function Virkegrener() {
       <section className="max-w-container-max mx-auto px-gutter mt-16">
         <div className="bg-surface-container-low p-6 rounded-2xl border border-surface-container flex items-center gap-4 text-on-surface-variant">
           <span className="material-symbols-outlined text-secondary text-[24px]">info</span>
-          <p className="text-sm font-body-md">
-            Merk: <strong>Klubb 3-10</strong> (som tidligere ble arrangert på torsdager) blir nedlagt fra og med høsten 2026.
-          </p>
+          <CmsText 
+            slug="virkegrener_discontinued_note" 
+            fallback="Merk: Klubb 3-10 (som tidligere ble arrangert på torsdager) blir nedlagt fra og med høsten 2026." 
+            as="p" 
+            className="text-sm font-body-md" 
+          />
         </div>
       </section>
-
+ 
       {/* Interactive Bottom CTA Section */}
       <section className="max-w-container-max mx-auto px-gutter mt-20">
         <div className="bg-gradient-to-br from-primary to-primary/90 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden border border-primary/20 flex flex-col md:flex-row gap-8 items-center justify-between">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent pointer-events-none" />
           <div className="space-y-4 max-w-xl text-center md:text-left z-10">
-            <h3 className="font-headline-lg text-headline-lg font-bold text-white">Lurer du på noe eller vil du bli med?</h3>
-            <p className="font-body-md text-white/80 leading-relaxed text-sm">
-              Uansett om du ønsker å delta på samlingene våre, har spørsmål om arbeidet vårt, eller ønsker å engasjere deg som frivillig medarbeider – er dørene våre alltid åpne. Vi gleder oss til å bli kjent med deg!
-            </p>
+            <CmsText 
+              slug="virkegrener_cta_title" 
+              fallback="Lurer du på noe eller vil du bli med?" 
+              as="h3" 
+              className="font-headline-lg text-headline-lg font-bold text-white" 
+            />
+            <CmsText 
+              slug="virkegrener_cta_desc" 
+              fallback="Uansett om du ønsker å delta på samlingene våre, har spørsmål om arbeidet vårt, eller ønsker å engasjere deg som frivillig medarbeider – er dørene våre alltid åpne. Vi gleder oss til å bli kjent med deg!" 
+              as="p" 
+              className="font-body-md text-white/80 leading-relaxed text-sm" 
+            />
           </div>
           <div className="shrink-0 flex flex-col sm:flex-row gap-4 w-full sm:w-auto z-10">
             <a

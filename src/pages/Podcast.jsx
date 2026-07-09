@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import CmsText from '@/components/CmsText';
 import historicalEpisodes from '@/data/historical_episodes.json';
 
 const speakerBios = {
@@ -434,9 +435,9 @@ export default function Podcast() {
 
           {/* Hero Content */}
           <div className="space-y-6 flex-1 text-center md:text-left">
-            <span className="bg-secondary text-white font-bold uppercase tracking-wider text-[11px] px-3.5 py-1 rounded-full inline-block shadow-sm">
-              Offisiell Podcast
-            </span>
+            <div className="bg-secondary text-white font-bold uppercase tracking-wider text-[11px] px-3.5 py-1 rounded-full inline-block shadow-sm">
+              <CmsText slug="podcast_hero_badge" fallback="Offisiell Podcast" />
+            </div>
             <h1 className="font-headline-xl text-headline-xl leading-tight">{podcastInfo.title}</h1>
             <p className="font-body-md text-white/80 leading-relaxed max-w-2xl">
               {podcastInfo.description}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import CmsText from '@/components/CmsText';
 
 export default function About() {
   const ledelse = [
@@ -134,16 +135,27 @@ export default function About() {
       <section className="max-w-container-max mx-auto px-gutter mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Hvem er vi?</span>
-            <h1 className="font-headline-xl text-headline-xl text-primary leading-tight break-words">
-              Pinsemenigheten Betania Vigeland
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-              Vi er en levende Pinsemenighet som hører til nettverket De Frie Evangeliske Forsamlinger (DFEF) i Pinsebevegelsen. Vi holder til på vakre Vigeland i Lindesnes kommune.
-            </p>
-            <p className="font-body-md text-on-surface-variant leading-relaxed">
-              Vår visjon for menigheten er: <span className="text-secondary font-bold tracking-wide">Å MØTE, FØLGE OG DELE JESUS</span>. Vi ønsker å være en menighet der mennesker kan møte Jesus, lære å følge han, og dele Jesus med andre. Enten du er ny i området, søker et åndelig fellesskap, eller bare er nysgjerrig, er du hjertelig velkommen til å besøke oss!
-            </p>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="about_intro_badge" fallback="Hvem er vi?" />
+            </div>
+            <CmsText 
+              slug="about_intro_title" 
+              fallback="Pinsemenigheten Betania Vigeland" 
+              as="h1" 
+              className="font-headline-xl text-headline-xl text-primary leading-tight break-words font-bold" 
+            />
+            <CmsText 
+              slug="about_intro_desc1" 
+              fallback="Vi er en levende Pinsemenighet som hører til nettverket De Frie Evangeliske Forsamlinger (DFEF) i Pinsebevegelsen. Vi holder til på vakre Vigeland i Lindesnes kommune." 
+              as="p" 
+              className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" 
+            />
+            <CmsText 
+              slug="about_intro_desc2" 
+              fallback="Vår visjon for menigheten er: Å MØTE, FØLGE OG DELE JESUS. Vi ønsker å være en menighet der mennesker kan møte Jesus, lære å følge han, og dele Jesus med andre. Enten du er ny i området, søker et åndelig fellesskap, eller bare er nysgjerrig, er du hjertelig velkommen til å besøke oss!" 
+              as="p" 
+              className="font-body-md text-on-surface-variant leading-relaxed" 
+            />
           </div>
           <div className="relative">
             <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
@@ -156,19 +168,26 @@ export default function About() {
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-lg border border-surface-container flex items-center gap-4">
               <span className="material-symbols-outlined text-[40px] text-secondary">diversity_1</span>
               <div>
-                <span className="block font-bold text-primary text-lg">Mennesker i fokus</span>
-                <span className="text-on-surface-variant font-label-md text-label-md">Fellesskap for alle generasjoner</span>
+                <CmsText slug="about_badge_focus_title" fallback="Mennesker i fokus" as="span" className="block font-bold text-primary text-lg" />
+                <CmsText slug="about_badge_focus_desc" fallback="Fellesskap for alle generasjoner" as="span" className="text-on-surface-variant font-label-md text-label-md" />
               </div>
             </div>
           </div>
         </div>
       </section>
-
+ 
       {/* Core Values Section */}
       <section className="bg-surface-container-low py-20 border-y border-surface-container mb-20">
         <div className="max-w-container-max mx-auto px-gutter text-center">
-          <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Vårt Fundament</span>
-          <h2 className="font-headline-lg text-headline-lg text-primary mt-2 mb-16">Verdier vi strekker oss etter</h2>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+            <CmsText slug="about_values_badge" fallback="Vårt Fundament" />
+          </div>
+          <CmsText 
+            slug="about_values_title" 
+            fallback="Verdier vi strekker oss etter" 
+            as="h2" 
+            className="font-headline-lg text-headline-lg text-primary mt-2 mb-16 font-bold" 
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
             {values.map((v) => (
               <div key={v.title} className="bg-white p-8 rounded-2xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
@@ -186,8 +205,15 @@ export default function About() {
         {/* Menighetens ledelse */}
         <div>
           <div className="text-center mb-12">
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Styring & Åndelig lederskap</span>
-            <h2 className="font-headline-lg text-headline-lg text-primary mt-2">Menighetens ledelse</h2>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="about_lead_badge" fallback="Styring & Åndelig lederskap" />
+            </div>
+            <CmsText 
+              slug="about_lead_title" 
+              fallback="Menighetens ledelse" 
+              as="h2" 
+              className="font-headline-lg text-headline-lg text-primary mt-2 font-bold" 
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ledelse.map((lead) => (
@@ -214,8 +240,15 @@ export default function About() {
         {/* Ansatte */}
         <div>
           <div className="text-center mb-12">
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Daglig drift & aktiviteter</span>
-            <h2 className="font-headline-lg text-headline-lg text-primary mt-2">Ansatte</h2>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="about_staff_badge" fallback="Daglig drift & aktiviteter" />
+            </div>
+            <CmsText 
+              slug="about_staff_title" 
+              fallback="Ansatte" 
+              as="h2" 
+              className="font-headline-lg text-headline-lg text-primary mt-2 font-bold" 
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {ansatte.map((lead) => (
@@ -244,11 +277,21 @@ export default function About() {
       <section className="bg-surface-container-low py-20 border-t border-surface-container">
         <div className="max-w-container-max mx-auto px-gutter">
           <div className="text-center mb-16">
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Hva vi tror</span>
-            <h2 className="font-headline-lg text-headline-lg text-primary mt-2">Vår tro og lære</h2>
-            <p className="font-body-md text-on-surface-variant max-w-2xl mx-auto mt-4 text-[15px]">
-              Pinsemenigheten Betania Vigeland bygger på bibelsk grunn. Her kan du lese mer om vårt teologiske fundament og lærepunkter.
-            </p>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="about_beliefs_badge" fallback="Hva vi tror" />
+            </div>
+            <CmsText 
+              slug="about_beliefs_title" 
+              fallback="Vår tro og lære" 
+              as="h2" 
+              className="font-headline-lg text-headline-lg text-primary mt-2 font-bold" 
+            />
+            <CmsText 
+              slug="about_beliefs_desc" 
+              fallback="Pinsemenigheten Betania Vigeland bygger på bibelsk grunn. Her kan du lese mer om vårt teologiske fundament og lærepunkter." 
+              as="p" 
+              className="font-body-md text-on-surface-variant max-w-2xl mx-auto mt-4 text-[15px] leading-relaxed" 
+            />
           </div>
 
           {/* Beliefs Grid */}

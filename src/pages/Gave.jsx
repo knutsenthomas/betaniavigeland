@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useContent } from '@/contexts/ContentContext';
+import CmsText from '@/components/CmsText';
 
 export default function Gave() {
+  const { siteSettings } = useContent();
+  const vipps = siteSettings?.platform_links?.vipps || '106111';
+  const driftskonto = siteSettings?.platform_links?.konto || '3138.07.03737';
   const [copiedText, setCopiedText] = useState('');
 
   const handleCopy = (text, label) => {
@@ -36,15 +41,21 @@ export default function Gave() {
       {/* Hero Section */}
       <section className="max-w-container-max mx-auto px-gutter mb-16 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
-          <span className="text-secondary font-bold uppercase tracking-wider text-xs px-3.5 py-1.5 rounded-full bg-secondary/10 inline-block">
-            Givertjeneste
-          </span>
-          <h1 className="font-headline-xl text-headline-xl text-primary leading-tight font-bold">
-            Gi en gave til Betania Vigeland
-          </h1>
-          <p className="font-body-md text-on-surface-variant leading-relaxed text-base">
-            Vi er utrolig takknemlige for hver eneste gave som blir betrodd oss. Alt arbeid i Betania drives og finansieres av frivillige gaver fra medlemmer og støttespillere. Ditt bidrag gjør det mulig å drive et aktivt arbeid for barn, unge og voksne i lokalsamfunnet vårt.
-          </p>
+          <div className="text-secondary font-bold uppercase tracking-wider text-xs px-3.5 py-1.5 rounded-full bg-secondary/10 inline-block">
+            <CmsText slug="gave_hero_badge" fallback="Givertjeneste" />
+          </div>
+          <CmsText 
+            slug="gave_hero_title" 
+            fallback="Gi en gave til Betania Vigeland" 
+            as="h1" 
+            className="font-headline-xl text-headline-xl text-primary leading-tight font-bold" 
+          />
+          <CmsText 
+            slug="gave_hero_desc" 
+            fallback="Vi er utrolig takknemlige for hver eneste gave som blir betrodd oss. Alt arbeid in Betania drives og finansieres av frivillige gaver fra medlemmer og støttespillere. Ditt bidrag gjør det mulig å drive et aktivt arbeid for barn, unge og voksne i lokalsamfunnet vårt." 
+            as="p" 
+            className="font-body-md text-on-surface-variant leading-relaxed text-base" 
+          />
         </div>
       </section>
 
@@ -170,22 +181,25 @@ export default function Gave() {
           {/* Fast Givertjeneste info */}
           <div className="flex-1 space-y-6 flex flex-col justify-between">
             <div className="space-y-4">
-              <h3 className="font-headline-lg text-headline-lg text-primary font-bold">Fast givetjeneste</h3>
-              <p className="font-body-md text-on-surface-variant leading-relaxed text-sm">
-                Ved å opprette et fast månedlig bidrag i nettbanken din hjelper du oss med å ha forutsigbarhet i økonomien. Dette gjør planlegging av barne- og ungdomsaktiviteter, misjonsprosjekter og lokalt arbeid mye enklere og tryggere.
-              </p>
+              <CmsText slug="gave_fast_title" fallback="Fast givetjeneste" as="h3" className="font-headline-lg text-headline-lg text-primary font-bold" />
+              <CmsText 
+                slug="gave_fast_desc" 
+                fallback="Ved å opprette et fast månedlig bidrag i nettbanken din hjelper du oss med å ha forutsigbarhet i økonomien. Dette gjør planlegging av barne- og ungdomsaktiviteter, misjonsprosjekter og lokalt arbeid mye enklere og tryggere." 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed text-sm" 
+              />
               <ul className="space-y-3 pt-2">
                 <li className="flex items-start gap-2.5 text-sm text-on-surface-variant">
                   <span className="material-symbols-outlined text-secondary select-none text-[18px] mt-0.5">check</span>
-                  <span>Opprettes som en fast månedlig betaling i egen nettbank.</span>
+                  <span><CmsText slug="gave_fast_bullet1" fallback="Opprettes som en fast månedlig betaling i egen nettbank." /></span>
                 </li>
                 <li className="flex items-start gap-2.5 text-sm text-on-surface-variant">
                   <span className="material-symbols-outlined text-secondary select-none text-[18px] mt-0.5">check</span>
-                  <span>Valgfritt beløp og trekkdato.</span>
+                  <span><CmsText slug="gave_fast_bullet2" fallback="Valgfritt beløp og trekkdato." /></span>
                 </li>
                 <li className="flex items-start gap-2.5 text-sm text-on-surface-variant">
                   <span className="material-symbols-outlined text-secondary select-none text-[18px] mt-0.5">check</span>
-                  <span>Kan avsluttes eller endres når som helst direkte i nettbanken.</span>
+                  <span><CmsText slug="gave_fast_bullet3" fallback="Kan avsluttes eller endres når som helst direkte i nettbanken." /></span>
                 </li>
               </ul>
             </div>
@@ -197,10 +211,13 @@ export default function Gave() {
           {/* Skattefradrag info */}
           <div className="flex-1 space-y-6 flex flex-col justify-between">
             <div className="space-y-4">
-              <h3 className="font-headline-lg text-headline-lg text-primary font-bold">Skattefradrag for gaver</h3>
-              <p className="font-body-md text-on-surface-variant leading-relaxed text-sm">
-                Betania Vigeland er registrert hos Skatteetaten, og alle gaver gitt til menigheten gir rett til skattefradrag i tråd med gjeldende regler.
-              </p>
+              <CmsText slug="gave_tax_title" fallback="Skattefradrag for gaver" as="h3" className="font-headline-lg text-headline-lg text-primary font-bold" />
+              <CmsText 
+                slug="gave_tax_desc" 
+                fallback="Betania Vigeland er registrert hos Skatteetaten, og alle gaver gitt til menigheten gir rett til skattefradrag i tråd med gjeldende regler." 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed text-sm" 
+              />
               <div className="bg-white/60 border border-surface-container rounded-2xl p-5 space-y-3">
                 <p className="text-xs text-on-surface-variant font-semibold">REGLER FOR SKATTEFRADRAG</p>
                 <p className="text-xs text-on-surface-variant leading-relaxed">

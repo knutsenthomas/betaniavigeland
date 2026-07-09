@@ -169,8 +169,15 @@ export default function Home() {
             className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4"
           >
             <div>
-              <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Kalender</span>
-              <h2 className="font-headline-lg text-headline-lg text-primary mt-2">Hva skjer?</h2>
+              <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+                <CmsText slug="home_cal_badge" fallback="Kalender" />
+              </div>
+              <CmsText 
+                slug="home_cal_title" 
+                fallback="Hva skjer?" 
+                as="h2" 
+                className="font-headline-lg text-headline-lg text-primary mt-2 font-bold" 
+              />
             </div>
             <Link to="/calendar" className="text-primary font-label-md text-label-md flex items-center gap-2 group hover:text-secondary transition-colors duration-300">
               Se hele kalenderen 
@@ -249,26 +256,34 @@ export default function Home() {
               variants={fadeInUpVariants}
               className="order-1 lg:order-2 space-y-8"
             >
-              <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Vårt hjertebarn</span>
-              <h2 className="font-headline-xl text-headline-xl text-primary leading-tight">
-                Vi satser på neste generasjon
-              </h2>
+              <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+                <CmsText slug="home_youth_badge" fallback="Vårt hjertebarn" />
+              </div>
+              <CmsText 
+                slug="home_youth_title" 
+                fallback="Vi satser på neste generasjon" 
+                as="h2" 
+                className="font-headline-xl text-headline-xl text-primary leading-tight font-bold" 
+              />
               <div className="w-20 h-1 bg-secondary" />
-              <p className="font-body-lg text-body-lg text-on-surface-variant">
-                I Betania Vigeland brenner vi for at barn og unge skal oppleve et trygt miljø der de blir sett, hørt og verdsatt. Vi ønsker å legge til rette for vekst, mestring og gode vennskap som varer livet ut.
-              </p>
+              <CmsText 
+                slug="home_youth_desc" 
+                fallback="I Betania Vigeland brenner vi for at barn og unge skal oppleve et trygt miljø der de blir sett, hørt og verdsatt. Vi ønsker å legge til rette for vekst, mestring og gode vennskap som varer livet ut." 
+                as="p" 
+                className="font-body-lg text-body-lg text-on-surface-variant" 
+              />
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 text-on-surface-variant">
                   <span className="material-symbols-outlined text-secondary">check_circle</span>
-                  <span className="font-body-md">Trygge voksne og inkluderende ledere</span>
+                  <span className="font-body-md"><CmsText slug="home_youth_bullet1" fallback="Trygge voksne og inkluderende ledere" /></span>
                 </li>
                 <li className="flex items-start gap-3 text-on-surface-variant">
                   <span className="material-symbols-outlined text-secondary">check_circle</span>
-                  <span className="font-body-md">Aktiviteter tilpasset alle aldersgrupper</span>
+                  <span className="font-body-md"><CmsText slug="home_youth_bullet2" fallback="Aktiviteter tilpasset alle aldersgrupper" /></span>
                 </li>
                 <li className="flex items-start gap-3 text-on-surface-variant">
                   <span className="material-symbols-outlined text-secondary">check_circle</span>
-                  <span className="font-body-md">Et fundament bygget på kristne verdier</span>
+                  <span className="font-body-md"><CmsText slug="home_youth_bullet3" fallback="Et fundament bygget på kristne verdier" /></span>
                 </li>
               </ul>
               <button 
@@ -292,9 +307,12 @@ export default function Home() {
           className="px-gutter max-w-2xl mx-auto text-center space-y-6"
         >
           <div className="w-12 h-px bg-secondary mx-auto" />
-          <blockquote className="font-quote text-quote text-primary italic leading-relaxed">
-            "La de små barna komme til meg, og hindre dem ikke; for Guds rike tilhører slike som dem."
-          </blockquote>
+          <CmsText 
+            slug="home_quote" 
+            fallback='"La de små barna komme til meg, og hindre dem ikke; for Guds rike tilhører slike som dem."' 
+            as="blockquote" 
+            className="font-quote text-quote text-primary italic leading-relaxed font-bold" 
+          />
           <div className="w-12 h-px bg-secondary mx-auto" />
         </motion.div>
       </section>
@@ -310,8 +328,15 @@ export default function Home() {
             className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4"
           >
             <div>
-              <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Sosiale medier</span>
-              <h2 className="font-headline-lg text-headline-lg text-primary mt-2">Siste fra Facebook</h2>
+              <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+                <CmsText slug="home_fb_badge" fallback="Sosiale medier" />
+              </div>
+              <CmsText 
+                slug="home_fb_title" 
+                fallback="Siste fra Facebook" 
+                as="h2" 
+                className="font-headline-lg text-headline-lg text-primary mt-2 font-bold" 
+              />
             </div>
             <a 
               href="https://www.facebook.com/betaniavigeland" 
@@ -404,10 +429,18 @@ export default function Home() {
               <span className="material-symbols-outlined text-[400px]">diversity_3</span>
             </div>
             <div className="relative z-10 max-w-2xl">
-              <h2 className="font-headline-xl text-headline-xl mb-6">Bli en del av oss</h2>
-              <p className="font-body-lg text-body-lg opacity-90 mb-10 leading-relaxed">
-                Betania Vigeland er mer enn bare et bygg – det er menneskene. Vi er en menighet som ønsker å være relevante i dagens samfunn, samtidig som vi tar vare på de nære relasjonene. Enten du er nysgjerrig på troen eller leter etter et nytt kirkefellesskap, er du hjertelig velkommen.
-              </p>
+              <CmsText 
+                slug="home_join_title" 
+                fallback="Bli en del av oss" 
+                as="h2" 
+                className="font-headline-xl text-headline-xl mb-6 font-bold" 
+              />
+              <CmsText 
+                slug="home_join_desc" 
+                fallback="Betania Vigeland er mer enn bare et bygg – det er menneskene. Vi er en menighet som ønsker å være relevante i dagens samfunn, samtidig som vi tar vare på de nære relasjonene. Enten du er nysgjerrig på troen eller leter etter et nytt kirkefellesskap, er du hjertelig velkommen." 
+                as="p" 
+                className="font-body-lg text-body-lg opacity-90 mb-10 leading-relaxed" 
+              />
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link to="/about" className="inline-flex items-center gap-2 font-label-md text-label-md group hover:text-secondary-fixed-dim transition-colors">
                   Les mer om oss 
@@ -434,8 +467,8 @@ export default function Home() {
               variants={fadeInUpVariants}
               className="space-y-4"
             >
-              <h4 className="font-headline-md text-headline-md text-primary">Støtt arbeidet</h4>
-              <p className="font-body-md text-on-surface-variant">Ditt bidrag gjør det mulig for oss å fortsette arbeidet for barn, unge og eldre i Vigeland.</p>
+              <CmsText slug="home_footer_support_title" fallback="Støtt arbeidet" as="h4" className="font-headline-md text-headline-md text-primary font-bold" />
+              <CmsText slug="home_footer_support_desc" fallback="Ditt bidrag gjør det mulig for oss å fortsette arbeidet for barn, unge og eldre i Vigeland." as="p" className="font-body-md text-on-surface-variant" />
               <div className="bg-white h-16 px-4 rounded-xl flex items-center justify-between border border-surface-container shadow-sm">
                 <div className="flex items-center gap-3">
                   <img 
@@ -467,8 +500,8 @@ export default function Home() {
               variants={fadeInUpVariants}
               className="space-y-4"
             >
-              <h4 className="font-headline-md text-headline-md text-primary">Følg oss</h4>
-              <p className="font-body-md text-on-surface-variant">Få med deg siste nytt og se glimt fra hverdagen i fellesskapet vårt.</p>
+              <CmsText slug="home_footer_follow_title" fallback="Følg oss" as="h4" className="font-headline-md text-headline-md text-primary font-bold" />
+              <CmsText slug="home_footer_follow_desc" fallback="Få med deg siste nytt og se glimt fra hverdagen i fellesskapet vårt." as="p" className="font-body-md text-on-surface-variant" />
               <div className="flex gap-4">
                 <a 
                   className="w-12 h-12 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" 
@@ -515,8 +548,8 @@ export default function Home() {
               variants={fadeInUpVariants}
               className="space-y-4"
             >
-              <h4 className="font-headline-md text-headline-md text-primary">Utleie</h4>
-              <p className="font-body-md text-on-surface-variant">Trenger du lokaler til konfirmasjon, selskap eller møter? Vi leier ut våre lyse og moderne lokaler.</p>
+              <CmsText slug="home_footer_rental_title" fallback="Utleie" as="h4" className="font-headline-md text-headline-md text-primary font-bold" />
+              <CmsText slug="home_footer_rental_desc" fallback="Trenger du lokaler til konfirmasjon, selskap eller møter? Vi leier ut våre lyse og moderne lokaler." as="p" className="font-body-md text-on-surface-variant" />
               <Link className="text-secondary font-label-md text-label-md border-b border-secondary hover:text-primary hover:border-primary transition-all" to="/rental">
                 Sjekk priser og tilgjengelighet
               </Link>

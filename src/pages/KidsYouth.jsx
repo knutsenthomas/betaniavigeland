@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import CmsText from '@/components/CmsText';
 
 export default function KidsYouth() {
   const activities = [
@@ -49,13 +50,21 @@ export default function KidsYouth() {
       {/* Hero section */}
       <section className="max-w-container-max mx-auto px-gutter mb-16">
         <motion.div variants={itemVariants} className="max-w-3xl">
-          <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">For barna og de unge</span>
-          <h1 className="font-headline-xl text-headline-xl text-primary mt-2 mb-6">
-            Trygge og morsomme arenaer for neste generasjon
-          </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-            Vi ønsker at barn og ungdom i Vigeland skal ha et sted å gå der de blir sett, anerkjent og inkludert. Gjennom lek, fellesskap og formidling ønsker vi å gi dem et solid fundament for livet.
-          </p>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+            <CmsText slug="kidsyouth_hero_badge" fallback="For barna og de unge" />
+          </div>
+          <CmsText 
+            slug="kidsyouth_hero_title" 
+            fallback="Trygge og morsomme arenaer for neste generasjon" 
+            as="h1" 
+            className="font-headline-xl text-headline-xl text-primary mt-2 mb-6 leading-tight font-bold" 
+          />
+          <CmsText 
+            slug="kidsyouth_hero_desc" 
+            fallback="Vi ønsker at barn og ungdom i Vigeland skal ha et sted å gå der de blir sett, anerkjent og inkludert. Gjennom lek, fellesskap og formidling ønsker vi å gi dem et solid fundament for livet." 
+            as="p" 
+            className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" 
+          />
         </motion.div>
       </section>
 
@@ -101,26 +110,46 @@ export default function KidsYouth() {
         <div className="max-w-container-max mx-auto px-gutter">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div variants={itemVariants} className="space-y-6">
-              <h2 className="font-headline-lg text-headline-lg text-primary">Trygge ledere og fokus på sikkerhet</h2>
-              <p className="font-body-md text-on-surface-variant leading-relaxed">
-                Alle våre barne- og ungdomsarbeidere har levert godkjent politiattest, og vi jobber aktivt for at alle ledere skal være gode og trygge rollemodeller. Vi arrangerer jevnlig ledersamlinger med fokus på grensesetting, inkludering og trygg formidling.
-              </p>
+              <CmsText 
+                slug="kidsyouth_safety_title" 
+                fallback="Trygge ledere og fokus på sikkerhet" 
+                as="h2" 
+                className="font-headline-lg text-headline-lg text-primary font-bold" 
+              />
+              <CmsText 
+                slug="kidsyouth_safety_desc" 
+                fallback="Alle våre barne- og ungdomsarbeidere har levert godkjent politiattest, og vi jobber aktivt for at alle ledere skal være gode og trygge rollemodeller. Vi arrangerer jevnlig ledersamlinger med fokus på grensesetting, inkludering og trygg formidling." 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed" 
+              />
               <div className="flex gap-4">
                 <div className="flex items-center gap-2 text-on-surface-variant">
                   <span className="material-symbols-outlined text-meadow-green">verified_user</span>
-                  <span className="font-label-md">Politiattest påkrevet</span>
+                  <span className="font-label-md">
+                    <CmsText slug="kidsyouth_safety_badge1" fallback="Politiattest påkrevet" />
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-on-surface-variant">
                   <span className="material-symbols-outlined text-meadow-green">health_and_safety</span>
-                  <span className="font-label-md">Førstehjelpskursing</span>
+                  <span className="font-label-md">
+                    <CmsText slug="kidsyouth_safety_badge2" fallback="Førstehjelpskursing" />
+                  </span>
                 </div>
               </div>
             </motion.div>
             <motion.div variants={itemVariants} className="bg-surface-cream p-8 rounded-2xl shadow-sm border border-surface-container">
-              <h3 className="font-headline-md text-headline-md text-primary mb-4">Har du spørsmål?</h3>
-              <p className="font-body-md text-on-surface-variant mb-6">
-                Lurer du på noe om aktivitetene, eller ønsker du å melde på barnet ditt? Ta gjerne kontakt med oss.
-              </p>
+              <CmsText 
+                slug="kidsyouth_contact_title" 
+                fallback="Har du spørsmål?" 
+                as="h3" 
+                className="font-headline-md text-headline-md text-primary mb-4 font-bold" 
+              />
+              <CmsText 
+                slug="kidsyouth_contact_desc" 
+                fallback="Lurer du på noe om aktivitetene, eller ønsker du å melde på barnet ditt? Ta gjerne kontakt med oss." 
+                as="p" 
+                className="font-body-md text-on-surface-variant mb-6" 
+              />
               <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
                 <div>
                   <label className="block font-label-md text-label-md text-on-surface-variant mb-1">Ditt navn</label>

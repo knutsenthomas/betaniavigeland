@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import CmsText from '@/components/CmsText';
 
 export default function Rental() {
   const [inquirySent, setInquirySent] = useState(false);
@@ -53,13 +54,21 @@ export default function Rental() {
       {/* Hero Header */}
       <section className="max-w-container-max mx-auto px-gutter mb-16">
         <div className="max-w-3xl">
-          <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Lokaler til leie</span>
-          <h1 className="font-headline-xl text-headline-xl text-primary mt-2 mb-6">
-            Lyse og moderne lokaler til livets store merkedager
-          </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-            Betania Vigeland har flotte, funksjonelle og universelt utformede lokaler som leies ut til private arrangementer, selskaper, møter og samlinger.
-          </p>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+            <CmsText slug="rental_hero_badge" fallback="Lokaler til leie" />
+          </div>
+          <CmsText 
+            slug="rental_hero_title" 
+            fallback="Lyse og moderne lokaler til livets store merkedager" 
+            as="h1" 
+            className="font-headline-xl text-headline-xl text-primary mt-2 mb-6 leading-tight font-bold" 
+          />
+          <CmsText 
+            slug="rental_hero_desc" 
+            fallback="Betania Vigeland har flotte, funksjonelle og universelt utformede lokaler som leies ut til private arrangementer, selskaper, møter og samlinger." 
+            as="p" 
+            className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" 
+          />
         </div>
       </section>
 
@@ -102,31 +111,39 @@ export default function Rental() {
           {/* Rules / Terms */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <h2 className="font-headline-lg text-headline-lg text-primary">Regler og retningslinjer</h2>
-              <p className="font-body-md text-on-surface-variant leading-relaxed mt-2">
-                Vi ønsker at leieforholdet skal fungere knirkefritt. Siden dette er et menighetshus, har vi noen viktige kjøreregler for utleie:
-              </p>
+              <CmsText 
+                slug="rental_rules_title" 
+                fallback="Regler og retningslinjer" 
+                as="h2" 
+                className="font-headline-lg text-headline-lg text-primary font-bold" 
+              />
+              <CmsText 
+                slug="rental_rules_desc" 
+                fallback="Vi ønsker at leieforholdet skal fungere knirkefritt. Siden dette er et menighetshus, har vi noen viktige kjøreregler for utleie:" 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed mt-2" 
+              />
             </div>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <span className="material-symbols-outlined text-secondary text-[24px]">block</span>
                 <div>
-                  <h4 className="font-bold text-primary text-md">Alkoholfritt arrangement</h4>
-                  <p className="text-on-surface-variant font-body-md mt-1">Det er ikke tillatt å servere eller nyte alkohol eller andre rusmidler på huset eller uteområdet.</p>
+                  <CmsText slug="rental_rule1_title" fallback="Alkoholfritt arrangement" as="h4" className="font-bold text-primary text-md" />
+                  <CmsText slug="rental_rule1_desc" fallback="Det er ikke tillatt å servere eller nyte alkohol eller andre rusmidler på huset eller uteområdet." as="p" className="text-on-surface-variant font-body-md mt-1" />
                 </div>
               </div>
               <div className="flex gap-4">
                 <span className="material-symbols-outlined text-secondary text-[24px]">cleaning_services</span>
                 <div>
-                  <h4 className="font-bold text-primary text-md">Vask og rydding</h4>
-                  <p className="text-on-surface-variant font-body-md mt-1">Leietaker er selv ansvarlig for oppvask, rydding av stoler og søppeltømming. Vask av gulv er inkludert i leieprisen.</p>
+                  <CmsText slug="rental_rule2_title" fallback="Vask og rydding" as="h4" className="font-bold text-primary text-md" />
+                  <CmsText slug="rental_rule2_desc" fallback="Leietaker er selv ansvarlig for oppvask, rydding av stoler og søppeltømming. Vask av gulv er inkludert i leieprisen." as="p" className="text-on-surface-variant font-body-md mt-1" />
                 </div>
               </div>
               <div className="flex gap-4">
                 <span className="material-symbols-outlined text-secondary text-[24px]">access_time</span>
                 <div>
-                  <h4 className="font-bold text-primary text-md">Tidsfrister</h4>
-                  <p className="text-on-surface-variant font-body-md mt-1">Leietaker disponerer lokalet fra kl. 08:00 på leiedagen, og må være ferdig ryddet og slukket senest kl. 23:00.</p>
+                  <CmsText slug="rental_rule3_title" fallback="Tidsfrister" as="h4" className="font-bold text-primary text-md" />
+                  <CmsText slug="rental_rule3_desc" fallback="Leietaker disponerer lokalet fra kl. 08:00 på leiedagen, og må være ferdig ryddet og slukket senest kl. 23:00." as="p" className="text-on-surface-variant font-body-md mt-1" />
                 </div>
               </div>
             </div>

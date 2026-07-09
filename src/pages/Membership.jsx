@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
+import CmsText from '@/components/CmsText';
 
 export default function Membership() {
   const { siteSettings } = useContent();
@@ -61,13 +62,21 @@ export default function Membership() {
             variants={fadeInUpVariants}
             className="max-w-3xl space-y-6"
           >
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Bli en del av fellesskapet</span>
-            <h1 className="font-headline-xl text-headline-xl text-primary leading-tight">
-              Medlemskap i Betania Vigeland
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-              Enhver gjenfødt kristen er hjertelig velkommen som medlem i menigheten vår. Vi deler troen, fellesskapet og et brennende ønske om å utgjøre en positiv forskjell for folk på Vigeland.
-            </p>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="membership_hero_badge" fallback="Bli en del av fellesskapet" />
+            </div>
+            <CmsText 
+              slug="membership_hero_title" 
+              fallback="Medlemskap i Betania Vigeland" 
+              as="h1" 
+              className="font-headline-xl text-headline-xl text-primary leading-tight font-bold" 
+            />
+            <CmsText 
+              slug="membership_hero_desc" 
+              fallback="Enhver gjenfødt kristen er hjertelig velkommen som medlem i menigheten vår. Vi deler troen, fellesskapet og et brennende ønske om å utgjøre en positiv forskjell for folk på Vigeland." 
+              as="p" 
+              className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" 
+            />
           </motion.div>
         </div>
       </section>
@@ -81,11 +90,21 @@ export default function Membership() {
           variants={fadeInUpVariants}
           className="text-center max-w-2xl mx-auto mb-16 space-y-3"
         >
-          <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Valgmuligheter</span>
-          <h2 className="font-headline-lg text-headline-lg text-primary">To kategorier av medlemskap</h2>
-          <p className="font-body-md text-on-surface-variant leading-relaxed">
-            Vi skiller mellom et fullt medlemskap med stemmerett, og et støttemedlem-alternativ for de som ønsker en mer formell juridisk tilknytning.
-          </p>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+            <CmsText slug="membership_categories_badge" fallback="Valgmuligheter" />
+          </div>
+          <CmsText 
+            slug="membership_categories_title" 
+            fallback="To kategorier av medlemskap" 
+            as="h2" 
+            className="font-headline-lg text-headline-lg text-primary font-bold" 
+          />
+          <CmsText 
+            slug="membership_categories_desc" 
+            fallback="Vi skiller mellom et fullt medlemskap med stemmerett, og et støttemedlem-alternativ for de som ønsker en mer formell juridisk tilknytning." 
+            as="p" 
+            className="font-body-md text-on-surface-variant leading-relaxed" 
+          />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -101,10 +120,13 @@ export default function Membership() {
               <div className="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary mb-6">
                 <span className="material-symbols-outlined text-[24px]">card_membership</span>
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary mb-3">Ordinært Medlem</h3>
-              <p className="text-on-surface-variant text-[15px] leading-relaxed mb-8">
-                For deg som ser på Betania som ditt åndelige hjem, ønsker å delta aktivt, og vil være med å stemme og bestemme på menighetens medlemsmøter.
-              </p>
+              <CmsText slug="membership_regular_card_title" fallback="Ordinært Medlem" as="h3" className="font-headline-md text-headline-md text-primary mb-3 font-bold" />
+              <CmsText 
+                slug="membership_regular_card_desc" 
+                fallback="For deg som ser på Betania som ditt åndelige hjem, ønsker å delta aktivt, og vil være med å stemme og bestemme på menighetens medlemsmøter." 
+                as="p" 
+                className="text-on-surface-variant text-[15px] leading-relaxed mb-8" 
+              />
             </div>
             <div className="space-y-3 pt-6 border-t border-surface-container/50">
               <a 
@@ -138,10 +160,13 @@ export default function Membership() {
               <div className="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary mb-6">
                 <span className="material-symbols-outlined text-[24px]">volunteer_activism</span>
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary mb-3">Støttemedlem</h3>
-              <p className="text-on-surface-variant text-[15px] leading-relaxed mb-8">
-                Regnes som tilknyttet menigheten og gir rett til sivile gjøremål som bryllup og begravelse. Har ikke stemmerett, men støtter opp under statstilskuddslisten vår.
-              </p>
+              <CmsText slug="membership_support_card_title" fallback="Støttemedlem" as="h3" className="font-headline-md text-headline-md text-primary mb-3 font-bold" />
+              <CmsText 
+                slug="membership_support_card_desc" 
+                fallback="Regnes som tilknyttet menigheten og gir rett til sivile gjøremål som bryllup og begravelse. Har ikke stemmerett, men støtter opp under statstilskuddslisten vår." 
+                as="p" 
+                className="text-on-surface-variant text-[15px] leading-relaxed mb-8" 
+              />
             </div>
             <div className="space-y-3 pt-6 border-t border-surface-container/50">
               <a 
@@ -175,10 +200,13 @@ export default function Membership() {
               <div className="w-12 h-12 rounded-2xl bg-surface-cream flex items-center justify-center text-on-surface-variant border border-surface-container mb-6">
                 <span className="material-symbols-outlined text-[24px]">logout</span>
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary mb-3">Utmelding</h3>
-              <p className="text-on-surface-variant text-[15px] leading-relaxed mb-8">
-                Dersom du flytter, ønsker å endre medlemskapet ditt, eller vil melde deg ut av menigheten og statstilskuddslisten vår.
-              </p>
+              <CmsText slug="membership_cancel_card_title" fallback="Utmelding" as="h3" className="font-headline-md text-headline-md text-primary mb-3 font-bold" />
+              <CmsText 
+                slug="membership_cancel_card_desc" 
+                fallback="Dersom du flytter, ønsker å endre medlemskapet ditt, eller vil melde deg ut av menigheten og statstilskuddslisten vår." 
+                as="p" 
+                className="text-on-surface-variant text-[15px] leading-relaxed mb-8" 
+              />
             </div>
             <div className="pt-6 border-t border-surface-container/50">
               <a 
@@ -204,11 +232,21 @@ export default function Membership() {
             variants={fadeInUpVariants}
             className="max-w-2xl mb-16 space-y-3"
           >
-            <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Rammeverk & Forventninger</span>
-            <h2 className="font-headline-lg text-headline-lg text-primary">Retningslinjer for medlemskap</h2>
-            <p className="font-body-md text-on-surface-variant">
-              Å stå sammen i en lokal menighet betyr at vi deler et felles verdigrunnlag og bærer byrder og gleder sammen.
-            </p>
+            <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+              <CmsText slug="membership_rules_badge" fallback="Rammeverk & Forventninger" />
+            </div>
+            <CmsText 
+              slug="membership_rules_title" 
+              fallback="Retningslinjer for medlemskap" 
+              as="h2" 
+              className="font-headline-lg text-headline-lg text-primary font-bold" 
+            />
+            <CmsText 
+              slug="membership_rules_desc" 
+              fallback="Å stå sammen i en lokal menighet betyr at vi deler et felles verdigrunnlag og bærer byrder og gleder sammen." 
+              as="p" 
+              className="font-body-md text-on-surface-variant" 
+            />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -310,11 +348,21 @@ export default function Membership() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Bidrag & Frivillighet</span>
-              <h2 className="font-headline-lg text-headline-lg text-primary">Vil du bidra til menighetens arbeid?</h2>
-              <p className="font-body-md text-on-surface-variant leading-relaxed">
-                Alt arbeid i Betania Vigeland finansieres av frivillige gaver fra medlemmer og støttespillere. Ditt bidrag gjør det mulig å opprettholde det aktive barne- og ungdomsarbeidet og ha åpne dører for lokalsamfunnet.
-              </p>
+              <div className="text-secondary font-label-md text-label-md tracking-widest uppercase">
+                <CmsText slug="membership_contribute_badge" fallback="Bidrag & Frivillighet" />
+              </div>
+              <CmsText 
+                slug="membership_contribute_title" 
+                fallback="Vil du bidra til menighetens arbeid?" 
+                as="h2" 
+                className="font-headline-lg text-headline-lg text-primary font-bold" 
+              />
+              <CmsText 
+                slug="membership_contribute_desc" 
+                fallback="Alt arbeid i Betania Vigeland finansieres av frivillige gaver fra medlemmer og støttespillere. Ditt bidrag gjør det mulig å opprettholde det aktive barne- og ungdomsarbeidet og ha åpne dører for lokalsamfunnet." 
+                as="p" 
+                className="font-body-md text-on-surface-variant leading-relaxed" 
+              />
               <p className="font-body-md text-on-surface-variant italic">
                 Tips: Alle gaver til menigheten gir rett til skattefradrag. Kontakt oss i skjemaet om du ønsker å sette opp fast givertjeneste registrert med personnummer for skattefradrag.
               </p>
