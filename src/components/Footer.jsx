@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContent } from '@/contexts/ContentContext';
+import CmsText from '@/components/CmsText';
 
 export default function Footer() {
   const { siteSettings } = useContent();
@@ -19,9 +20,12 @@ export default function Footer() {
               />
               Betania Vigeland
             </div>
-            <p className="font-body-md text-on-surface-variant leading-relaxed">
-              En lokal menighet tilknyttet Pinsebevegelsen i Norge. Vi er et fellesskap som ønsker å peke på Jesus og utgjøre en forskjell i lokalmiljøet.
-            </p>
+            <CmsText 
+              slug="footer_description" 
+              fallback={siteSettings?.platform_links?.footer_description || "En lokal menighet tilknyttet Pinsebevegelsen i Norge. Vi er et fellesskap som ønsker å peke på Jesus og utgjøre en forskjell i lokalmiljøet."} 
+              as="p" 
+              className="font-body-md text-on-surface-variant leading-relaxed" 
+            />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
             {/* Column 1: Menigheten */}
@@ -66,20 +70,20 @@ export default function Footer() {
             <div className="space-y-4 col-span-2 sm:col-span-1">
               <h5 className="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Besøk og kontakt</h5>
               <div className="space-y-3 font-body-md text-on-surface-variant leading-relaxed">
-                <p>
-                  Elveveien 6<br/>
-                  4520 Lindesnes
-                </p>
-                <p>
+                <div>
+                  <CmsText slug="footer_address_line1" fallback={siteSettings?.platform_links?.address_line1 || "Elveveien 6"} as="span" className="block" />
+                  <CmsText slug="footer_address_line2" fallback={siteSettings?.platform_links?.address_line2 || "4520 Lindesnes"} as="span" className="block" />
+                </div>
+                <div>
                   <span className="font-bold text-primary block text-xs uppercase tracking-wider">Epost</span>
-                  <a href="mailto:post@betania-vigeland.no" className="hover:text-secondary transition-colors">
-                    post@betania-vigeland.no
+                  <a href={`mailto:${siteSettings?.platform_links?.email || 'post@betania-vigeland.no'}`} className="hover:text-secondary transition-colors">
+                    <CmsText slug="footer_email" fallback={siteSettings?.platform_links?.email || "post@betania-vigeland.no"} as="span" />
                   </a>
-                </p>
-                <p>
+                </div>
+                <div>
                   <span className="font-bold text-primary block text-xs uppercase tracking-wider">Bidrag</span>
                   Vipps: {vipps}
-                </p>
+                </div>
               </div>
             </div>
           </div>

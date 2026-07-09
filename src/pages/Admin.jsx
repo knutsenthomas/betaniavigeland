@@ -113,7 +113,7 @@ export default function Admin() {
     { id: 'oversikt', label: 'Oversikt', icon: 'dashboard' },
     { id: 'sommerinfo', label: 'Sommerferie-info', icon: 'wb_sunny' },
     { id: 'okonomi', label: 'Økonomi & Vipps', icon: 'payments' },
-    { id: 'lenker', label: 'Sosiale Medier', icon: 'link' },
+    { id: 'lenker', label: 'Sosiale Medier & Info', icon: 'link' },
     { id: 'kalender', label: 'Google Kalender', icon: 'calendar_month' },
     { id: 'visuell-cms', label: 'Visuell CMS', icon: 'design_services' },
   ];
@@ -629,6 +629,83 @@ export default function Admin() {
                             platform_links: { ...localSettings.platform_links, podbean: e.target.value }
                           })}
                           className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* === BESØK OG KONTAKTINFO === */}
+                  <div className="bg-white p-6 rounded-3xl border border-surface-container shadow-sm space-y-4 mt-6">
+                    <h4 className="font-bold text-primary text-sm uppercase tracking-widest mb-4">Besøk & Kontaktinfo (Footer)</h4>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Epostadresse</label>
+                        <input
+                          type="email"
+                          value={localSettings.platform_links?.email || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            platform_links: {
+                              ...localSettings.platform_links,
+                              email: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                          placeholder="post@betania-vigeland.no"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Adresse Linje 1</label>
+                        <input
+                          type="text"
+                          value={localSettings.platform_links?.address_line1 || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            platform_links: {
+                              ...localSettings.platform_links,
+                              address_line1: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                          placeholder="Elveveien 6"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Adresse Linje 2</label>
+                        <input
+                          type="text"
+                          value={localSettings.platform_links?.address_line2 || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            platform_links: {
+                              ...localSettings.platform_links,
+                              address_line2: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                          placeholder="4520 Lindesnes"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Footer Beskrivelse</label>
+                        <textarea
+                          rows="2"
+                          value={localSettings.platform_links?.footer_description || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            platform_links: {
+                              ...localSettings.platform_links,
+                              footer_description: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs resize-none"
+                          placeholder="En lokal menighet tilknyttet..."
                         />
                       </div>
                     </div>

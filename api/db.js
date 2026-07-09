@@ -45,14 +45,18 @@ export async function getDbClient() {
             ]
           },
           platform_links: {
-            vipps: "12345",
-            konto: "1234.56.78910",
+            vipps: "106111",
+            konto: "3138.07.03737",
             facebook: "https://www.facebook.com/BetaniaVigeland",
             instagram: "",
             youtube: "",
             spotify: "",
             apple_podcasts: "https://podcasts.apple.com/no/podcast/betania-vigeland/id1113038676",
-            podbean: "https://betania-vigeland.podbean.com"
+            podbean: "https://betania-vigeland.podbean.com",
+            email: "post@betania-vigeland.no",
+            address_line1: "Elveveien 6",
+            address_line2: "4520 Lindesnes",
+            footer_description: "En lokal menighet tilknyttet Pinsebevegelsen i Norge. Vi er et fellesskap som ønsker å peke på Jesus og utgjøre en forskjell i lokalmiljøet."
           },
           calendar_sync: {
             enabled: false,
