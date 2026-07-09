@@ -1422,15 +1422,27 @@ export default function Admin() {
                     <ul className="space-y-2.5 text-xs text-on-surface-variant">
                       <li className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                        <span><strong>Forside:</strong> Velkomsttekster, slagord, bibelvers og seksjonsoverskrifter.</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
                         <span><strong>Kalenderside:</strong> Tittel på siden, tittel på sommerbanner, og sommerferietekstene.</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
-                        <span><strong>Forside:</strong> Velkomsttekster, slagord og seksjonsoverskrifter.</span>
+                        <span><strong>Om oss:</strong> Menighetsbeskrivelser, visjonserklæringer, ledelse/ansatte og trosbekjennelsen (Hva vi tror).</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
-                        <span><strong>Om oss:</strong> Menighetsbeskrivelser og visjonserklæringer.</span>
+                        <span><strong>Utleie:</strong> Utleieinfo, leievilkår, prislister og kontaktinformasjon.</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                        <span><strong>Gave:</strong> Giverinfo-tekster, kontonummer og Vipps-detaljer.</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                        <span><strong>Barn & Unge / Virkegrener:</strong> Seksjonstekster for søndagsskole, ungdomsarbeid, og andre aktiviteter.</span>
                       </li>
                     </ul>
                   </div>
