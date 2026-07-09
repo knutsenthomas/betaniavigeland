@@ -143,10 +143,10 @@ export default function Navbar({ onSearchOpen }) {
         </div>
 
         {/* Action Button & Mobile Menu Toggle */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <button
             onClick={onSearchOpen}
-            className="text-primary hover:text-secondary p-2 rounded-full hover:bg-surface-container/50 transition-colors flex items-center justify-center"
+            className="text-primary hover:text-secondary w-10 h-10 rounded-full hover:bg-surface-container/50 transition-colors flex items-center justify-center"
             aria-label="Søk på nettsiden"
           >
             <span className="material-symbols-outlined text-[24px]">search</span>
@@ -155,10 +155,10 @@ export default function Navbar({ onSearchOpen }) {
           {/* Hamburger Icon */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-primary focus:outline-none"
+            className="lg:hidden w-10 h-10 text-primary hover:text-secondary hover:bg-surface-container/50 rounded-full transition-colors focus:outline-none flex items-center justify-center"
             aria-label="Toggle navigation"
           >
-            <span className="material-symbols-outlined text-[28px]">
+            <span className="material-symbols-outlined text-[26px]">
               {isMobileMenuOpen ? 'close' : 'menu'}
             </span>
           </button>
