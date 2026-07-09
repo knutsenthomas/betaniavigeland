@@ -102,6 +102,23 @@ const getSpeakerBio = (name) => {
 
 export default function Podcast() {
   const location = useLocation();
+  const { siteSettings } = useContent();
+
+  const getFeedUrl = () => {
+    const podbeanUrl = siteSettings?.platform_links?.podbean || '';
+    let username = 'betania-vigeland';
+    if (podbeanUrl) {
+      const match = podbeanUrl.match(/(?:https?:\/\/)?([^.]+)\.podbean\.com/);
+      if (match && match[1]) {
+        username = match[1];
+      } else {
+        // Fallback for custom domains or username strings
+        username = podbeanUrl.replace(/https?:\/\//, '').split('/')[0].trim();
+      }
+    }
+    return `https://feed.podbean.com/${username}/feed.xml`;
+  };
+
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -138,7 +155,8 @@ export default function Podcast() {
     const fetchEpisodes = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://feed.podbean.com/betania-vigeland/feed.xml');
+        const feedUrl = getFeedUrl();
+        const response = await fetch(feedUrl);
         if (!response.ok) {
           throw new Error('Kunne ikke laste podcast-episoder');
         }
