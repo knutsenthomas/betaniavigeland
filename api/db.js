@@ -62,6 +62,12 @@ export async function getDbClient() {
             enabled: false,
             calendar_id: "",
             api_key: ""
+          },
+          monthly_program: {
+            enabled: false,
+            url: "",
+            filename: "",
+            file_data: ""
           }
         };
 

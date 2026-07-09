@@ -57,6 +57,31 @@ export default function Calendar() {
           <p className="font-body-lg text-body-lg text-on-surface-variant">
             Velkommen til vårt fellesskap. Her finner du oversikt over alle kommende aktiviteter, gudstjenester og samlinger for alle aldre.
           </p>
+          {siteSettings?.monthly_program?.enabled && (
+            <div className="mt-6 flex flex-wrap gap-4">
+              {siteSettings.monthly_program.url && (
+                <a 
+                  href={siteSettings.monthly_program.url} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary-container text-white px-5 py-3 rounded-xl font-label-md text-xs shadow-md transition-all duration-200 active:scale-[0.98]"
+                >
+                  <span className="material-symbols-outlined text-[18px]">link</span>
+                  <span>Månedsprogram (Lenke)</span>
+                </a>
+              )}
+              {siteSettings.monthly_program.file_data && (
+                <a 
+                  href={siteSettings.monthly_program.file_data} 
+                  download={siteSettings.monthly_program.filename || 'manedsprogram.pdf'}
+                  className="inline-flex items-center gap-2 bg-primary hover:bg-[#153a51] text-white px-5 py-3 rounded-xl font-label-md text-xs shadow-md transition-all duration-200 active:scale-[0.98]"
+                >
+                  <span className="material-symbols-outlined text-[18px]">download</span>
+                  <span>Last ned program (PDF)</span>
+                </a>
+              )}
+            </div>
+          )}
         </motion.div>
       </section>
 

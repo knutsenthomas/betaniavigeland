@@ -55,6 +55,14 @@ export default function Admin() {
           email: "jant_tellefsen@live.no"
         };
       }
+      if (!copy.monthly_program) {
+        copy.monthly_program = {
+          enabled: false,
+          url: "",
+          filename: "",
+          file_data: ""
+        };
+      }
       setLocalSettings(copy);
     }
   }, [siteSettings]);
@@ -1151,6 +1159,130 @@ export default function Admin() {
                       )}
                     </div>
                   )}
+
+                  {/* MÅNEDSPROGRAM CARD */}
+                  <div className="bg-white p-6 rounded-3xl border border-surface-container shadow-sm space-y-6">
+                    <div className="flex items-center justify-between border-b border-surface-container pb-4">
+                      <div>
+                        <h4 className="font-bold text-primary text-sm uppercase tracking-widest">Månedsprogram (PDF / Vedlegg / Lenke)</h4>
+                        <p className="text-xs text-on-surface-variant mt-1">Gjør det mulig å vise en nedlastbar PDF eller ekstern lenke til månedsprogrammet på kalendersiden.</p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={localSettings.monthly_program?.enabled || false}
+                          onChange={(e) => {
+                            const updated = {
+                              ...localSettings,
+                              monthly_program: { 
+                                ...localSettings.monthly_program, 
+                                enabled: e.target.checked 
+                              }
+                            };
+                            setLocalSettings(updated);
+                            handleSave(updated);
+                          }}
+                          className="sr-only peer"
+                        />
+                        <div className="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
+                      </label>
+                    </div>
+
+                    {(localSettings.monthly_program?.enabled) && (
+                      <div className="space-y-4 pt-2">
+                        {/* URL link */}
+                        <div className="space-y-2">
+                          <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Ekstern lenke til programmet (valgfritt)</label>
+                          <input
+                            type="url"
+                            value={localSettings.monthly_program?.url || ''}
+                            onChange={(e) => setLocalSettings({
+                              ...localSettings,
+                              monthly_program: {
+                                ...localSettings.monthly_program,
+                                url: e.target.value
+                              }
+                            })}
+                            className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-sm"
+                            placeholder="https://example.com/mitt-program"
+                          />
+                        </div>
+
+                        {/* File upload */}
+                        <div className="space-y-2">
+                          <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Last opp PDF-vedlegg (valgfritt)</label>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-3">
+                              <input
+                                type="file"
+                                accept="application/pdf"
+                                id="pdf-upload"
+                                className="hidden"
+                                onChange={(e) => {
+                                  const file = e.target.files[0];
+                                  if (!file) return;
+                                  if (file.type !== 'application/pdf') {
+                                    alert('Vennligst velg en gyldig PDF-fil.');
+                                    return;
+                                  }
+                                  const reader = new FileReader();
+                                  reader.onload = (event) => {
+                                    setLocalSettings({
+                                      ...localSettings,
+                                      monthly_program: {
+                                        ...localSettings.monthly_program,
+                                        enabled: true,
+                                        filename: file.name,
+                                        file_data: event.target.result,
+                                        url: localSettings.monthly_program?.url || ''
+                                      }
+                                    });
+                                  };
+                                  reader.readAsDataURL(file);
+                                }}
+                              />
+                              <label
+                                htmlFor="pdf-upload"
+                                className="cursor-pointer px-4 py-2.5 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5"
+                              >
+                                <span className="material-symbols-outlined text-[18px]">upload</span>
+                                Velg PDF-fil
+                              </label>
+
+                              {localSettings.monthly_program?.file_data && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setLocalSettings({
+                                      ...localSettings,
+                                      monthly_program: {
+                                        ...localSettings.monthly_program,
+                                        filename: '',
+                                        file_data: ''
+                                      }
+                                    });
+                                  }}
+                                  className="px-4 py-2.5 bg-red-600 hover:bg-red-700 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5"
+                                >
+                                  <span className="material-symbols-outlined text-[18px]">delete</span>
+                                  Slett vedlegg
+                                </button>
+                              )}
+                            </div>
+
+                            {localSettings.monthly_program?.filename ? (
+                              <p className="text-xs text-on-surface-variant font-mono flex items-center gap-1">
+                                <span className="material-symbols-outlined text-[14px] text-emerald-600">attachment</span>
+                                Aktivt vedlegg: <span className="font-bold text-primary">{localSettings.monthly_program.filename}</span>
+                              </p>
+                            ) : (
+                              <p className="text-xs text-on-surface-variant italic">Ingen PDF-fil opplastet.</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="flex items-center gap-3">
                     <button
