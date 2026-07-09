@@ -454,7 +454,7 @@ export default function CalendarMonth() {
             </div>
 
             {/* Detailed Events Title & Section below Grid */}
-            <section className="max-w-3xl mx-auto">
+            <section className="w-full">
               <div className="border-b border-surface-container pb-4 mb-8 flex justify-between items-end">
                 <h2 className="font-headline-sm text-headline-sm text-primary font-bold">
                   {selectedDate 
@@ -523,7 +523,7 @@ export default function CalendarMonth() {
           </>
         ) : (
           /* List / Overview (Agenda) View Mode */
-          <div className="bg-white border border-surface-container rounded-3xl p-6 md:p-8 shadow-sm mb-12 max-w-4xl mx-auto animate-fadeIn">
+          <div className="bg-white border border-surface-container rounded-3xl p-6 md:p-8 shadow-sm mb-12 w-full animate-fadeIn">
             {currentMonthEvents.length > 0 ? (
               <div className="divide-y divide-surface-container/60">
                 {currentMonthEvents.map((evt, idx) => {
