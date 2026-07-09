@@ -11,37 +11,37 @@ export default function About() {
       name: 'Glenn Gundersen',
       role: 'Leder av Interimsstyre',
       email: 'glenn@lindesnesbygg.no',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80'
+      image: ''
     },
     {
       name: 'Anja Cisilie Ødegård',
       role: 'Medlem av Interimsstyre',
       email: 'anjacisilie@hotmail.com',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=300&h=300&q=80'
+      image: ''
     },
     {
       name: 'Anders Gabrielsen',
       role: 'Medlem av Eldsterådet',
       email: 'anders@betania-vigeland.no',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fit=crop&w=300&h=300&q=80'
+      image: ''
     },
     {
       name: 'Andreas Høiland',
       role: 'Medlem av Eldsterådet',
       email: 'andreas_az@hotmail.com',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'
+      image: ''
     },
     {
       name: 'Line-Anette H. Larsen',
       role: 'Medlem av Eldsterådet',
       email: 'line-anettelarsen@hotmail.com',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fit=crop&w=300&h=300&q=80'
+      image: ''
     },
     {
       name: 'Brita Haga Gundersen',
       role: 'Medlem av Eldsterådet',
       email: 'britahg@online.no',
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=300&h=300&q=80'
+      image: ''
     }
   ];
 
@@ -50,13 +50,13 @@ export default function About() {
       name: 'Vidar Tjomsland',
       role: 'Administrasjon & Regnskap',
       email: 'post@betania-vigeland.no',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=300&h=300&q=80'
+      image: ''
     },
     {
       name: 'Andreas Høiland',
       role: 'Leder for ungdomsarbeidet Awake',
       email: 'andreas_az@hotmail.com',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'
+      image: ''
     }
   ];
 
