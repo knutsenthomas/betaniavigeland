@@ -33,6 +33,12 @@
   text-rendering: optimizeLegibility;
   font-feature-settings: 'liga';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  
+  /* Layout Shift & FOUT Prevention */
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: middle;
 }
 
 .text-glow-hover:hover {
