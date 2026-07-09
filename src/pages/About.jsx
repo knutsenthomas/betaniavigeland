@@ -232,7 +232,7 @@ export default function About() {
                     />
                   ) : (
                     <div className="flex flex-col items-center justify-center text-on-surface-variant/20">
-                      <span className="material-symbols-outlined text-[96px]">person</span>
+                      <span className="material-symbols-outlined text-[128px]">person</span>
                     </div>
                   )}
                 </div>
@@ -273,7 +273,7 @@ export default function About() {
                     />
                   ) : (
                     <div className="flex flex-col items-center justify-center text-on-surface-variant/20">
-                      <span className="material-symbols-outlined text-[96px]">person</span>
+                      <span className="material-symbols-outlined text-[128px]">person</span>
                     </div>
                   )}
                 </div>
