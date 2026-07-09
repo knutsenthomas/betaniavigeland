@@ -71,9 +71,9 @@ export default function KidsYouth() {
       {/* Activities Grid */}
       <section className="max-w-container-max mx-auto px-gutter mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {activities.map((act) => (
+          {activities.map((act, idx) => (
             <motion.div
-              key={act.title}
+              key={idx}
               variants={itemVariants}
               whileHover={{ y: -8 }}
               className={`bg-surface-cream rounded-2xl p-8 border-t-8 ${act.accent} shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between`}
@@ -83,16 +83,16 @@ export default function KidsYouth() {
                   <span className="material-symbols-outlined text-[28px]">{act.icon}</span>
                 </div>
                 <div className="space-y-2 mb-4">
-                  <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-secondary bg-secondary-fixed px-3 py-1 rounded-full">
-                    {act.age}
-                  </span>
-                  <h3 className="font-headline-md text-headline-md text-primary leading-tight">{act.title}</h3>
+                  <div className="inline-block text-[11px] font-bold uppercase tracking-widest text-secondary bg-secondary-fixed px-3 py-1 rounded-full">
+                    <CmsText slug={`kidsyouth_act_age_${idx}`} fallback={act.age} />
+                  </div>
+                  <CmsText slug={`kidsyouth_act_title_${idx}`} fallback={act.title} as="h3" className="font-headline-md text-headline-md text-primary leading-tight font-bold" />
                 </div>
                 <div className="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md mb-5">
                   <span className="material-symbols-outlined text-[16px]">schedule</span>
-                  <span>{act.time}</span>
+                  <CmsText slug={`kidsyouth_act_time_${idx}`} fallback={act.time} as="span" />
                 </div>
-                <p className="text-on-surface-variant font-body-md leading-relaxed">{act.description}</p>
+                <CmsText slug={`kidsyouth_act_desc_${idx}`} fallback={act.description} as="p" className="text-on-surface-variant font-body-md leading-relaxed" />
               </div>
               <div className="mt-8 pt-6 border-t border-surface-container">
                 <button className="text-secondary font-label-md text-label-md hover:text-primary transition-colors flex items-center gap-2">

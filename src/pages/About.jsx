@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import CmsText from '@/components/CmsText';
+import { useContent } from '@/contexts/ContentContext';
 
 export default function About() {
-  const ledelse = [
+  const { siteSettings } = useContent();
+
+  const defaultLedelse = [
     {
       name: 'Glenn Gundersen',
       role: 'Leder av Interimsstyre',
@@ -42,7 +45,7 @@ export default function About() {
     }
   ];
 
-  const ansatte = [
+  const defaultAnsatte = [
     {
       name: 'Vidar Tjomsland',
       role: 'Administrasjon & Regnskap',
@@ -56,6 +59,9 @@ export default function About() {
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'
     }
   ];
+
+  const ledelse = siteSettings?.leadership || defaultLedelse;
+  const ansatte = siteSettings?.staff || defaultAnsatte;
 
   const beliefs = [
     {
@@ -189,11 +195,11 @@ export default function About() {
             className="font-headline-lg text-headline-lg text-primary mt-2 mb-16 font-bold" 
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
-            {values.map((v) => (
-              <div key={v.title} className="bg-white p-8 rounded-2xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
+            {values.map((v, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
                 <span className="material-symbols-outlined text-secondary text-[32px] mb-4 block">favorite</span>
-                <h3 className="font-headline-md text-headline-md text-primary mb-3">{v.title}</h3>
-                <p className="text-on-surface-variant font-body-md leading-relaxed">{v.desc}</p>
+                <CmsText slug={`about_value_title_${idx}`} fallback={v.title} as="h3" className="font-headline-md text-headline-md text-primary mb-3 font-bold" />
+                <CmsText slug={`about_value_desc_${idx}`} fallback={v.desc} as="p" className="text-on-surface-variant font-body-md leading-relaxed" />
               </div>
             ))}
           </div>
@@ -216,8 +222,8 @@ export default function About() {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {ledelse.map((lead) => (
-              <div key={lead.name} className="group bg-surface-cream border border-surface-container rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            {ledelse.map((lead, idx) => (
+              <div key={idx} className="group bg-surface-cream border border-surface-container rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
                 <div className="h-64 overflow-hidden relative">
                   <div 
                     className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
@@ -225,9 +231,9 @@ export default function About() {
                   />
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="font-headline-md text-headline-md text-primary mb-1">{lead.name}</h3>
-                  <span className="block text-secondary font-label-md text-label-md uppercase tracking-wider mb-4">{lead.role}</span>
-                  <a href={`mailto:${lead.email}`} className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors font-label-md text-label-md truncate block">
+                  <CmsText slug={`about_leader_name_${idx}`} fallback={lead.name} as="h3" className="font-headline-md text-headline-md text-primary mb-1 font-bold" />
+                  <CmsText slug={`about_leader_role_${idx}`} fallback={lead.role} as="span" className="block text-secondary font-label-md text-label-md uppercase tracking-wider mb-4" />
+                  <a href={`mailto:${lead.email}`} className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors font-label-md text-label-md truncate block justify-center">
                     <span className="material-symbols-outlined text-[18px] align-middle mr-1">mail</span>
                     <span className="align-middle text-[13px]">{lead.email}</span>
                   </a>
@@ -251,8 +257,8 @@ export default function About() {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            {ansatte.map((lead) => (
-              <div key={lead.name} className="group bg-surface-cream border border-surface-container rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            {ansatte.map((lead, idx) => (
+              <div key={idx} className="group bg-surface-cream border border-surface-container rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
                 <div className="h-64 overflow-hidden relative">
                   <div 
                     className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
@@ -260,9 +266,9 @@ export default function About() {
                   />
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="font-headline-md text-headline-md text-primary mb-1">{lead.name}</h3>
-                  <span className="block text-secondary font-label-md text-label-md uppercase tracking-wider mb-4">{lead.role}</span>
-                  <a href={`mailto:${lead.email}`} className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors font-label-md text-label-md">
+                  <CmsText slug={`about_staff_name_${idx}`} fallback={lead.name} as="h3" className="font-headline-md text-headline-md text-primary mb-1 font-bold" />
+                  <CmsText slug={`about_staff_role_${idx}`} fallback={lead.role} as="span" className="block text-secondary font-label-md text-label-md uppercase tracking-wider mb-4" />
+                  <a href={`mailto:${lead.email}`} className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors font-label-md text-label-md justify-center">
                     <span className="material-symbols-outlined text-[18px] align-middle mr-1">mail</span>
                     <span className="align-middle text-[13px]">{lead.email}</span>
                   </a>
@@ -296,18 +302,18 @@ export default function About() {
 
           {/* Beliefs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {beliefs.map((b) => (
-              <div key={b.title} className="bg-white p-8 rounded-3xl border border-surface-container shadow-sm space-y-4 hover:shadow-md transition-shadow flex flex-col justify-between">
+            {beliefs.map((b, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-3xl border border-surface-container shadow-sm space-y-4 hover:shadow-md transition-shadow flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-headline-md text-headline-lg text-primary font-bold">{b.title}</h3>
+                    <CmsText slug={`about_belief_title_${idx}`} fallback={b.title} as="h3" className="font-headline-md text-headline-lg text-primary font-bold" />
                     <span className="material-symbols-outlined text-secondary select-none">menu_book</span>
                   </div>
-                  <p className="text-on-surface-variant font-body-md leading-relaxed text-[14px]">{b.text}</p>
+                  <CmsText slug={`about_belief_text_${idx}`} fallback={b.text} as="p" className="text-on-surface-variant font-body-md leading-relaxed text-[14px]" />
                 </div>
                 <div className="pt-4 border-t border-surface-container flex items-center gap-2 text-secondary/80 text-[12px] font-semibold italic mt-4">
                   <span className="material-symbols-outlined text-[16px] select-none">bookmark</span>
-                  <span>{b.ref}</span>
+                  <CmsText slug={`about_belief_ref_${idx}`} fallback={b.ref} as="span" />
                 </div>
               </div>
             ))}
@@ -318,14 +324,12 @@ export default function About() {
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary-fixed opacity-20 rounded-bl-full pointer-events-none" />
             <div className="text-center space-y-6">
               <span className="material-symbols-outlined text-secondary text-[36px] select-none">workspace_premium</span>
-              <h3 className="font-headline-md text-headline-lg text-primary font-bold">Den apostoliske trosbekjennelse</h3>
-              <p className="font-body-md text-on-surface-variant leading-relaxed italic max-w-xl mx-auto text-[14px]">
-                Vi slutter oss til den apostoliske trosbekjennelsen som felles kristent fundament:
-              </p>
+              <CmsText slug="about_creed_title" fallback="Den apostoliske trosbekjennelse" as="h3" className="font-headline-md text-headline-lg text-primary font-bold" />
+              <CmsText slug="about_creed_intro" fallback="Vi slutter oss til den apostoliske trosbekjennelsen som felles kristent fundament:" as="p" className="font-body-md text-on-surface-variant leading-relaxed italic max-w-xl mx-auto text-[14px]" />
               <div className="border-t border-b border-surface-container py-6 text-on-surface leading-relaxed font-body-md max-w-lg mx-auto text-[14px] space-y-4">
-                <p>Jeg tror på Gud Fader, den allmektige, himmelens og jordens skaper.</p>
-                <p>Jeg tror på Jesus Kristus, Guds enbårne Sønn, vår Herre, som ble unnfanget ved Den Hellige Ånd, født av jomfru Maria, pint under Pontius Pilatus, korsfestet, død og begravet, fór ned til dødsriket, stod opp fra de døde tredje dag, fór opp til himmelen, sitter ved Guds, den allmektige Faders høyre hånd, skal derfra komme igjen for å dømme levende og døde.</p>
-                <p>Jeg tror på Den Hellige Ånd, en hellig, allmenn kirke, de helliges samfunn, syndenes forlatelse, legemets oppstandelse og det evige liv.</p>
+                <CmsText slug="about_creed_p1" fallback="Jeg tror på Gud Fader, den allmektige, himmelens og jordens skaper." as="p" />
+                <CmsText slug="about_creed_p2" fallback="Jeg tror på Jesus Kristus, Guds enbårne Sønn, vår Herre, som ble unnfanget ved Den Hellige Ånd, født av jomfru Maria, pint under Pontius Pilatus, korsfestet, død og begravet, fór ned til dødsriket, stod opp fra de døde tredje dag, fór opp til himmelen, sitter ved Guds, den allmektige Faders høyre hånd, skal derfra komme igjen for å dømme levende og døde." as="p" />
+                <CmsText slug="about_creed_p3" fallback="Jeg tror på Den Hellige Ånd, en hellig, allmenn kirke, de helliges samfunn, syndenes forlatelse, legemets oppstandelse og det evige liv." as="p" />
               </div>
               <span className="text-[13px] font-bold text-secondary uppercase tracking-widest block select-none">Amen</span>
             </div>

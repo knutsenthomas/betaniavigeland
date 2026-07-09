@@ -31,7 +31,31 @@ export default function Admin() {
   // Sync local state when siteSettings load
   React.useEffect(() => {
     if (siteSettings) {
-      setLocalSettings(JSON.parse(JSON.stringify(siteSettings)));
+      const copy = JSON.parse(JSON.stringify(siteSettings));
+      if (!copy.leadership) {
+        copy.leadership = [
+          { name: "Glenn Gundersen", role: "Leder av Interimsstyre", email: "glenn@lindesnesbygg.no", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80" },
+          { name: "Anja Cisilie Ødegård", role: "Medlem av Interimsstyre", email: "anjacisilie@hotmail.com", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=300&h=300&q=80" },
+          { name: "Anders Gabrielsen", role: "Medlem av Eldsterådet", email: "anders@betania-vigeland.no", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fit=crop&w=300&h=300&q=80" },
+          { name: "Andreas Høiland", role: "Medlem av Eldsterådet", email: "andreas_az@hotmail.com", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80" },
+          { name: "Line-Anette H. Larsen", role: "Medlem av Eldsterådet", email: "line-anettelarsen@hotmail.com", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fit=crop&w=300&h=300&q=80" },
+          { name: "Brita Haga Gundersen", role: "Medlem av Eldsterådet", email: "britahg@online.no", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=300&h=300&q=80" }
+        ];
+      }
+      if (!copy.staff) {
+        copy.staff = [
+          { name: "Vidar Tjomsland", role: "Administrasjon & Regnskap", email: "post@betania-vigeland.no", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=300&h=300&q=80" },
+          { name: "Andreas Høiland", role: "Leder for ungdomsarbeidet Awake", email: "andreas_az@hotmail.com", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80" }
+        ];
+      }
+      if (!copy.rental_contact) {
+        copy.rental_contact = {
+          name: "Jan Tore Tellefsen",
+          phone: "97055786",
+          email: "jant_tellefsen@live.no"
+        };
+      }
+      setLocalSettings(copy);
     }
   }, [siteSettings]);
 
@@ -114,6 +138,7 @@ export default function Admin() {
     { id: 'sommerinfo', label: 'Sommerferie-info', icon: 'wb_sunny' },
     { id: 'okonomi', label: 'Økonomi & Vipps', icon: 'payments' },
     { id: 'lenker', label: 'Sosiale Medier & Info', icon: 'link' },
+    { id: 'mennesker', label: 'Ledelse & Kontakt', icon: 'groups' },
     { id: 'kalender', label: 'Google Kalender', icon: 'calendar_month' },
     { id: 'visuell-cms', label: 'Visuell CMS', icon: 'design_services' },
   ];
@@ -711,6 +736,282 @@ export default function Admin() {
                     </div>
                   </div>
 
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleSave()}
+                      className="px-6 py-3.5 bg-primary hover:bg-[#153a51] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider rounded-2xl transition-all shadow-md flex items-center gap-2"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">save</span>
+                      <span>Lagre endringer</span>
+                    </button>
+                    {saveStatus === 'suksess' && <span className="text-xs text-emerald-600 font-bold flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">check_circle</span> Lagret!</span>}
+                  </div>
+                </div>
+              )}
+
+              {/* === MENNESKER (LEDELSE & ANSATTE) PANEL === */}
+              {activeTab === 'mennesker' && (
+                <div className="space-y-6">
+                  {/* UTLEIEANSVARLIG */}
+                  <div className="bg-white p-6 rounded-3xl border border-surface-container shadow-sm space-y-4">
+                    <h4 className="font-bold text-primary text-sm uppercase tracking-widest mb-4">Utleieansvarlig Kontaktperson</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
+                        <input
+                          type="text"
+                          value={localSettings.rental_contact?.name || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            rental_contact: {
+                              ...localSettings.rental_contact,
+                              name: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs font-semibold text-primary"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Telefon</label>
+                        <input
+                          type="text"
+                          value={localSettings.rental_contact?.phone || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            rental_contact: {
+                              ...localSettings.rental_contact,
+                              phone: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
+                        <input
+                          type="email"
+                          value={localSettings.rental_contact?.email || ''}
+                          onChange={(e) => setLocalSettings({
+                            ...localSettings,
+                            rental_contact: {
+                              ...localSettings.rental_contact,
+                              email: e.target.value
+                            }
+                          })}
+                          className="w-full p-3 bg-surface-container-low border border-surface-container rounded-xl text-xs"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* LEDERRAAD LIST */}
+                  <div className="bg-white p-6 rounded-3xl border border-surface-container shadow-sm space-y-6">
+                    <div className="flex items-center justify-between border-b border-surface-container pb-4">
+                      <div>
+                        <h4 className="font-bold text-primary text-sm uppercase tracking-widest">Menighetsledelse / Lederråd</h4>
+                        <p className="text-xs text-on-surface-variant mt-1">Styrer hvem som vises i lederråd-seksjonen på Om Oss-siden.</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const leadership = [...(localSettings.leadership || [])];
+                          leadership.push({ name: '', role: '', email: '', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80' });
+                          setLocalSettings({ ...localSettings, leadership });
+                        }}
+                        className="px-4 py-2 bg-secondary hover:bg-secondary-container text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">add_circle</span>
+                        <span>Legg til leder</span>
+                      </button>
+                    </div>
+
+                    <div className="space-y-6">
+                      {(localSettings.leadership || []).map((person, idx) => (
+                        <div key={idx} className="p-4 bg-surface-container-lowest rounded-2xl border border-surface-container flex flex-col md:flex-row gap-4 items-start md:items-end justify-between relative group">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const leadership = localSettings.leadership.filter((_, i) => i !== idx);
+                              setLocalSettings({ ...localSettings, leadership });
+                            }}
+                            className="absolute top-4 right-4 text-outline hover:text-secondary transition-colors"
+                            title="Slett denne lederen"
+                          >
+                            <span className="material-symbols-outlined">delete</span>
+                          </button>
+
+                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-1">
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
+                              <input
+                                type="text"
+                                value={person.name}
+                                onChange={(e) => {
+                                  const leadership = [...localSettings.leadership];
+                                  leadership[idx].name = e.target.value;
+                                  setLocalSettings({ ...localSettings, leadership });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs font-semibold text-primary"
+                                placeholder="Fullt navn"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Rolle / Tittel</label>
+                              <input
+                                type="text"
+                                value={person.role}
+                                onChange={(e) => {
+                                  const leadership = [...localSettings.leadership];
+                                  leadership[idx].role = e.target.value;
+                                  setLocalSettings({ ...localSettings, leadership });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                placeholder="F.eks. Medlem av Eldsterådet"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
+                              <input
+                                type="email"
+                                value={person.email}
+                                onChange={(e) => {
+                                  const leadership = [...localSettings.leadership];
+                                  leadership[idx].email = e.target.value;
+                                  setLocalSettings({ ...localSettings, leadership });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                placeholder="navn@epost.no"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde URL</label>
+                              <input
+                                type="text"
+                                value={person.image}
+                                onChange={(e) => {
+                                  const leadership = [...localSettings.leadership];
+                                  leadership[idx].image = e.target.value;
+                                  setLocalSettings({ ...localSettings, leadership });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs text-outline font-mono truncate"
+                                placeholder="https://..."
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {(localSettings.leadership || []).length === 0 && (
+                        <p className="text-xs text-on-surface-variant italic py-4 text-center">Ingen personer lagt til i lederrådet ennå.</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* STAFF LIST */}
+                  <div className="bg-white p-6 rounded-3xl border border-surface-container shadow-sm space-y-6">
+                    <div className="flex items-center justify-between border-b border-surface-container pb-4">
+                      <div>
+                        <h4 className="font-bold text-primary text-sm uppercase tracking-widest">Ansatte / Medarbeidere</h4>
+                        <p className="text-xs text-on-surface-variant mt-1">Styrer hvem som vises i ansatt-seksjonen på Om Oss-siden.</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const staff = [...(localSettings.staff || [])];
+                          staff.push({ name: '', role: '', email: '', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=300&h=300&q=80' });
+                          setLocalSettings({ ...localSettings, staff });
+                        }}
+                        className="px-4 py-2 bg-secondary hover:bg-secondary-container text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">add_circle</span>
+                        <span>Legg til ansatt</span>
+                      </button>
+                    </div>
+
+                    <div className="space-y-6">
+                      {(localSettings.staff || []).map((person, idx) => (
+                        <div key={idx} className="p-4 bg-surface-container-lowest rounded-2xl border border-surface-container flex flex-col md:flex-row gap-4 items-start md:items-end justify-between relative group">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const staff = localSettings.staff.filter((_, i) => i !== idx);
+                              setLocalSettings({ ...localSettings, staff });
+                            }}
+                            className="absolute top-4 right-4 text-outline hover:text-secondary transition-colors"
+                            title="Slett denne ansatte"
+                          >
+                            <span className="material-symbols-outlined">delete</span>
+                          </button>
+
+                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-1">
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
+                              <input
+                                type="text"
+                                value={person.name}
+                                onChange={(e) => {
+                                  const staff = [...localSettings.staff];
+                                  staff[idx].name = e.target.value;
+                                  setLocalSettings({ ...localSettings, staff });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs font-semibold text-primary"
+                                placeholder="Fullt navn"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Rolle / Tittel</label>
+                              <input
+                                type="text"
+                                value={person.role}
+                                onChange={(e) => {
+                                  const staff = [...localSettings.staff];
+                                  staff[idx].role = e.target.value;
+                                  setLocalSettings({ ...localSettings, staff });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                placeholder="F.eks. Barne- og ungdomsarbeider"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
+                              <input
+                                type="email"
+                                value={person.email}
+                                onChange={(e) => {
+                                  const staff = [...localSettings.staff];
+                                  staff[idx].email = e.target.value;
+                                  setLocalSettings({ ...localSettings, staff });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                placeholder="navn@epost.no"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde URL</label>
+                              <input
+                                type="text"
+                                value={person.image}
+                                onChange={(e) => {
+                                  const staff = [...localSettings.staff];
+                                  staff[idx].image = e.target.value;
+                                  setLocalSettings({ ...localSettings, staff });
+                                }}
+                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs text-outline font-mono truncate"
+                                placeholder="https://..."
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {(localSettings.staff || []).length === 0 && (
+                        <p className="text-xs text-on-surface-variant italic py-4 text-center">Ingen personer lagt til blant de ansatte ennå.</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* SAVE BUTTON */}
                   <div className="flex items-center gap-3">
                     <button
                       type="button"

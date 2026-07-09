@@ -110,7 +110,7 @@ export default function Mission() {
                   </div>
                   <div>
                     <div className="flex items-center gap-3">
-                      <h2 className="font-headline-lg text-headline-lg text-primary">{project.title}</h2>
+                      <CmsText slug={`mission_proj_title_${idx}`} fallback={project.title} as="h2" className="font-headline-lg text-headline-lg text-primary font-bold" />
                       {project.title === 'Sett og Hørt' && project.flags && (
                         <img 
                           src={project.flags[0]} 
@@ -119,17 +119,13 @@ export default function Mission() {
                         />
                       )}
                     </div>
-                    <span className="text-secondary font-label-md text-xs uppercase tracking-wider block mt-0.5">{project.subtitle}</span>
+                    <CmsText slug={`mission_proj_subtitle_${idx}`} fallback={project.subtitle} as="span" className="text-secondary font-label-md text-xs uppercase tracking-wider block mt-0.5" />
                   </div>
                 </div>
 
-                <p className="font-body-lg text-on-surface leading-relaxed">
-                  {project.description}
-                </p>
+                <CmsText slug={`mission_proj_desc_${idx}`} fallback={project.description} as="p" className="font-body-lg text-on-surface leading-relaxed" />
 
-                <p className="font-body-md text-on-surface-variant leading-relaxed">
-                  {project.details}
-                </p>
+                <CmsText slug={`mission_proj_details_${idx}`} fallback={project.details} as="p" className="font-body-md text-on-surface-variant leading-relaxed" />
 
                 <div className="pt-4 flex flex-col sm:flex-row sm:items-center gap-6">
                   <a

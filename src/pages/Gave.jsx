@@ -75,10 +75,13 @@ export default function Gave() {
               </div>
               
               <div className="space-y-3">
-                <h3 className="font-headline-md text-headline-md text-primary font-bold">Vipps</h3>
-                <p className="text-on-surface-variant font-body-md text-sm leading-relaxed">
-                  Den enkleste måten å gi en enkeltgave eller gi kollekt under møtene våre. Søk opp menigheten eller skriv inn nummeret direkte.
-                </p>
+                <CmsText slug="gave_vipps_title" fallback="Vipps" as="h3" className="font-headline-md text-headline-md text-primary font-bold" />
+                <CmsText 
+                  slug="gave_vipps_desc" 
+                  fallback="Den enkleste måten å gi en enkeltgave eller gi kollekt under møtene våre. Søk opp menigheten eller skriv inn nummeret direkte." 
+                  as="p" 
+                  className="text-on-surface-variant font-body-md text-sm leading-relaxed" 
+                />
               </div>
 
               {/* Number display */}
@@ -111,10 +114,13 @@ export default function Gave() {
               </div>
               
               <div className="space-y-3">
-                <h3 className="font-headline-md text-headline-md text-primary font-bold">Driftskonto</h3>
-                <p className="text-on-surface-variant font-body-md text-sm leading-relaxed">
-                  Brukes til faste månedlige bidrag (tiende), overføringer via nettbank og ordinære driftsgaver til menigheten.
-                </p>
+                <CmsText slug="gave_konto_title" fallback="Driftskonto" as="h3" className="font-headline-md text-headline-md text-primary font-bold" />
+                <CmsText 
+                  slug="gave_konto_desc" 
+                  fallback="Brukes til faste månedlige bidrag (tiende), overføringer via nettbank og ordinære driftsgaver til menigheten." 
+                  as="p" 
+                  className="text-on-surface-variant font-body-md text-sm leading-relaxed" 
+                />
               </div>
 
               {/* Number display */}
@@ -147,10 +153,13 @@ export default function Gave() {
               </div>
               
               <div className="space-y-3">
-                <h3 className="font-headline-md text-headline-md text-primary font-bold">Byggkonto</h3>
-                <p className="text-on-surface-variant font-body-md text-sm leading-relaxed">
-                  Brukes spesifikt til vedlikehold, oppgraderinger, oppussing og nedbetaling av lån på menighetsbygget vårt.
-                </p>
+                <CmsText slug="gave_bygg_title" fallback="Byggkonto" as="h3" className="font-headline-md text-headline-md text-primary font-bold" />
+                <CmsText 
+                  slug="gave_bygg_desc" 
+                  fallback="Brukes spesifikt til vedlikehold, oppgraderinger, oppussing og nedbetaling av lån på menighetsbygget vårt." 
+                  as="p" 
+                  className="text-on-surface-variant font-body-md text-sm leading-relaxed" 
+                />
               </div>
 
               {/* Number display */}

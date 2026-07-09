@@ -199,17 +199,15 @@ export default function Virkegrener() {
                       <span className="text-[11px] font-bold uppercase tracking-widest text-secondary block">
                         {item.category === 'moter' ? 'Møter & Voksne' : item.category === 'barn' ? 'Barn' : 'Ungdom'}
                       </span>
-                      <h3 className="font-headline-md text-headline-md text-primary mt-1">{item.title}</h3>
+                      <CmsText slug={`virkegrener_branch_title_${item.id}`} fallback={item.title} as="h3" className="font-headline-md text-headline-md text-primary mt-1 font-bold" />
                     </div>
 
                     <div className="flex items-center gap-2 text-on-surface-variant text-xs">
                       <span className="material-symbols-outlined text-[16px]">schedule</span>
-                      <span className="font-semibold">{item.time}</span>
+                      <CmsText slug={`virkegrener_branch_time_${item.id}`} fallback={item.time} as="span" className="font-semibold" />
                     </div>
 
-                    <p className="text-on-surface-variant font-body-md leading-relaxed text-[14px]">
-                      {item.description}
-                    </p>
+                    <CmsText slug={`virkegrener_branch_desc_${item.id}`} fallback={item.description} as="p" className="text-on-surface-variant font-body-md leading-relaxed text-[14px]" />
                   </div>
                 </div>
 
@@ -220,10 +218,10 @@ export default function Virkegrener() {
                       href={item.facebook || item.link} 
                       target="_blank" 
                       rel="noreferrer"
-                      className="text-secondary hover:text-primary transition-colors text-[13px] font-bold flex items-center gap-1.5"
+                      className="text-secondary hover:text-primary transition-colors text-xs font-bold flex items-center gap-1.5"
                     >
-                      {item.linkLabel || 'Følg på Facebook'}
-                      <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                      <CmsText slug={`virkegrener_branch_linklabel_${item.id}`} fallback={item.linkLabel || (item.facebook ? 'Følg på Facebook' : 'Besøk nettside')} as="span" />
+                      <span className="material-symbols-outlined text-[14px]">east</span>
                     </a>
                   </div>
                 )}

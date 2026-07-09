@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CmsText from '@/components/CmsText';
+import { useContent } from '@/contexts/ContentContext';
 
 export default function Rental() {
+  const { siteSettings } = useContent();
   const [inquirySent, setInquirySent] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -75,7 +77,7 @@ export default function Rental() {
       {/* Rooms Overview */}
       <section className="max-w-container-max mx-auto px-gutter mb-20 space-y-16">
         {rooms.map((room, idx) => (
-          <div key={room.title} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-surface-cream rounded-3xl overflow-hidden border border-surface-container shadow-sm p-6 lg:p-10">
+          <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-surface-cream rounded-3xl overflow-hidden border border-surface-container shadow-sm p-6 lg:p-10">
             <div className={`lg:col-span-6 ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
               <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-md">
                 <div 
@@ -86,17 +88,17 @@ export default function Rental() {
             </div>
             <div className={`lg:col-span-6 space-y-6 ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
               <div>
-                <span className="text-secondary font-label-md text-label-md uppercase tracking-wider">{room.capacity}</span>
-                <h3 className="font-headline-lg text-headline-lg text-primary mt-1">{room.title}</h3>
-                <span className="block font-bold text-primary text-lg mt-2">{room.price}</span>
+                <CmsText slug={`rental_room_capacity_${idx}`} fallback={room.capacity} as="span" className="text-secondary font-label-md text-label-md uppercase tracking-wider block" />
+                <CmsText slug={`rental_room_title_${idx}`} fallback={room.title} as="h3" className="font-headline-lg text-headline-lg text-primary mt-1 font-bold" />
+                <CmsText slug={`rental_room_price_${idx}`} fallback={room.price} as="span" className="block font-bold text-primary text-lg mt-2" />
               </div>
-              <p className="text-on-surface-variant font-body-md leading-relaxed">{room.description}</p>
+              <CmsText slug={`rental_room_desc_${idx}`} fallback={room.description} as="p" className="text-on-surface-variant font-body-md leading-relaxed" />
               
               <div className="grid grid-cols-2 gap-3 pt-4 border-t border-surface-container">
-                {room.specs.map(spec => (
-                  <div key={spec} className="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+                {room.specs.map((spec, specIdx) => (
+                  <div key={specIdx} className="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
                     <span className="material-symbols-outlined text-secondary text-[16px]">check</span>
-                    <span>{spec}</span>
+                    <CmsText slug={`rental_room_${idx}_spec_${specIdx}`} fallback={spec} as="span" />
                   </div>
                 ))}
               </div>
@@ -155,14 +157,22 @@ export default function Rental() {
               </h4>
               <p className="text-on-surface-variant font-body-md">For spørsmål om leie og tilgjengelighet, ta kontakt med:</p>
               <div className="space-y-1 font-body-md">
-                <p className="font-bold text-primary text-lg">Jan Tore Tellefsen</p>
+                <p className="font-bold text-primary text-lg">
+                  {siteSettings?.rental_contact?.name || 'Jan Tore Tellefsen'}
+                </p>
                 <p className="text-on-surface-variant flex items-center gap-2">
                   <span className="material-symbols-outlined text-[18px]">phone</span>
-                  Mobil: <a href="tel:97055786" className="text-secondary hover:underline">97055786</a>
+                  Mobil:{' '}
+                  <a href={`tel:${siteSettings?.rental_contact?.phone || '97055786'}`} className="text-secondary hover:underline">
+                    {siteSettings?.rental_contact?.phone || '97055786'}
+                  </a>
                 </p>
                 <p className="text-on-surface-variant flex items-center gap-2">
                   <span className="material-symbols-outlined text-[18px]">mail</span>
-                  E-post: <a href="mailto:jant_tellefsen@live.no" className="text-secondary hover:underline">jant_tellefsen@live.no</a>
+                  E-post:{' '}
+                  <a href={`mailto:${siteSettings?.rental_contact?.email || 'jant_tellefsen@live.no'}`} className="text-secondary hover:underline">
+                    {siteSettings?.rental_contact?.email || 'jant_tellefsen@live.no'}
+                  </a>
                 </p>
               </div>
             </div>
