@@ -131,7 +131,16 @@ export const ContentProvider = ({ children }) => {
         if (settingsRes.ok) {
           const settingsData = await settingsRes.json();
           if (settingsData.data) {
-            setSiteSettings(settingsData.data);
+            const loaded = settingsData.data;
+            if (!loaded.monthly_program) {
+              loaded.monthly_program = {
+                enabled: false,
+                url: "",
+                filename: "",
+                file_data: ""
+              };
+            }
+            setSiteSettings(loaded);
           }
         }
       } catch (err) {
