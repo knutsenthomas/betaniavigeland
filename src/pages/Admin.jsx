@@ -242,7 +242,7 @@ export default function Admin() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.25 }}
-              className="space-y-8"
+              className="space-y-8 w-full"
             >
               
               {/* === OVERSIKT PANEL === */}
