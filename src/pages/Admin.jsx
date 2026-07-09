@@ -853,60 +853,65 @@ export default function Admin() {
                             <span className="material-symbols-outlined">delete</span>
                           </button>
 
-                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-1">
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
-                              <input
-                                type="text"
-                                value={person.name}
-                                onChange={(e) => {
-                                  const leadership = [...localSettings.leadership];
-                                  leadership[idx].name = e.target.value;
-                                  setLocalSettings({ ...localSettings, leadership });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs font-semibold text-primary"
-                                placeholder="Fullt navn"
-                              />
+                          <div className="flex-1 space-y-4 min-w-0">
+                            {/* Rad 1: Navn, Rolle, E-post */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
+                                <input
+                                  type="text"
+                                  value={person.name}
+                                  onChange={(e) => {
+                                    const leadership = [...localSettings.leadership];
+                                    leadership[idx].name = e.target.value;
+                                    setLocalSettings({ ...localSettings, leadership });
+                                  }}
+                                  className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs font-semibold text-primary"
+                                  placeholder="Fullt navn"
+                                />
+                              </div>
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Rolle / Tittel</label>
+                                <input
+                                  type="text"
+                                  value={person.role}
+                                  onChange={(e) => {
+                                    const leadership = [...localSettings.leadership];
+                                    leadership[idx].role = e.target.value;
+                                    setLocalSettings({ ...localSettings, leadership });
+                                  }}
+                                  className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                  placeholder="F.eks. Medlem av Eldsterådet"
+                                />
+                              </div>
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
+                                <input
+                                  type="email"
+                                  value={person.email}
+                                  onChange={(e) => {
+                                    const leadership = [...localSettings.leadership];
+                                    leadership[idx].email = e.target.value;
+                                    setLocalSettings({ ...localSettings, leadership });
+                                  }}
+                                  className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                  placeholder="navn@epost.no"
+                                />
+                              </div>
                             </div>
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Rolle / Tittel</label>
-                              <input
-                                type="text"
-                                value={person.role}
-                                onChange={(e) => {
-                                  const leadership = [...localSettings.leadership];
-                                  leadership[idx].role = e.target.value;
-                                  setLocalSettings({ ...localSettings, leadership });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
-                                placeholder="F.eks. Medlem av Eldsterådet"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
-                              <input
-                                type="email"
-                                value={person.email}
-                                onChange={(e) => {
-                                  const leadership = [...localSettings.leadership];
-                                  leadership[idx].email = e.target.value;
-                                  setLocalSettings({ ...localSettings, leadership });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
-                                placeholder="navn@epost.no"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde (URL eller Opplasting)</label>
-                              <div className="flex items-center gap-2">
+
+                            {/* Rad 2: Bilde (Upload & URL) */}
+                            <div className="pt-3 border-t border-surface-container-high/50">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Bilde</label>
+                              <div className="flex items-center gap-3">
                                 {person.image && (
                                   <img 
                                     src={person.image} 
                                     alt="Leder" 
-                                    className="w-10 h-10 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0" 
+                                    className="w-12 h-12 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0 shadow-sm" 
                                   />
                                 )}
-                                <div className="flex-1 flex gap-1.5 min-w-0">
+                                <div className="flex items-center gap-2">
                                   <input
                                     type="file"
                                     accept="image/*"
@@ -926,23 +931,23 @@ export default function Admin() {
                                   />
                                   <label
                                     htmlFor={`leadership-img-${idx}`}
-                                    className="cursor-pointer px-2.5 py-2 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1 shrink-0"
+                                    className="cursor-pointer px-3.5 py-2.5 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5 shrink-0 shadow-sm"
                                   >
-                                    <span className="material-symbols-outlined text-[14px]">upload</span>
-                                    Last opp
+                                    <span className="material-symbols-outlined text-[16px]">upload</span>
+                                    Last opp bilde
                                   </label>
-                                  <input
-                                    type="text"
-                                    value={person.image || ''}
-                                    onChange={(e) => {
-                                      const leadership = [...localSettings.leadership];
-                                      leadership[idx].image = e.target.value;
-                                      setLocalSettings({ ...localSettings, leadership });
-                                    }}
-                                    className="flex-1 p-2 bg-white border border-surface-container rounded-xl text-[10px] font-mono truncate"
-                                    placeholder="https://... eller base64"
-                                  />
                                 </div>
+                                <input
+                                  type="text"
+                                  value={person.image || ''}
+                                  onChange={(e) => {
+                                    const leadership = [...localSettings.leadership];
+                                    leadership[idx].image = e.target.value;
+                                    setLocalSettings({ ...localSettings, leadership });
+                                  }}
+                                  className="flex-1 p-2.5 bg-white border border-surface-container rounded-xl text-xs font-mono truncate"
+                                  placeholder="Eller lim inn bilde-URL (https://...)"
+                                />
                               </div>
                             </div>
                           </div>
@@ -991,60 +996,65 @@ export default function Admin() {
                             <span className="material-symbols-outlined">delete</span>
                           </button>
 
-                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-1">
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
-                              <input
-                                type="text"
-                                value={person.name}
-                                onChange={(e) => {
-                                  const staff = [...localSettings.staff];
-                                  staff[idx].name = e.target.value;
-                                  setLocalSettings({ ...localSettings, staff });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs font-semibold text-primary"
-                                placeholder="Fullt navn"
-                              />
+                          <div className="flex-1 space-y-4 min-w-0">
+                            {/* Rad 1: Navn, Rolle, E-post */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Navn</label>
+                                <input
+                                  type="text"
+                                  value={person.name}
+                                  onChange={(e) => {
+                                    const staff = [...localSettings.staff];
+                                    staff[idx].name = e.target.value;
+                                    setLocalSettings({ ...localSettings, staff });
+                                  }}
+                                  className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs font-semibold text-primary"
+                                  placeholder="Fullt navn"
+                                />
+                              </div>
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Rolle / Tittel</label>
+                                <input
+                                  type="text"
+                                  value={person.role}
+                                  onChange={(e) => {
+                                    const staff = [...localSettings.staff];
+                                    staff[idx].role = e.target.value;
+                                    setLocalSettings({ ...localSettings, staff });
+                                  }}
+                                  className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                  placeholder="F.eks. Barne- og ungdomsarbeider"
+                                />
+                              </div>
+                              <div className="space-y-1">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
+                                <input
+                                  type="email"
+                                  value={person.email}
+                                  onChange={(e) => {
+                                    const staff = [...localSettings.staff];
+                                    staff[idx].email = e.target.value;
+                                    setLocalSettings({ ...localSettings, staff });
+                                  }}
+                                  className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
+                                  placeholder="navn@epost.no"
+                                />
+                              </div>
                             </div>
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Rolle / Tittel</label>
-                              <input
-                                type="text"
-                                value={person.role}
-                                onChange={(e) => {
-                                  const staff = [...localSettings.staff];
-                                  staff[idx].role = e.target.value;
-                                  setLocalSettings({ ...localSettings, staff });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
-                                placeholder="F.eks. Barne- og ungdomsarbeider"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">E-post</label>
-                              <input
-                                type="email"
-                                value={person.email}
-                                onChange={(e) => {
-                                  const staff = [...localSettings.staff];
-                                  staff[idx].email = e.target.value;
-                                  setLocalSettings({ ...localSettings, staff });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs"
-                                placeholder="navn@epost.no"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde (URL eller Opplasting)</label>
-                              <div className="flex items-center gap-2">
+
+                            {/* Rad 2: Bilde (Upload & URL) */}
+                            <div className="pt-3 border-t border-surface-container-high/50">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Bilde</label>
+                              <div className="flex items-center gap-3">
                                 {person.image && (
                                   <img 
                                     src={person.image} 
                                     alt="Ansatt" 
-                                    className="w-10 h-10 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0" 
+                                    className="w-12 h-12 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0 shadow-sm" 
                                   />
                                 )}
-                                <div className="flex-1 flex gap-1.5 min-w-0">
+                                <div className="flex items-center gap-2">
                                   <input
                                     type="file"
                                     accept="image/*"
@@ -1064,23 +1074,23 @@ export default function Admin() {
                                   />
                                   <label
                                     htmlFor={`staff-img-${idx}`}
-                                    className="cursor-pointer px-2.5 py-2 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1 shrink-0"
+                                    className="cursor-pointer px-3.5 py-2.5 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5 shrink-0 shadow-sm"
                                   >
-                                    <span className="material-symbols-outlined text-[14px]">upload</span>
-                                    Last opp
+                                    <span className="material-symbols-outlined text-[16px]">upload</span>
+                                    Last opp bilde
                                   </label>
-                                  <input
-                                    type="text"
-                                    value={person.image || ''}
-                                    onChange={(e) => {
-                                      const staff = [...localSettings.staff];
-                                      staff[idx].image = e.target.value;
-                                      setLocalSettings({ ...localSettings, staff });
-                                    }}
-                                    className="flex-1 p-2 bg-white border border-surface-container rounded-xl text-[10px] font-mono truncate"
-                                    placeholder="https://... eller base64"
-                                  />
                                 </div>
+                                <input
+                                  type="text"
+                                  value={person.image || ''}
+                                  onChange={(e) => {
+                                    const staff = [...localSettings.staff];
+                                    staff[idx].image = e.target.value;
+                                    setLocalSettings({ ...localSettings, staff });
+                                  }}
+                                  className="flex-1 p-2.5 bg-white border border-surface-container rounded-xl text-xs font-mono truncate"
+                                  placeholder="Eller lim inn bilde-URL (https://...)"
+                                />
                               </div>
                             </div>
                           </div>
