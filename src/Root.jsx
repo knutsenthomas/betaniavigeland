@@ -7,6 +7,7 @@ import Layout from '@/components/Layout';
 import ScrollToTop from '@/components/ScrollToTop';
 import Home from '@/pages/Home';
 import Calendar from '@/pages/Calendar';
+import CalendarMonth from '@/pages/CalendarMonth';
 import KidsYouth from '@/pages/KidsYouth';
 import About from '@/pages/About';
 import Rental from '@/pages/Rental';
@@ -30,6 +31,8 @@ export default function Root() {
                 <Route index element={<Home />} />
                 <Route path="calendar" element={<Calendar />} />
                 <Route path="hva-skjer" element={<Calendar />} />
+                <Route path="kalender-mnd" element={<CalendarMonth />} />
+                <Route path="aktivitetskalender" element={<CalendarMonth />} />
                 <Route path="kids-youth" element={<KidsYouth />} />
                 <Route path="about" element={<About />} />
                 <Route path="om-oss" element={<About />} />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
+import { Link } from 'react-router-dom';
 import CmsText from '@/components/CmsText';
 
 export default function Calendar() {
@@ -286,17 +287,15 @@ export default function Calendar() {
       </section>
 
       {/* Load More Section */}
-      {siteSettings?.monthly_program?.enabled && (
-        <section className="mt-16 flex justify-center">
-          <button 
-            onClick={handleOpenMonthlyProgram}
-            className="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-300 active:scale-95 flex items-center gap-2"
-          >
-            <span className="material-symbols-outlined text-[20px]">calendar_month</span>
-            <span>Se flere aktiviteter</span>
-          </button>
-        </section>
-      )}
+      <section className="mt-16 flex justify-center">
+        <Link 
+          to="/kalender-mnd"
+          className="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-300 active:scale-95 flex items-center gap-2"
+        >
+          <span className="material-symbols-outlined text-[20px]">calendar_month</span>
+          <span>Se flere aktiviteter</span>
+        </Link>
+      </section>
     </main>
   );
 }
