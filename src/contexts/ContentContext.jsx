@@ -112,7 +112,14 @@ export const ContentProvider = ({ children }) => {
     }
   });
 
-  const [isAdminEditing, setIsAdminEditing] = useState(false);
+  const [isAdminEditing, setIsAdminEditing] = useState(() => {
+    return localStorage.getItem('betania-admin-editing') === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('betania-admin-editing', isAdminEditing ? 'true' : 'false');
+  }, [isAdminEditing]);
+
   const [loading, setLoading] = useState(true);
 
   // 1. Fetch CMS text config & site settings from Vercel Postgres on mount
