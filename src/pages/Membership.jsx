@@ -272,7 +272,7 @@ export default function Membership() {
                   'Være innskrevet i menighetens liste for statstilskudd.'
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-on-surface-variant font-body-md leading-relaxed text-[15px]">
-                    <span className="material-symbols-outlined text-meadow-green text-[20px] mt-0.5 select-none">check_circle</span>
+                    <span className="material-symbols-outlined text-meadow-green text-[20px] mt-0.5 select-none shrink-0">check_circle</span>
                     <CmsText slug={`membership_require_item_${idx}`} fallback={item} as="span" />
                   </li>
                 ))}
@@ -299,7 +299,7 @@ export default function Membership() {
                     'At du ønsker å være med på å bygge menigheten.'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-on-surface-variant text-[15px] leading-relaxed">
-                      <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5">arrow_right_alt</span>
+                      <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5 shrink-0">arrow_right_alt</span>
                       <CmsText slug={`membership_expect_item_${idx}`} fallback={item} as="span" />
                     </li>
                   ))}
@@ -325,7 +325,7 @@ export default function Membership() {
                     'Du får leie våre flotte lokaler for kun 750 kr til egne enkeltarrangementer.'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-on-surface-variant text-[15px] leading-relaxed">
-                      <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5">star_rate</span>
+                      <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5 shrink-0">star_rate</span>
                       <CmsText slug={`membership_receive_item_${idx}`} fallback={item} as="span" />
                     </li>
                   ))}
