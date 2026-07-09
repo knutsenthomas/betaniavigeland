@@ -135,14 +135,14 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
             <span className="text-secondary font-label-md text-label-md tracking-widest uppercase">Hvem er vi?</span>
-            <h1 className="font-headline-xl text-headline-xl text-primary leading-tight">
+            <h1 className="font-headline-xl text-headline-xl text-primary leading-tight break-words">
               Pinsemenigheten Betania Vigeland
             </h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
               Vi er en levende Pinsemenighet som hører til nettverket De Frie Evangeliske Forsamlinger (DFEF) i Pinsebevegelsen. Vi holder til på vakre Vigeland i Lindesnes kommune.
             </p>
             <p className="font-body-md text-on-surface-variant leading-relaxed">
-              Vår visjon for menigheten er: **Å MØTE, FØLGE OG DELE JESUS**. Vi ønsker å være en menighet der mennesker kan møte Jesus, lære å følge han, og dele Jesus med andre. Enten du er ny i området, søker et åndelig fellesskap, eller bare er nysgjerrig, er du hjertelig velkommen til å besøke oss!
+              Vår visjon for menigheten er: <span className="text-secondary font-bold tracking-wide">Å MØTE, FØLGE OG DELE JESUS</span>. Vi ønsker å være en menighet der mennesker kan møte Jesus, lære å følge han, og dele Jesus med andre. Enten du er ny i området, søker et åndelig fellesskap, eller bare er nysgjerrig, er du hjertelig velkommen til å besøke oss!
             </p>
           </div>
           <div className="relative">

@@ -24,3 +24,22 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
+
+@layer utilities {
+  .text-headline-xl {
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  @media (min-width: 768px) {
+    .text-headline-xl {
+      font-size: 48px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  .font-headline-xl {
+    font-family: 'Playfair Display', serif;
+  }
+}
