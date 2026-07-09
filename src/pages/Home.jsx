@@ -116,7 +116,7 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-surface-cream/90 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/70 md:to-transparent" />
+          <div className="absolute inset-0 bg-surface-cream/70 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/60 md:to-transparent" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
