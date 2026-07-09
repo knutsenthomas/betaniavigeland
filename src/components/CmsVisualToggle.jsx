@@ -14,11 +14,11 @@ export default function CmsVisualToggle() {
     return localStorage.getItem('betania-cms-minimized') === 'true';
   });
 
-  // Only show for logged in admin users
+  // Only show for logged in admin users when visual editing is active
   const isAdminUser = user && user.role === 'admin';
   const isAdminPage = location.pathname.startsWith('/admin');
 
-  if (!isAdminUser || isAdminPage) {
+  if (!isAdminUser || isAdminPage || !isAdminEditing) {
     return null;
   }
 
