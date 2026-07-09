@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useContent } from '@/contexts/ContentContext';
+import historicalEpisodes from '@/data/historical_episodes.json';
 
 export default function SearchModal({ isOpen, onClose }) {
   const navigate = useNavigate();
   const { events } = useContent();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [podcastEpisodes, setPodcastEpisodes] = useState([]);
   const inputRef = useRef(null);
 
   // Auto-focus input on open
@@ -26,6 +28,86 @@ export default function SearchModal({ isOpen, onClose }) {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  // Fetch and merge podcast episodes when the search modal is mounted
+  useEffect(() => {
+    // 1. Load historical fallback immediately so search is usable offline
+    const fallbackList = historicalEpisodes.map((ep, idx, arr) => ({
+      ...ep,
+      dateObj: new Date(ep.pubDate),
+      episodeNumber: arr.length - idx
+    })).sort((a, b) => b.dateObj - a.dateObj);
+    setPodcastEpisodes(fallbackList);
+
+    // 2. Fetch live episodes asynchronously
+    const fetchLivePodcast = async () => {
+      try {
+        const response = await fetch('https://feed.podbean.com/betania-vigeland/feed.xml');
+        if (!response.ok) return;
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        
+        const parserError = xmlDoc.querySelector('parsererror');
+        if (parserError) return;
+
+        const channel = xmlDoc.querySelector('channel');
+        const channelImage = channel?.querySelector('image > url')?.textContent || '';
+        const items = xmlDoc.querySelectorAll('item');
+
+        const episodesList = Array.from(items).map((item, idx, arr) => {
+          const rawTitle = item.querySelector('title')?.textContent || '';
+          const parts = rawTitle.split(' - ');
+          let speaker = '';
+          let sermonTitle = rawTitle;
+          if (parts.length > 1) {
+            speaker = parts[0].trim();
+            sermonTitle = parts.slice(1).join(' - ').replace(/[””"’‘']/g, '').trim();
+          }
+
+          const pubDateStr = item.querySelector('pubDate')?.textContent || '';
+          const enclosure = item.querySelector('enclosure');
+          const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
+          
+          let description = item.querySelector('description')?.textContent || '';
+          description = description.replace(/<[^>]*>/g, '').trim();
+
+          let thumbnail = channelImage;
+          const imageEl = item.getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', 'image')[0] || item.querySelector('image');
+          if (imageEl) {
+            thumbnail = imageEl.getAttribute('href') || thumbnail;
+          }
+
+          return {
+            id: item.querySelector('guid')?.textContent || String(idx),
+            title: rawTitle,
+            sermonTitle: sermonTitle,
+            speaker: speaker || 'Gjestetaler',
+            pubDate: pubDateStr,
+            description: description || '',
+            thumbnail: thumbnail || 'https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?fit=crop&w=600&h=600&q=80',
+            audioUrl: audioUrl
+          };
+        });
+
+        // Merge dynamic RSS with local historical fallback using audioUrl/id
+        const mergedMap = new Map();
+        fallbackList.forEach(ep => mergedMap.set(ep.audioUrl || ep.id, ep));
+        episodesList.forEach(ep => mergedMap.set(ep.audioUrl || ep.id, ep));
+
+        const finalEpisodes = Array.from(mergedMap.values()).map(ep => ({
+          ...ep,
+          dateObj: new Date(ep.pubDate)
+        })).sort((a, b) => b.dateObj - a.dateObj);
+
+        setPodcastEpisodes(finalEpisodes);
+      } catch (err) {
+        console.error('SearchModal podcast fetch error:', err);
+      }
+    };
+
+    fetchLivePodcast();
+  }, []);
 
   // Handle ESC key close
   useEffect(() => {
@@ -185,9 +267,20 @@ export default function SearchModal({ isOpen, onClose }) {
       return searchTerms.every(term => item.keywords.includes(term));
     });
 
+    // 3. Index podcast episodes
+    const matchedPodcasts = podcastEpisodes.map(ep => ({
+      title: ep.sermonTitle || ep.title,
+      category: `Podcast: ${ep.speaker}`,
+      path: '/podcast',
+      text: `${ep.speaker} - ${ep.description}`,
+      keywords: `${ep.title} ${ep.sermonTitle} ${ep.speaker} ${ep.description} podcast`.toLowerCase()
+    })).filter(item => {
+      return searchTerms.every(term => item.keywords.includes(term));
+    });
+
     // Combine results
-    setResults([...matchedStatic, ...matchedEvents]);
-  }, [query, events]);
+    setResults([...matchedStatic, ...matchedEvents, ...matchedPodcasts]);
+  }, [query, events, podcastEpisodes]);
 
   if (!isOpen) return null;
 
@@ -253,7 +346,11 @@ export default function SearchModal({ isOpen, onClose }) {
                   >
                     <div className="w-9 h-9 rounded-xl bg-secondary-fixed text-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                       <span className="material-symbols-outlined text-[20px] select-none">
-                        {res.path === '/calendar' ? 'calendar_today' : 'arrow_forward'}
+                        {res.path === '/calendar' 
+                          ? 'calendar_today' 
+                          : res.path === '/podcast' 
+                            ? 'podcasts' 
+                            : 'arrow_forward'}
                       </span>
                     </div>
                     
