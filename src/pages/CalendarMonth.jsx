@@ -504,24 +504,24 @@ export default function CalendarMonth() {
                     <div 
                       key={evt.id || idx} 
                       onClick={() => setActivePopupEvent(evt)}
-                      className="py-6 first:pt-0 last:pb-0 flex flex-col md:flex-row gap-6 md:items-start group cursor-pointer"
+                      className="py-6 first:pt-0 last:pb-0 flex flex-row gap-4 md:gap-6 items-start group cursor-pointer"
                     >
                       {/* Left Date Column */}
-                      <div className="w-24 shrink-0 flex flex-col">
-                        <span className="text-3xl font-headline font-bold text-primary group-hover:text-secondary transition-colors leading-none">
+                      <div className="w-14 md:w-24 shrink-0 flex flex-col text-left">
+                        <span className="text-2xl md:text-3xl font-headline font-bold text-primary group-hover:text-secondary transition-colors leading-none">
                           {dateObj.getDate()}
                         </span>
-                        <span className="text-[11px] uppercase font-bold tracking-wider text-on-surface-variant/70 mt-1.5">
+                        <span className="text-[10px] md:text-[11px] uppercase font-bold tracking-wider text-on-surface-variant/70 mt-1.5">
                           {MONTH_NAMES[dateObj.getMonth()].slice(0, 3)}
                         </span>
-                        <span className="text-[10px] text-on-surface-variant/40 mt-0.5">
+                        <span className="text-[9px] md:text-[10px] text-on-surface-variant/40 mt-0.5">
                           {niceDayName}
                         </span>
                       </div>
                       
                       {/* Right Content Column */}
-                      <div className="flex-1 flex flex-col sm:flex-row gap-6 justify-between sm:items-center">
-                        <div className="space-y-2">
+                      <div className="flex-1 flex flex-col sm:flex-row gap-4 justify-between sm:items-start">
+                        <div className="space-y-2 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
                             <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${theme.bg} ${theme.text || 'text-slate-800'} border ${theme.border || 'border-slate-200'}`}>
                               {evt.category}
@@ -531,14 +531,14 @@ export default function CalendarMonth() {
                               <span>{evt.time}</span>
                             </div>
                           </div>
-                          <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">{evt.title}</h3>
+                          <h3 className="text-base md:text-lg font-bold text-primary group-hover:text-secondary transition-colors leading-snug">{evt.title}</h3>
                           <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed max-w-2xl">{evt.description}</p>
                         </div>
                         
                         {/* Event Image Preview */}
                         {evt.image && (
                           <div 
-                            className="w-28 h-20 bg-cover bg-center rounded-2xl shrink-0 overflow-hidden shadow-sm self-start sm:self-auto border border-surface-container"
+                            className="w-full sm:w-28 h-32 sm:h-20 bg-cover bg-center rounded-2xl shrink-0 overflow-hidden shadow-sm border border-surface-container mt-3 sm:mt-0"
                             style={{ backgroundImage: `url('${evt.image}')` }}
                           />
                         )}
