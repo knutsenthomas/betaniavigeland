@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
         <div className="py-10 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <p className="font-body-md text-[14px] text-on-surface-variant/80">
-            © {new Date().getFullYear()} Betania Vigeland
+            © {new Date().getFullYear()} Betania Vigeland • Alle rettigheter reservert
           </p>
           <a 
             href="https://tk-design.no" 
