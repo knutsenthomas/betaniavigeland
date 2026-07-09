@@ -271,7 +271,7 @@ export default function SearchModal({ isOpen, onClose }) {
     const matchedPodcasts = podcastEpisodes.map(ep => ({
       title: ep.sermonTitle || ep.title,
       category: `Podcast: ${ep.speaker}`,
-      path: '/podcast',
+      path: `/podcast?play=${ep.id}`,
       text: `${ep.speaker} - ${ep.description}`,
       keywords: `${ep.title} ${ep.sermonTitle} ${ep.speaker} ${ep.description} podcast`.toLowerCase()
     })).filter(item => {

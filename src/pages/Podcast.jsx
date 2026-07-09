@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import historicalEpisodes from '@/data/historical_episodes.json';
 
 export default function Podcast() {
+  const location = useLocation();
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -229,6 +231,39 @@ export default function Podcast() {
     }
   }, [playbackRate]);
 
+  // Handle auto-playing and scrolling when navigating with a ?play=episodeId parameter
+  useEffect(() => {
+    if (episodes.length === 0) return;
+
+    const params = new URLSearchParams(location.search);
+    const playId = params.get('play');
+    if (playId) {
+      const episode = episodes.find(ep => ep.id === playId);
+      if (episode) {
+        // Clear filter to show all, so the target episode isn't hidden
+        setSelectedSpeaker('Alle');
+        setSearchQuery('');
+        
+        // Play the episode
+        handlePlayEpisode(episode);
+
+        // Smooth scroll to the card
+        setTimeout(() => {
+          const card = document.getElementById(`episode-${playId}`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Add a temporary glow / border highlight
+            card.classList.add('border-secondary', 'shadow-lg');
+            setTimeout(() => {
+              card.classList.remove('border-secondary', 'shadow-lg');
+            }, 3000);
+          }
+        }, 600);
+      }
+    }
+  }, [episodes, location.search]);
+
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setCurrentTime(audioRef.current.currentTime);
@@ -444,6 +479,7 @@ export default function Podcast() {
               
               return (
                 <motion.div
+                  id={`episode-${ep.id}`}
                   key={ep.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
