@@ -28,6 +28,37 @@ export default function Calendar() {
     setTimeout(() => setCalendarAlert(null), 3000);
   };
 
+  const handleOpenMonthlyProgram = () => {
+    const { url, file_data, filename } = siteSettings?.monthly_program || {};
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    if (file_data) {
+      try {
+        const parts = file_data.split(';base64,');
+        const contentType = parts[0].split(':')[1];
+        const raw = window.atob(parts[1]);
+        const rawLength = raw.length;
+        const uInt8Array = new Uint8Array(rawLength);
+        
+        for (let i = 0; i < rawLength; ++i) {
+          uInt8Array[i] = raw.charCodeAt(i);
+        }
+        
+        const blob = new Blob([uInt8Array], { type: contentType });
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, '_blank');
+      } catch (err) {
+        console.error("Klarte ikke åpne PDF:", err);
+        const link = document.createElement('a');
+        link.href = file_data;
+        link.download = filename || 'manedsprogram.pdf';
+        link.click();
+      }
+    }
+  };
+
   return (
     <main className="pt-32 pb-section-gap-lg bg-background min-h-screen">
       {/* Toast Alert for calendar action */}
@@ -48,15 +79,20 @@ export default function Calendar() {
       {/* Hero Section */}
       <section className="max-w-container-max mx-auto px-gutter mb-section-gap-sm">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl"
+          className="max-w-2xl"
         >
-          <h1 className="font-headline-xl text-headline-xl text-primary mb-4">Hva skjer på Betania</h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant">
-            Velkommen til vårt fellesskap. Her finner du oversikt over alle kommende aktiviteter, gudstjenester og samlinger for alle aldre.
-          </p>
+          <div className="text-secondary font-label-md text-label-md tracking-widest uppercase mb-2">
+            <CmsText slug="calendar_badge" fallback="Hva skjer" />
+          </div>
+          <CmsText 
+            slug="calendar_title" 
+            fallback="Kalender" 
+            as="h1" 
+            className="font-headline-lg text-headline-lg text-primary font-bold" 
+          />
           {siteSettings?.monthly_program?.enabled && (
             <div className="mt-6 flex flex-wrap gap-4">
               {siteSettings.monthly_program.url && (
@@ -130,13 +166,13 @@ export default function Calendar() {
                   href={link.url} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="group bg-white p-4 rounded-xl border border-surface-container flex items-center justify-between hover:shadow-md transition-all duration-300"
+                  className="group flex justify-between items-center p-4 bg-white hover:bg-primary/5 border border-surface-container rounded-2xl transition-all duration-300 active:scale-[0.99] shadow-sm"
                 >
-                  <div>
-                    <span className="block font-bold text-primary text-sm group-hover:text-secondary transition-colors">{link.label}</span>
-                    <span className="text-xs text-on-surface-variant">{link.sublabel}</span>
+                  <div className="space-y-0.5">
+                    <span className="font-label-md text-xs font-bold text-primary group-hover:text-secondary transition-colors">{link.label}</span>
+                    <span className="block text-[11px] text-on-surface-variant">{link.sublabel}</span>
                   </div>
-                  <span className="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
+                  <span className="material-symbols-outlined text-outline group-hover:text-secondary group-hover:translate-x-1 transition-all duration-300">arrow_forward</span>
                 </a>
               ))}
             </div>
@@ -144,87 +180,86 @@ export default function Calendar() {
         </section>
       )}
 
-      {/* Filters Section */}
-      <section className="max-w-container-max mx-auto px-gutter mb-12">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap items-center gap-4 py-6 border-y border-surface-container"
-        >
-          <span className="font-label-md text-label-md uppercase tracking-widest text-outline">Filtrer:</span>
-          {filters.map((filter) => {
-            const isActive = selectedFilter === filter.name;
-            return (
-              <button
-                key={filter.name}
-                onClick={() => setSelectedFilter(filter.name)}
-                className={`px-6 py-2 rounded-full border-2 font-label-md text-label-md transition-all active:scale-95 ${
-                  isActive 
-                    ? 'border-secondary bg-secondary text-white shadow-sm' 
-                    : filter.colorClass
-                }`}
-              >
-                {filter.name}
-              </button>
-            );
-          })}
-        </motion.div>
+      {/* Filter Section */}
+      <section className="max-w-container-max mx-auto px-gutter mb-8">
+        <div className="flex flex-wrap gap-2.5">
+          {filters.map((filter) => (
+            <button
+              key={filter.name}
+              onClick={() => setSelectedFilter(filter.name)}
+              className={`px-5 py-2.5 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-200 active:scale-[0.97] ${
+                selectedFilter === filter.name
+                  ? 'bg-primary text-white border-primary shadow-sm'
+                  : `bg-white ${filter.colorClass}`
+              }`}
+            >
+              {filter.name}
+            </button>
+          ))}
+        </div>
       </section>
 
-      {/* Calendar Bento Grid */}
+      {/* Grid List */}
       <section className="max-w-container-max mx-auto px-gutter">
         <motion.div 
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredEvents.map((event) => (
+            {(filteredEvents || []).map((evt, idx) => (
               <motion.div
                 layout
-                key={event.id}
+                key={evt.id || idx}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                className="calendar-card group bg-surface-cream rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col border border-surface-container"
+                transition={{ duration: 0.3 }}
+                className="group bg-surface-cream border border-surface-container rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full"
               >
-                <div className="relative h-56 overflow-hidden">
+                {/* Event Image */}
+                <div className="h-48 overflow-hidden relative shrink-0">
                   <div 
-                    className="absolute inset-0 bg-cover bg-center event-image transition-transform duration-700" 
-                    style={{ backgroundImage: `url('${event.image}')` }}
-                    data-alt={event.title}
+                    className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                    style={{ backgroundImage: `url('${evt.image}')` }}
                   />
-                  <div className="absolute top-4 left-4 bg-white px-3 py-1 rounded shadow-md flex flex-col items-center min-w-[50px]">
-                    <span className="font-bold text-secondary text-lg leading-none">{event.day}</span>
-                    <span className="text-[10px] uppercase font-bold text-on-surface-variant">{event.month.slice(0, 3)}</span>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="bg-primary/95 text-white px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-wider backdrop-blur-sm">
-                      {event.category}
-                    </span>
-                  </div>
+                  {/* Category Badge */}
+                  <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-primary px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                    {evt.category}
+                  </span>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-on-surface-variant mb-2">
-                    <span className="material-symbols-outlined text-[18px]">schedule</span>
-                    <span className="text-label-md font-label-md">{event.time}</span>
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Date & Time */}
+                  <div className="flex items-center gap-3 text-secondary font-label-md text-label-md uppercase tracking-wider mb-2 shrink-0">
+                    <div className="flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[16px]">calendar_today</span>
+                      <span>{evt.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1 border-l border-surface-container-highest pl-3">
+                      <span className="material-symbols-outlined text-[16px]">schedule</span>
+                      <span>{evt.time}</span>
+                    </div>
                   </div>
-                  <h3 className="font-headline-md text-headline-md text-primary mb-3">{event.title}</h3>
-                  <p className="text-on-surface-variant text-body-md mb-6 flex-1">{event.description}</p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-surface-container">
-                    <button className="flex items-center gap-2 text-secondary font-label-md text-label-md hover:underline decoration-2 underline-offset-4 active:scale-95 transition-transform">
-                      Les mer
-                      <span className="material-symbols-outlined">arrow_forward</span>
-                    </button>
-                    <button 
-                      onClick={() => handleAddToCalendar(event.title)}
-                      className="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant hover:text-secondary active:scale-90 transition-all" 
-                      title="Legg i kalender"
-                    >
-                      <span className="material-symbols-outlined">calendar_add_on</span>
-                    </button>
-                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-headline-sm text-headline-sm text-primary font-bold mb-3 line-clamp-1 group-hover:text-secondary transition-colors shrink-0">
+                    {evt.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="font-body-md text-on-surface-variant leading-relaxed line-clamp-3 mb-6 flex-1">
+                    {evt.description}
+                  </p>
+
+                  {/* Button */}
+                  <button 
+                    onClick={() => handleAddToCalendar(evt.title)}
+                    className="w-full py-3 bg-surface-container hover:bg-primary hover:text-white text-primary text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-1.5 shrink-0"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">add</span>
+                    <span>Legg til i kalender</span>
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -251,11 +286,17 @@ export default function Calendar() {
       </section>
 
       {/* Load More Section */}
-      <section className="mt-16 flex justify-center">
-        <button className="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-300 active:scale-95">
-          Se flere aktiviteter
-        </button>
-      </section>
+      {siteSettings?.monthly_program?.enabled && (
+        <section className="mt-16 flex justify-center">
+          <button 
+            onClick={handleOpenMonthlyProgram}
+            className="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-300 active:scale-95 flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[20px]">calendar_month</span>
+            <span>Se flere aktiviteter</span>
+          </button>
+        </section>
+      )}
     </main>
   );
 }
