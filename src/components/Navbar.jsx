@@ -25,7 +25,7 @@ export default function Navbar({ onSearchOpen }) {
   const mainLinks = [
     { to: '/', label: 'Hjem' },
     { to: '/hva-skjer', label: 'Hva skjer' },
-    { to: '/virkegrener', label: 'Våre virkegrener' },
+    { to: '/virkegrener', label: 'Virkegrener' },
     { to: '/podcast', label: 'Podcast' },
   ];
 
@@ -40,7 +40,7 @@ export default function Navbar({ onSearchOpen }) {
   const allMobileLinks = [
     { to: '/', label: 'Hjem', icon: 'home' },
     { to: '/hva-skjer', label: 'Hva skjer', icon: 'calendar_today' },
-    { to: '/virkegrener', label: 'Våre virkegrener', icon: 'church' },
+    { to: '/virkegrener', label: 'Virkegrener', icon: 'church' },
     { to: '/podcast', label: 'Podcast', icon: 'podcasts' },
     { to: '/about', label: 'Om oss', icon: 'info' },
     { to: '/misjon', label: 'Misjon', icon: 'public' },
@@ -196,7 +196,7 @@ export default function Navbar({ onSearchOpen }) {
                       }`}>
                         {link.icon}
                       </span>
-                      <span className="text-[13px] tracking-wide leading-tight truncate">
+                      <span className="text-[13px] tracking-wide leading-tight">
                         {link.label}
                       </span>
                     </Link>
