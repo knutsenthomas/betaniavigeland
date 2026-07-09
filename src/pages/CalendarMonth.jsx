@@ -39,7 +39,12 @@ export default function CalendarMonth() {
   const { events } = useContent();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? 'list' : 'grid';
+    }
+    return 'grid';
+  }); // 'grid' or 'list'
   const [activePopupEvent, setActivePopupEvent] = useState(null);
   const [calendarAlert, setCalendarAlert] = useState(null);
 
