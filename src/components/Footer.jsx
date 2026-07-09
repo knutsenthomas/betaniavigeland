@@ -80,24 +80,27 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="py-8 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-          <p className="font-label-md text-label-md text-on-surface-variant">
-            © {new Date().getFullYear()} Betania Vigeland. Designet av{' '}
+        <div className="py-10 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+          <p className="font-body-md text-[14px] text-on-surface-variant/80">
+            © {new Date().getFullYear()} Betania Vigeland • Designet av{' '}
             <a 
               href="https://tk-design.no" 
               target="_blank" 
               rel="noreferrer" 
-              className="hover:text-secondary transition-colors font-bold"
+              className="text-secondary hover:text-secondary-container transition-colors font-bold underline underline-offset-4 decoration-[1.5px]"
             >
               tk-design.no
             </a>
           </p>
-          <div className="flex items-center gap-2 text-on-surface-variant opacity-60">
-            <span className="material-symbols-outlined text-[16px]">church</span>
-            <span className="text-[12px] uppercase tracking-widest font-label-md">Pinsebevegelsen i Norge</span>
+          <div className="flex items-center gap-2 text-on-surface-variant/60 hover:text-primary transition-colors duration-300">
+            <span className="material-symbols-outlined text-[18px] select-none translate-y-[-0.5px]">church</span>
+            <span className="text-[12px] uppercase tracking-widest font-label-md font-bold">
+              Pinsebevegelsen i Norge
+            </span>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
