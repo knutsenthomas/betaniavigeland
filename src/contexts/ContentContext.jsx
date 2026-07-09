@@ -292,7 +292,8 @@ export const ContentProvider = ({ children }) => {
       });
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Klarte ikke lagre innstillinger');
+        const msg = errorData.message ? `${errorData.error}: ${errorData.message}` : errorData.error;
+        throw new Error(msg || 'Klarte ikke lagre innstillinger');
       }
     } catch (err) {
       console.error("Klarte ikke lagre innstillinger:", err);
