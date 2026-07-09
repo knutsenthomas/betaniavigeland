@@ -209,7 +209,7 @@ export default function Admin() {
               logout();
               navigate('/login');
             }}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-secondary-container hover:bg-secondary/10 transition-all border border-secondary/25 hover:border-secondary/40"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-white/75 hover:bg-white/5 hover:text-white transition-all border border-white/10 hover:border-white/20"
           >
             <span className="material-symbols-outlined text-[18px]">logout</span>
             <span>Logg ut</span>
