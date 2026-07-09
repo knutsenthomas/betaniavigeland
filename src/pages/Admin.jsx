@@ -893,18 +893,53 @@ export default function Admin() {
                               />
                             </div>
                             <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde URL</label>
-                              <input
-                                type="text"
-                                value={person.image}
-                                onChange={(e) => {
-                                  const leadership = [...localSettings.leadership];
-                                  leadership[idx].image = e.target.value;
-                                  setLocalSettings({ ...localSettings, leadership });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs text-outline font-mono truncate"
-                                placeholder="https://..."
-                              />
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde (URL eller Opplasting)</label>
+                              <div className="flex items-center gap-2">
+                                {person.image && (
+                                  <img 
+                                    src={person.image} 
+                                    alt="Leder" 
+                                    className="w-10 h-10 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0" 
+                                  />
+                                )}
+                                <div className="flex-1 flex gap-1.5 min-w-0">
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    id={`leadership-img-${idx}`}
+                                    className="hidden"
+                                    onChange={(e) => {
+                                      const file = e.target.files[0];
+                                      if (!file) return;
+                                      const reader = new FileReader();
+                                      reader.onload = (event) => {
+                                        const leadership = [...localSettings.leadership];
+                                        leadership[idx].image = event.target.result;
+                                        setLocalSettings({ ...localSettings, leadership });
+                                      };
+                                      reader.readAsDataURL(file);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor={`leadership-img-${idx}`}
+                                    className="cursor-pointer px-2.5 py-2 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1 shrink-0"
+                                  >
+                                    <span className="material-symbols-outlined text-[14px]">upload</span>
+                                    Last opp
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={person.image || ''}
+                                    onChange={(e) => {
+                                      const leadership = [...localSettings.leadership];
+                                      leadership[idx].image = e.target.value;
+                                      setLocalSettings({ ...localSettings, leadership });
+                                    }}
+                                    className="flex-1 p-2 bg-white border border-surface-container rounded-xl text-[10px] font-mono truncate"
+                                    placeholder="https://... eller base64"
+                                  />
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -996,18 +1031,53 @@ export default function Admin() {
                               />
                             </div>
                             <div className="space-y-1">
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde URL</label>
-                              <input
-                                type="text"
-                                value={person.image}
-                                onChange={(e) => {
-                                  const staff = [...localSettings.staff];
-                                  staff[idx].image = e.target.value;
-                                  setLocalSettings({ ...localSettings, staff });
-                                }}
-                                className="w-full p-2.5 bg-white border border-surface-container rounded-xl text-xs text-outline font-mono truncate"
-                                placeholder="https://..."
-                              />
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Bilde (URL eller Opplasting)</label>
+                              <div className="flex items-center gap-2">
+                                {person.image && (
+                                  <img 
+                                    src={person.image} 
+                                    alt="Ansatt" 
+                                    className="w-10 h-10 rounded-xl object-cover border border-surface-container bg-surface-cream shrink-0" 
+                                  />
+                                )}
+                                <div className="flex-1 flex gap-1.5 min-w-0">
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    id={`staff-img-${idx}`}
+                                    className="hidden"
+                                    onChange={(e) => {
+                                      const file = e.target.files[0];
+                                      if (!file) return;
+                                      const reader = new FileReader();
+                                      reader.onload = (event) => {
+                                        const staff = [...localSettings.staff];
+                                        staff[idx].image = event.target.result;
+                                        setLocalSettings({ ...localSettings, staff });
+                                      };
+                                      reader.readAsDataURL(file);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor={`staff-img-${idx}`}
+                                    className="cursor-pointer px-2.5 py-2 bg-secondary hover:bg-secondary/90 active:scale-[0.98] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-1 shrink-0"
+                                  >
+                                    <span className="material-symbols-outlined text-[14px]">upload</span>
+                                    Last opp
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={person.image || ''}
+                                    onChange={(e) => {
+                                      const staff = [...localSettings.staff];
+                                      staff[idx].image = e.target.value;
+                                      setLocalSettings({ ...localSettings, staff });
+                                    }}
+                                    className="flex-1 p-2 bg-white border border-surface-container rounded-xl text-[10px] font-mono truncate"
+                                    placeholder="https://... eller base64"
+                                  />
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
