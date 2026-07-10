@@ -397,6 +397,19 @@ export default function Home() {
                   )}
                 </div>
 
+                {/* Engagement Bar */}
+                <div className="px-5 py-3 border-t border-surface-container/40 flex justify-between items-center text-xs text-on-surface-variant/70 shrink-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-5 h-5 bg-[#1877F2] text-white rounded-full flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[11px] font-bold">thumb_up</span>
+                    </span>
+                    <span className="font-semibold text-slate-700">{post.likes}</span>
+                  </div>
+                  <div className="text-[11px] font-medium text-slate-500">
+                    {post.comments} {post.comments === 1 ? 'kommentar' : 'kommentarer'}
+                  </div>
+                </div>
+
                 {/* Post Footer/Actions */}
                 <div className="p-4 bg-surface-cream/50 border-t border-surface-container flex justify-start items-center">
                   <a 
