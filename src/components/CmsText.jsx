@@ -6,8 +6,7 @@ export default function CmsText({
   fallback, 
   className = '', 
   as: Component = 'span', 
-  replaceObj = null,
-  ...props
+  replaceObj = null 
 }) {
   const { cmsContent, updateCmsText, isAdminEditing } = useContent();
   
@@ -73,7 +72,7 @@ export default function CmsText({
   };
 
   if (!isAdminEditing) {
-    return <Component className={className} {...props}>{displayText}</Component>;
+    return <Component className={className}>{displayText}</Component>;
   }
 
   return (
@@ -90,7 +89,6 @@ export default function CmsText({
       onClick={handleClick}
       className={`${className} inline-block outline-none border border-dashed border-secondary/50 hover:border-secondary focus:border-secondary focus:bg-secondary/5 focus:ring-1 focus:ring-secondary rounded px-1.5 -mx-1.5 transition-all cursor-text relative group min-h-[1em]`}
       title={`Klikk for å redigere "${slug}" direkte på siden`}
-      {...props}
     >
       {rawText}
     </Component>

@@ -118,7 +118,7 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-slate-900/[0.03]" />
+          <div className="absolute inset-0 bg-surface-cream/80 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/75 md:to-transparent" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
@@ -133,14 +133,12 @@ export default function Home() {
               fallback="Et fellesskap for hele livet" 
               as="h1" 
               className="font-headline-xl text-headline-xl text-primary mb-6 leading-tight" 
-              style={{ textShadow: '0 2px 10px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.9)' }}
             />
             <CmsText 
               slug="hero_desc" 
               fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
               as="p" 
-              className="font-body-lg text-body-lg text-primary font-semibold mb-10 max-w-lg" 
-              style={{ textShadow: '0 2px 8px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(255, 255, 255, 0.9)' }}
+              className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg" 
             />
             <div className="flex flex-wrap gap-4">
               <button 
