@@ -118,7 +118,7 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-surface-cream/80 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/75 md:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/65 via-slate-900/45 to-slate-900/25" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
@@ -132,24 +132,24 @@ export default function Home() {
               slug="hero_title" 
               fallback="Et fellesskap for hele livet" 
               as="h1" 
-              className="font-headline-xl text-headline-xl text-primary mb-6 leading-tight" 
+              className="font-headline-xl text-headline-xl text-white mb-6 leading-tight" 
             />
             <CmsText 
               slug="hero_desc" 
               fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
               as="p" 
-              className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg" 
+              className="font-body-lg text-body-lg text-blue-100/90 mb-10 max-w-lg" 
             />
             <div className="flex flex-wrap gap-4">
               <button 
                 onClick={() => navigate('/about')}
-                className="bg-secondary text-on-tertiary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-lg hover:bg-secondary-container transition-all transform hover:-translate-y-1 active:scale-95"
+                className="bg-white text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-lg hover:bg-surface-cream transition-all transform hover:-translate-y-1 active:scale-95"
               >
                 Ny her?
               </button>
               <button 
                 onClick={() => navigate('/calendar')}
-                className="border-2 border-primary text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all transform hover:-translate-y-1 active:scale-95"
+                className="border-2 border-white text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-white hover:text-primary transition-all transform hover:-translate-y-1 active:scale-95"
               >
                 Hva skjer?
               </button>
