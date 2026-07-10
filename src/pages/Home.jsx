@@ -118,29 +118,29 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-slate-900/10" />
+          <div className="absolute inset-0 bg-surface-cream/80 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/75 md:to-transparent" />
         </div>
         
-        <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-12 md:py-20 flex items-center justify-start">
+        <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
           <motion.div 
-            initial={{ opacity: 0, y: 30, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-xl bg-white/85 md:bg-white/70 backdrop-blur-md md:backdrop-blur-lg border border-white/40 p-8 md:p-12 rounded-3xl shadow-xl md:shadow-2xl space-y-6"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="max-w-2xl"
           >
             <CmsText 
               slug="hero_title" 
               fallback="Et fellesskap for hele livet" 
               as="h1" 
-              className="font-headline-xl text-headline-xl text-primary leading-tight" 
+              className="font-headline-xl text-headline-xl text-primary mb-6 leading-tight" 
             />
             <CmsText 
               slug="hero_desc" 
               fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
               as="p" 
-              className="font-body-lg text-body-lg text-on-surface-variant max-w-md" 
+              className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg" 
             />
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-4">
               <button 
                 onClick={() => navigate('/about')}
                 className="bg-secondary text-on-tertiary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-lg hover:bg-secondary-container transition-all transform hover:-translate-y-1 active:scale-95"
