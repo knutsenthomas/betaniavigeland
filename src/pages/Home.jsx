@@ -112,7 +112,7 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div 
-            className="w-full h-full bg-cover bg-center" 
+            className="w-full h-full bg-cover bg-center opacity-60" 
             style={{ 
               backgroundImage: `url('/hero-bg.png')` 
             }}
