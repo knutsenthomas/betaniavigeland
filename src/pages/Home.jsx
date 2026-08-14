@@ -109,7 +109,7 @@ export default function Home() {
   return (
     <div className="overflow-x-hidden bg-background">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden text-center">
         <div className="absolute inset-0 z-0">
           <div 
             className="w-full h-full bg-cover bg-center" 
@@ -118,29 +118,35 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-black/5 bg-gradient-to-r from-black/40 via-black/15 to-transparent" />
+          <div className="absolute inset-0 bg-black/35 bg-gradient-to-b from-black/40 via-black/25 to-black/50" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="max-w-xl"
+            className="max-w-4xl mx-auto flex flex-col items-center"
           >
+            <span className="text-white text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.25em] mb-2 drop-shadow-md">
+              Velkommen til
+            </span>
+            
             <CmsText 
               slug="hero_title" 
-              fallback="Å møte, følge og dele Jesus" 
+              fallback="BETANIA VIGELAND" 
               as="h1" 
-              className="font-headline-xl text-headline-xl text-white mb-6 leading-tight drop-shadow-md" 
+              className="font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-wider uppercase mb-4 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] leading-tight" 
             />
+            
             <CmsText 
-              slug="hero_desc" 
-              fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
+              slug="hero_subtitle" 
+              fallback="Å møte, følge og dele Jesus." 
               as="p" 
-              className="font-body-lg text-body-lg text-slate-100 mb-10 max-w-lg drop-shadow" 
+              className="font-extrabold text-2xl sm:text-3xl md:text-4xl text-divine-yellow italic mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" 
             />
-            <div className="flex flex-wrap gap-4">
+
+            <div className="flex flex-wrap justify-center gap-4">
               <button 
                 onClick={() => navigate('/about')}
                 className="bg-secondary text-on-tertiary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-lg hover:bg-secondary-container transition-all transform hover:-translate-y-1 active:scale-95"
@@ -155,6 +161,11 @@ export default function Home() {
               </button>
             </div>
           </motion.div>
+        </div>
+
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 text-white/80 animate-bounce cursor-pointer" onClick={() => window.scrollTo({ top: window.innerHeight * 0.8, behavior: 'smooth' })}>
+          <span className="material-symbols-outlined text-[36px]">expand_more</span>
         </div>
       </section>
 
