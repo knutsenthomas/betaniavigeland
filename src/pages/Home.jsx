@@ -128,6 +128,9 @@ export default function Home() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="max-w-xl"
           >
+            <span className="text-white/95 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-3 block drop-shadow-sm">
+              <CmsText slug="hero_badge" fallback="Velkommen til Betania Vigeland" />
+            </span>
             <CmsText 
               slug="hero_title" 
               fallback="Å møte, følge og dele Jesus" 
@@ -136,7 +139,7 @@ export default function Home() {
             />
             <CmsText 
               slug="hero_desc" 
-              fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
+              fallback="Et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
               as="p" 
               className="font-body-lg text-body-lg text-slate-100 mb-10 max-w-lg drop-shadow" 
             />
