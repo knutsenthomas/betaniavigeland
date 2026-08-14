@@ -4,12 +4,54 @@ import { motion } from 'framer-motion';
 import { useContent } from '@/contexts/ContentContext';
 import CmsText from '@/components/CmsText';
 import facebookPosts from '@/data/facebook_posts.json';
+import historicalEpisodes from '@/data/historical_episodes.json';
 
 export default function Home() {
   const navigate = useNavigate();
   const { events, siteSettings } = useContent();
   const vipps = siteSettings?.platform_links?.vipps || '106111';
   const [copied, setCopied] = useState(false);
+
+  // Latest Podcast Episode State
+  const [latestEpisode, setLatestEpisode] = useState(historicalEpisodes[0] || null);
+
+  useEffect(() => {
+    const fetchLatestPodcast = async () => {
+      try {
+        const feedUrl = siteSettings?.platform_links?.podcast_rss || 'https://feed.podbean.com/betania-vigeland/feed.xml';
+        const res = await fetch(feedUrl);
+        if (!res.ok) return;
+        const xmlText = await res.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        const firstItem = xmlDoc.querySelector('item');
+        if (firstItem) {
+          const rawTitle = firstItem.querySelector('title')?.textContent || '';
+          const parts = rawTitle.split(' - ');
+          let speaker = '';
+          let sermonTitle = rawTitle;
+          if (parts.length > 1) {
+            speaker = parts[0].trim();
+            sermonTitle = parts.slice(1).join(' - ').replace(/[””"’‘']/g, '').trim();
+          }
+          const enclosure = firstItem.querySelector('enclosure');
+          const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
+          
+          setLatestEpisode({
+            id: firstItem.querySelector('guid')?.textContent || 'latest',
+            title: rawTitle,
+            sermonTitle,
+            speaker,
+            audioUrl,
+            duration: 'Siste tale'
+          });
+        }
+      } catch (e) {
+        console.warn('Klarte ikke laste siste podcast for forsiden:', e);
+      }
+    };
+    fetchLatestPodcast();
+  }, [siteSettings]);
 
   // Filter the events that are featured
   const featuredEvents = events.filter(event => event.featured).slice(0, 3);
@@ -227,6 +269,107 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Podcast Section */}
+      <section className="bg-surface-bright py-section-gap-lg border-t border-surface-container">
+        <div className="px-gutter max-w-container-max mx-auto">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUpVariants}
+            className="bg-primary text-white rounded-3xl p-8 sm:p-12 md:p-14 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-10 border border-primary-container/40"
+          >
+            {/* Background Icon Watermark */}
+            <span className="material-symbols-outlined absolute -right-10 -bottom-10 text-[260px] opacity-10 select-none pointer-events-none text-white">
+              podcasts
+            </span>
+
+            {/* Left Content */}
+            <div className="relative z-10 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className="bg-secondary text-white text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  <CmsText slug="home_podcast_badge" fallback="Offisiell Podcast" />
+                </span>
+                <span className="text-primary-fixed-dim text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" /> Siste tale
+                </span>
+              </div>
+
+              <CmsText 
+                slug="home_podcast_title" 
+                fallback="Hør på vår nyeste podcast" 
+                as="h2" 
+                className="font-headline-lg text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white leading-tight" 
+              />
+
+              <CmsText 
+                slug="home_podcast_desc" 
+                fallback="Få med deg undervisning og inspirerende taler fra Betania Vigeland. Du kan lytte direkte på nettsiden eller finne oss på Spotify, Apple Podcasts og Podbean." 
+                as="p" 
+                className="text-slate-200 text-base sm:text-lg mb-8 leading-relaxed font-body-md" 
+              />
+
+              {/* Latest Episode Card / Quick Play */}
+              {latestEpisode && (
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 sm:p-6 rounded-2xl mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 bg-secondary rounded-2xl flex items-center justify-center text-white shrink-0 shadow-md">
+                      <span className="material-symbols-outlined text-[32px]">podcasts</span>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-xs uppercase tracking-wider text-primary-fixed-dim font-bold block truncate">
+                        {latestEpisode.speaker || 'Betania Vigeland'} {latestEpisode.duration ? `• ${latestEpisode.duration}` : ''}
+                      </span>
+                      <h3 className="font-bold text-white text-lg sm:text-xl truncate">
+                        {latestEpisode.sermonTitle || latestEpisode.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => navigate(`/podcast?play=${latestEpisode.id}`)}
+                    className="w-full sm:w-auto bg-white text-primary px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all transform hover:scale-105 active:scale-95 shrink-0 shadow-lg min-h-[44px]"
+                  >
+                    <span className="material-symbols-outlined text-[22px]">play_arrow</span>
+                    Spill av nå
+                  </button>
+                </div>
+              )}
+
+              <div className="flex flex-wrap items-center gap-4">
+                <Link 
+                  to="/podcast" 
+                  className="bg-secondary text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-secondary-container transition-all transform hover:-translate-y-0.5 active:scale-95 shadow-md flex items-center gap-2 min-h-[44px]"
+                >
+                  <span className="material-symbols-outlined text-[20px]">library_music</span>
+                  Se alle taler & episoder
+                </Link>
+
+                {siteSettings?.platform_links?.spotify && (
+                  <a 
+                    href={siteSettings.platform_links.spotify} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="border border-white/30 text-white hover:bg-white/10 px-6 py-4 rounded-xl font-label-md text-label-md transition-colors flex items-center gap-2 min-h-[44px]"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+                    Spotify
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Right Side: Podcast Artwork / Cover */}
+            <div className="relative z-10 w-full sm:w-64 lg:w-72 aspect-square rounded-2xl overflow-hidden shadow-2xl shrink-0 border-2 border-white/20 group">
+              <img 
+                src="https://pbcdn1.podbean.com/imglogo/image-logo/21521859/Podcastbilde2.jpg" 
+                alt="Betania Vigeland Podcast Cover" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
