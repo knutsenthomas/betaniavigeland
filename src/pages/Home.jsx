@@ -118,7 +118,7 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-surface-cream/40 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/80 md:via-surface-cream/30 md:to-transparent" />
+          <div className="absolute inset-0 bg-surface-cream/85 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/65 md:to-transparent" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
@@ -126,7 +126,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="max-w-2xl bg-surface-cream/90 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl border border-white/80"
+            className="max-w-2xl"
           >
             <CmsText 
               slug="hero_title" 
