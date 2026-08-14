@@ -280,12 +280,10 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUpVariants}
-            className="bg-primary text-white rounded-3xl p-5 sm:p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-10 border border-primary-container/40"
+            className="bg-gradient-to-br from-primary to-primary/85 text-white rounded-3xl p-5 sm:p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-10 border border-primary/20"
           >
-            {/* Background Icon Watermark */}
-            <span className="material-symbols-outlined absolute -right-10 -bottom-10 text-[180px] sm:text-[260px] opacity-10 select-none pointer-events-none text-white">
-              podcasts
-            </span>
+            {/* Background Radial Overlay */}
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent pointer-events-none" />
 
             {/* Left Content */}
             <div className="relative z-10 w-full max-w-2xl">
