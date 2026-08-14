@@ -126,7 +126,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="max-w-2xl"
+            className="max-w-2xl bg-surface-cream/90 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl border border-white/80"
           >
             <CmsText 
               slug="hero_title" 
