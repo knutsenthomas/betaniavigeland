@@ -112,13 +112,13 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div 
-            className="w-full h-full bg-cover bg-center opacity-60" 
+            className="w-full h-full bg-cover bg-center" 
             style={{ 
               backgroundImage: `url('/hero-bg.png')` 
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
-          <div className="absolute inset-0 bg-surface-cream/80 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/95 md:via-surface-cream/75 md:to-transparent" />
+          <div className="absolute inset-0 bg-surface-cream/40 md:bg-transparent md:bg-gradient-to-r md:from-surface-cream/80 md:via-surface-cream/30 md:to-transparent" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
