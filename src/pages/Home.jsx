@@ -280,16 +280,16 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUpVariants}
-            className="bg-primary text-white rounded-3xl p-8 sm:p-12 md:p-14 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-10 border border-primary-container/40"
+            className="bg-primary text-white rounded-3xl p-5 sm:p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-10 border border-primary-container/40"
           >
             {/* Background Icon Watermark */}
-            <span className="material-symbols-outlined absolute -right-10 -bottom-10 text-[260px] opacity-10 select-none pointer-events-none text-white">
+            <span className="material-symbols-outlined absolute -right-10 -bottom-10 text-[180px] sm:text-[260px] opacity-10 select-none pointer-events-none text-white">
               podcasts
             </span>
 
             {/* Left Content */}
-            <div className="relative z-10 max-w-2xl">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="relative z-10 w-full max-w-2xl">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
                 <span className="text-primary-fixed-dim text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" /> Siste tale
                 </span>
@@ -299,28 +299,28 @@ export default function Home() {
                 slug="home_podcast_title" 
                 fallback="Hør på vår nyeste podcast" 
                 as="h2" 
-                className="font-headline-lg text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white leading-tight" 
+                className="font-headline-lg text-2xl sm:text-4xl md:text-5xl font-bold mb-4 text-white leading-tight break-words" 
               />
 
               <CmsText 
                 slug="home_podcast_desc" 
                 fallback="Få med deg undervisning og inspirerende taler fra Betania Vigeland. Du kan lytte direkte på nettsiden eller finne oss på Spotify, Apple Podcasts og Podbean." 
                 as="p" 
-                className="text-slate-200 text-base sm:text-lg mb-8 leading-relaxed font-body-md" 
+                className="text-slate-200 text-sm sm:text-lg mb-6 sm:mb-8 leading-relaxed font-body-md" 
               />
 
               {/* Latest Episode Card / Quick Play */}
               {latestEpisode && (
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 sm:p-6 rounded-2xl mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 hover:bg-white/15 transition-all">
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-14 h-14 bg-secondary rounded-2xl flex items-center justify-center text-white shrink-0 shadow-md">
-                      <span className="material-symbols-outlined text-[32px]">podcasts</span>
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 rounded-2xl mb-6 sm:mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 hover:bg-white/15 transition-all w-full">
+                  <div className="flex items-center gap-3 sm:gap-4 min-w-0 w-full sm:w-auto">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-secondary rounded-2xl flex items-center justify-center text-white shrink-0 shadow-md">
+                      <span className="material-symbols-outlined text-[28px] sm:text-[32px]">podcasts</span>
                     </div>
-                    <div className="min-w-0">
-                      <span className="text-xs uppercase tracking-wider text-primary-fixed-dim font-bold block truncate">
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[11px] sm:text-xs uppercase tracking-wider text-primary-fixed-dim font-bold block truncate">
                         {latestEpisode.speaker || 'Betania Vigeland'} {latestEpisode.duration ? `• ${latestEpisode.duration}` : ''}
                       </span>
-                      <h3 className="font-bold text-white text-lg sm:text-xl truncate">
+                      <h3 className="font-bold text-white text-base sm:text-xl truncate">
                         {latestEpisode.sermonTitle || latestEpisode.title}
                       </h3>
                     </div>
@@ -335,10 +335,10 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full">
                 <Link 
                   to="/podcast" 
-                  className="bg-secondary text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-secondary-container transition-all transform hover:-translate-y-0.5 active:scale-95 shadow-md flex items-center gap-2 min-h-[44px]"
+                  className="bg-secondary text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-label-md text-label-md hover:bg-secondary-container transition-all transform hover:-translate-y-0.5 active:scale-95 shadow-md flex items-center justify-center gap-2 min-h-[44px] text-center"
                 >
                   <span className="material-symbols-outlined text-[20px]">library_music</span>
                   Se alle taler & episoder
@@ -349,7 +349,7 @@ export default function Home() {
                     href={siteSettings.platform_links.spotify} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="border border-white/30 text-white hover:bg-white/10 px-6 py-4 rounded-xl font-label-md text-label-md transition-colors flex items-center gap-2 min-h-[44px]"
+                    className="border border-white/30 text-white hover:bg-white/10 px-6 py-3.5 sm:py-4 rounded-xl font-label-md text-label-md transition-colors flex items-center justify-center gap-2 min-h-[44px] text-center"
                   >
                     <span className="material-symbols-outlined text-[20px]">open_in_new</span>
                     Spotify
@@ -359,7 +359,7 @@ export default function Home() {
             </div>
 
             {/* Right Side: Podcast Artwork / Cover */}
-            <div className="relative z-10 w-full sm:w-64 lg:w-72 aspect-square rounded-2xl overflow-hidden shadow-2xl shrink-0 border-2 border-white/20 group">
+            <div className="relative z-10 w-48 sm:w-64 lg:w-72 aspect-square rounded-2xl overflow-hidden shadow-2xl shrink-0 border-2 border-white/20 group mx-auto lg:mx-0">
               <img 
                 src="https://pbcdn1.podbean.com/imglogo/image-logo/21521859/Podcastbilde2.jpg" 
                 alt="Betania Vigeland Podcast Cover" 
