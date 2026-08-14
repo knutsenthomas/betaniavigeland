@@ -290,9 +290,6 @@ export default function Home() {
             {/* Left Content */}
             <div className="relative z-10 max-w-2xl">
               <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="bg-secondary text-white text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                  <CmsText slug="home_podcast_badge" fallback="Offisiell Podcast" />
-                </span>
                 <span className="text-primary-fixed-dim text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" /> Siste tale
                 </span>
