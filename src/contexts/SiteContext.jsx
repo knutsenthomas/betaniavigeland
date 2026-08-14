@@ -5,7 +5,7 @@ export const SiteContext = createContext({});
 export const SiteProvider = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState({
     name: 'Betania Vigeland',
-    description: 'Et fellesskap for hele livet',
+    description: 'Å møte, følge og dele Jesus',
     address: 'Elveveien 6, 4520 Lindesnes',
     vipps: '106111',
     email: 'post@betania-vigeland.no',

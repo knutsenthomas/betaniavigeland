@@ -130,7 +130,7 @@ export default function Home() {
           >
             <CmsText 
               slug="hero_title" 
-              fallback="Et fellesskap for hele livet" 
+              fallback="Å møte, følge og dele Jesus" 
               as="h1" 
               className="font-headline-xl text-headline-xl text-white mb-6 leading-tight drop-shadow-md" 
             />
