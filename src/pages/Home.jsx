@@ -118,6 +118,7 @@ export default function Home() {
             }}
             data-alt="Betania Vigeland kirke bygning"
           />
+          <div className="absolute inset-0 bg-black/30 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full px-gutter max-w-container-max mx-auto py-section-gap-sm">
@@ -125,19 +126,19 @@ export default function Home() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="max-w-xl bg-gradient-to-r from-surface-cream/90 via-surface-cream/75 to-transparent p-6 sm:p-8 rounded-3xl"
+            className="max-w-xl"
           >
             <CmsText 
               slug="hero_title" 
               fallback="Et fellesskap for hele livet" 
               as="h1" 
-              className="font-headline-xl text-headline-xl text-primary mb-6 leading-tight" 
+              className="font-headline-xl text-headline-xl text-white mb-6 leading-tight drop-shadow-md" 
             />
             <CmsText 
               slug="hero_desc" 
               fallback="Velkommen til Betania Vigeland – et varmt og inkluderende fellesskap for alle generasjoner. Her er det rom for tro, vennskap og livets små og store øyeblikk." 
               as="p" 
-              className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg" 
+              className="font-body-lg text-body-lg text-slate-100 mb-10 max-w-lg drop-shadow" 
             />
             <div className="flex flex-wrap gap-4">
               <button 
@@ -148,7 +149,7 @@ export default function Home() {
               </button>
               <button 
                 onClick={() => navigate('/calendar')}
-                className="border-2 border-primary text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all transform hover:-translate-y-1 active:scale-95"
+                className="border-2 border-white text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-white hover:text-primary transition-all transform hover:-translate-y-1 active:scale-95"
               >
                 Hva skjer?
               </button>
